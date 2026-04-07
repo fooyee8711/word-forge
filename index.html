@@ -8,29 +8,24 @@
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
 
         :root {
-            /* 水彩/羊皮紙色系 */
-            --paper-bg: #f5ebd9;
-            --paper-dark: #e8d5b5;
-            --ink-dark: #2c3e50;
-            --ink-brown: #4e342e;
-            
-            /* 魔法發光色系 */
-            --magic-blue: #0ea5e9;
-            --magic-blue-glow: rgba(14, 165, 233, 0.4);
-            --magic-green: #10b981;
-            --magic-gold: #d97706;
-            
-            /* 邊框與陰影 */
-            --rune-border: rgba(78, 52, 46, 0.3);
-            --watercolor-shadow: 0 8px 24px rgba(44, 62, 80, 0.1), inset 0 0 40px rgba(232, 213, 181, 0.3);
+            var(--paper-bg): #f5ebd9;
+            var(--paper-dark): #e8d5b5;
+            var(--ink-dark): #2c3e50;
+            var(--ink-brown): #4e342e;
+            var(--magic-blue): #0ea5e9;
+            var(--magic-blue-glow): rgba(14, 165, 233, 0.4);
+            var(--magic-green): #10b981;
+            var(--magic-gold): #d97706;
+            var(--rune-border): rgba(78, 52, 46, 0.3);
+            var(--watercolor-shadow): 0 8px 24px rgba(44, 62, 80, 0.1), inset 0 0 40px rgba(232, 213, 181, 0.3);
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, var(--paper-bg) 0%, #faecd4 50%, var(--paper-dark) 100%);
-            color: var(--ink-dark);
-            font-family: 'Lora', serif; /* 內文字體 */
+            background: linear-gradient(135deg, #f5ebd9 0%, #faecd4 50%, #e8d5b5 100%);
+            color: #2c3e50;
+            font-family: 'Lora', serif;
             display: flex;
             height: 100vh;
             overflow: hidden;
@@ -38,16 +33,16 @@
         }
 
         h1, h2, h3, .rune-text {
-            font-family: 'Cinzel', serif; /* 標題/符文字體 */
-            color: var(--ink-brown);
+            font-family: 'Cinzel', serif;
+            color: #4e342e;
         }
 
-        /* 側邊導覽列 (Sidebar Navigation) */
+        /* Sidebar Navigation */
         nav {
             width: 260px;
             background: rgba(245, 235, 217, 0.8);
             backdrop-filter: blur(10px);
-            border-right: 2px solid var(--rune-border);
+            border-right: 2px solid rgba(78, 52, 46, 0.3);
             display: flex;
             flex-direction: column;
             padding: 2rem 1rem;
@@ -55,27 +50,9 @@
             z-index: 10;
         }
 
-        .logo-area {
-            text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px dashed var(--rune-border);
-            padding-bottom: 1rem;
-        }
-
-        .logo-area h1 {
-            font-size: 1.8rem;
-            margin: 0;
-            letter-spacing: 2px;
-            color: var(--ink-brown);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .logo-area .subtitle {
-            font-size: 0.9rem;
-            color: var(--magic-blue);
-            font-weight: bold;
-            letter-spacing: 4px;
-        }
+        .logo-area { text-align: center; margin-bottom: 3rem; border-bottom: 1px dashed rgba(78, 52, 46, 0.3); padding-bottom: 1rem; }
+        .logo-area h1 { font-size: 1.8rem; margin: 0; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .logo-area .subtitle { font-size: 0.9rem; color: #0ea5e9; font-weight: bold; letter-spacing: 4px; }
 
         .nav-btn {
             background: transparent;
@@ -87,299 +64,82 @@
             font-family: 'Cinzel', serif;
             font-size: 1.2rem;
             font-weight: bold;
-            color: var(--ink-dark);
+            color: #2c3e50;
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 0 8px 8px 0;
         }
-
-        .nav-btn:hover {
-            background: rgba(232, 213, 181, 0.5);
-            color: var(--magic-blue);
-        }
-
+        .nav-btn:hover { background: rgba(232, 213, 181, 0.5); color: #0ea5e9; }
         .nav-btn.active {
-            border-left-color: var(--magic-blue);
+            border-left-color: #0ea5e9;
             background: linear-gradient(90deg, rgba(14, 165, 233, 0.1) 0%, transparent 100%);
-            color: var(--magic-blue);
-            text-shadow: 0 0 10px var(--magic-blue-glow);
+            color: #0ea5e9;
+            text-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
         }
 
-        /* 穩定性水晶球 (Stability Orb) */
-        .crystal-orb-container {
-            margin-top: auto;
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255,255,255,0.3);
-            border-radius: 15px;
-            border: 1px solid var(--rune-border);
-        }
-
+        .crystal-orb-container { margin-top: auto; text-align: center; padding: 1rem; background: rgba(255,255,255,0.3); border-radius: 15px; border: 1px solid rgba(78, 52, 46, 0.3); }
         .crystal-orb {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #a7f3d0, var(--magic-green), #064e3b);
+            width: 80px; height: 80px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #a7f3d0, #10b981, #064e3b);
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), inset -10px -10px 20px rgba(0,0,0,0.4);
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: 'Cinzel', serif;
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;
+            color: white; font-family: 'Cinzel', serif; font-weight: bold; font-size: 1.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
         }
 
-        /* 主要內容區 */
-        main {
-            flex: 1;
-            padding: 3rem 4rem;
-            position: relative;
-            overflow-y: auto;
-        }
+        main { flex: 1; padding: 3rem 4rem; position: relative; overflow-y: auto; }
+        .view-section { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .view-section {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .view-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* === 首頁 (Index View) === */
+        /* Index View */
         .profile-card {
             background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>'), rgba(253, 246, 227, 0.7);
-            border: 2px solid var(--rune-border);
-            border-radius: 12px;
-            padding: 3rem;
-            box-shadow: var(--watercolor-shadow);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .profile-card h2 { font-size: 2.5rem; margin-bottom: 0.5rem;}
-        .rank-title { color: var(--magic-gold); font-style: italic; font-size: 1.2rem; margin-bottom: 2rem;}
-
-        /* === 每日鍛造 (Daily Sprint View) === */
-        .forge-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
+            border: 2px solid rgba(78, 52, 46, 0.3); border-radius: 12px; padding: 3rem; text-align: center; max-width: 600px; margin: 0 auto;
         }
 
+        /* Daily Sprint View */
+        .forge-container { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
         .blueprint-area {
-            background: rgba(255, 255, 255, 0.4);
-            border: 2px dashed var(--rune-border);
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.03);
-            width: 100%;
-            max-width: 800px;
-            position: relative;
+            background: rgba(255, 255, 255, 0.4); border: 2px dashed rgba(78, 52, 46, 0.3); padding: 3rem; border-radius: 16px;
+            text-align: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.03); width: 100%; max-width: 800px; position: relative;
+            transition: all 0.5s ease;
         }
-
-        /* 裝飾性星盤線條 */
         .astrolabe-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            height: 90%;
-            border: 1px solid rgba(14, 165, 233, 0.1);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; height: 90%; border: 1px solid rgba(14, 165, 233, 0.1); border-radius: 50%; pointer-events: none; z-index: 0;
         }
 
-        .target-word {
-            font-size: 2rem;
-            color: var(--magic-blue);
-            letter-spacing: 5px;
-            text-shadow: 0 0 15px var(--magic-blue-glow);
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .slots {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
+        .target-word { font-size: 2rem; color: #0ea5e9; letter-spacing: 5px; text-shadow: 0 0 15px rgba(14, 165, 233, 0.4); margin-bottom: 2rem; position: relative; z-index: 1; }
+        
+        .slots { display: flex; justify-content: center; gap: 1.5rem; position: relative; z-index: 1; }
         .slot {
-            width: 120px;
-            height: 120px;
-            border: 2px solid rgba(78, 52, 46, 0.5);
-            background: rgba(250, 236, 212, 0.8);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Cinzel', serif;
-            color: rgba(78, 52, 46, 0.6);
-            transition: all 0.3s;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            width: 120px; height: 120px; border: 2px solid rgba(78, 52, 46, 0.5); background: rgba(250, 236, 212, 0.8);
+            border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            font-family: 'Cinzel', serif; color: rgba(78, 52, 46, 0.6); transition: all 0.2s; box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
-
+        .slot.drag-over { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.1); box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); color: #0ea5e9; }
         .slot.filled {
-            border-color: var(--magic-gold);
-            color: var(--ink-brown);
-            background: #fff;
-            box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
-            font-size: 1.5rem;
-            font-weight: bold;
+            border-color: #d97706; color: #4e342e; background: #fff; box-shadow: 0 0 20px rgba(217, 119, 6, 0.3); font-size: 1.5rem; font-weight: bold;
         }
+        .slot.error { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); color: #ef4444; }
 
-        .parts-pool {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 800px;
-        }
-
+        .parts-pool { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; max-width: 800px; }
         .rune {
-            background: #fffdf8;
-            border: 2px solid var(--rune-border);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--ink-dark);
-            cursor: pointer;
-            box-shadow: 2px 4px 8px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: #fffdf8; border: 2px solid rgba(78, 52, 46, 0.3); padding: 1rem 1.5rem; border-radius: 8px;
+            font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: bold; color: #2c3e50; cursor: grab;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.05); transition: all 0.2s;
         }
+        .rune:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(14, 165, 233, 0.2); border-color: #0ea5e9; color: #0ea5e9; }
+        .rune:active { cursor: grabbing; transform: scale(0.95); }
+        .rune.hidden { visibility: hidden; opacity: 0; pointer-events: none; } /* 隱藏但保留空間 */
 
-        .rune:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(14, 165, 233, 0.2);
-            border-color: var(--magic-blue);
-            color: var(--magic-blue);
-        }
-
-        /* === 科技樹 (Tech Tree View) === */
-        .tree-container {
-            text-align: center;
-            height: 100%;
+        /* 成功動畫訊息 */
+        #success-msg {
+            display: none; color: #d97706; font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: bold; 
+            margin-top: 1rem; animation: fadeIn 1s; text-shadow: 0 0 10px rgba(217, 119, 6, 0.4);
         }
         
-        .constellation {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3rem;
-            margin-top: 2rem;
-            position: relative;
-        }
-
-        .tree-node {
-            background: rgba(255,255,255,0.7);
-            border: 2px solid var(--rune-border);
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .tree-node.unlocked {
-            border-color: var(--magic-blue);
-            color: var(--magic-blue);
-            box-shadow: 0 0 20px var(--magic-blue-glow);
-        }
-        
-        .tree-node.ancient {
-            border-color: #8b5cf6; /* 古老紫 */
-            color: #8b5cf6;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
-        }
-
-        /* 連接線 */
-        .line {
-            position: absolute;
-            width: 2px;
-            height: 3rem;
-            background: var(--rune-border);
-            z-index: 1;
-        }
-
-        /* === 檔案館 (Archive View) === */
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .parchment-card {
-            background: #fffbf0;
-            border: 1px solid #d7ccc8;
-            padding: 2rem;
-            border-radius: 4px;
-            box-shadow: 4px 4px 12px rgba(0,0,0,0.05);
-            position: relative;
-        }
-
-        /* 模擬羊皮紙卷角 */
-        .parchment-card::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            border-width: 0 20px 20px 0;
-            border-style: solid;
-            border-color: #f5ebd9 #f5ebd9 #e8d5b5 #e8d5b5;
-            box-shadow: -2px 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .word-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--magic-blue);
-            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .word-logic {
-            font-family: 'Courier New', monospace;
-            color: var(--magic-green);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .word-def {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--ink-dark);
-            margin-bottom: 1rem;
-        }
-        
-        .word-meta {
-            font-style: italic;
-            color: #795548;
-            font-size: 0.85rem;
-            text-align: right;
-        }
-
     </style>
 </head>
 <body>
@@ -396,9 +156,8 @@
         <button class="nav-btn" onclick="switchView('archive')">📜 Archive</button>
 
         <div class="crystal-orb-container">
-            <div style="font-size: 0.85rem; margin-bottom: 5px; color: var(--ink-brown);">System Stability</div>
-            <div class="crystal-orb">100%</div>
-            <div style="font-size: 0.8rem; margin-top: 10px; font-style: italic;">Perfect Alignment</div>
+            <div style="font-size: 0.85rem; margin-bottom: 5px; color: #4e342e;">System Stability</div>
+            <div class="crystal-orb" id="stability-display">100%</div>
         </div>
     </nav>
 
@@ -406,102 +165,143 @@
         <section id="view-index" class="view-section active">
             <div class="profile-card">
                 <h2>Welcome, Amelia</h2>
-                <div class="rank-title">Rank: Apprentice Word Sculptor</div>
-                <p>The machinery of language awaits your command. Your Lexile sensors are currently tuned to <b>800-1100</b>.</p>
-                <p style="color: var(--magic-blue); font-style: italic; margin-top: 2rem;">"Decode the ancient roots, master the logic."</p>
+                <div style="color: #d97706; font-style: italic; font-size: 1.2rem; margin-bottom: 2rem;">Rank: Apprentice Word Sculptor</div>
+                <p>The machinery of language awaits your command.</p>
             </div>
         </section>
 
         <section id="view-sprint" class="view-section">
             <div class="forge-container">
-                <div class="blueprint-area">
+                <div class="blueprint-area" id="blueprint-board">
                     <div class="astrolabe-bg"></div>
                     <div class="rune-text" style="color: rgba(78,52,46,0.6); margin-bottom: 10px;">TARGET BLUEPRINT:</div>
                     <div class="target-word">UNPREDICTABLE</div>
                     
                     <div class="slots">
-                        <div class="slot filled" style="border-color: var(--magic-blue); box-shadow: 0 0 15px rgba(14,165,233,0.3);">un-</div>
-                        <div class="slot filled">pre-</div>
-                        <div class="slot">ROOT</div>
-                        <div class="slot">SUFFIX</div>
+                        <div class="slot" data-expected="un-">PREFIX</div>
+                        <div class="slot" data-expected="pre-">PREFIX</div>
+                        <div class="slot" data-expected="dict">ROOT</div>
+                        <div class="slot" data-expected="-able">SUFFIX</div>
                     </div>
+                    
+                    <div id="success-msg">✧ MASTERPIECE FORGED ✧</div>
                 </div>
 
-                <div class="rune-text" style="font-size: 1.2rem; color: var(--ink-brown); margin-top: 1rem;">✧ Parts Pool ✧</div>
+                <div class="rune-text" style="font-size: 1.2rem; margin-top: 1rem;">✧ Parts Pool ✧</div>
                 <div class="parts-pool">
-                    <div class="rune">dict</div>
-                    <div class="rune">-able</div>
-                    <div class="rune">port</div>
-                    <div class="rune">re-</div>
-                    <div class="rune">struct</div>
-                    <div class="rune">in-</div>
-                    <div class="rune">-ology</div>
+                    <div class="rune" draggable="true" data-val="dict">dict</div>
+                    <div class="rune" draggable="true" data-val="-able">-able</div>
+                    <div class="rune" draggable="true" data-val="port">port</div>
+                    <div class="rune" draggable="true" data-val="re-">re-</div>
+                    <div class="rune" draggable="true" data-val="un-">un-</div>
+                    <div class="rune" draggable="true" data-val="struct">struct</div>
+                    <div class="rune" draggable="true" data-val="pre-">pre-</div>
                 </div>
             </div>
         </section>
 
-        <section id="view-tree" class="view-section">
-            <h2 class="rune-text" style="text-align: center; font-size: 2rem;">Etymology Constellations</h2>
-            <p style="text-align: center; color: var(--ink-brown); font-style: italic;">Map your journey through the roots of language.</p>
-            
-            <div class="constellation">
-                <div class="tree-node unlocked">Level 1: Directional Prefixes</div>
-                <div class="line" style="top: 3.5rem;"></div>
-                <div class="tree-node unlocked" style="margin-top: 3rem;">Level 2: Physical Roots (struct, port)</div>
-                <div class="line" style="top: 10rem;"></div>
-                <div class="tree-node unlocked" style="margin-top: 3rem;">Level 3: Abstract Roots (bio, chron)</div>
-                <div class="line" style="top: 16.5rem;"></div>
-                <div class="tree-node ancient" style="margin-top: 3rem;">✧ Ancient Lexicon: Greco-Latin ✧</div>
-            </div>
-        </section>
-
-        <section id="view-archive" class="view-section">
-            <h2 class="rune-text" style="margin-bottom: 2rem; border-bottom: 2px solid var(--rune-border); padding-bottom: 1rem;">Decoding Log Archive</h2>
-            
-            <div class="archive-grid">
-                <div class="parchment-card">
-                    <div class="word-title">UNPREDICTABLE</div>
-                    <div class="word-logic">[ un- ] + [ pre- ] + [ dict ] + [ -able ]</div>
-                    <div class="word-def">Not able to be foreseen or known beforehand.</div>
-                    <div style="font-style: italic; color: #666; margin-bottom: 1rem;">"The weather in the mountains can be highly unpredictable."</div>
-                    <div class="word-meta">Level 3 | Lexile 850</div>
-                </div>
-
-                <div class="parchment-card">
-                    <div class="word-title">SYNCHRONIZE</div>
-                    <div class="word-logic">[ syn- ] + [ chron ] + [ -ize ]</div>
-                    <div class="word-def">To cause to happen at the exact same time or rate.</div>
-                    <div style="font-style: italic; color: #666; margin-bottom: 1rem;">"The spies had to synchronize their watches."</div>
-                    <div class="word-meta" style="color: #8b5cf6;">Ancient | Lexile 950</div>
-                </div>
-                
-                <div class="parchment-card">
-                    <div class="word-title">TRANSFORMATION</div>
-                    <div class="word-logic">[ trans- ] + [ form ] + [ -ation ]</div>
-                    <div class="word-def">A thorough or dramatic change in form or appearance.</div>
-                    <div style="font-style: italic; color: #666; margin-bottom: 1rem;">"The caterpillar's transformation was complete."</div>
-                    <div class="word-meta">Level 2 | Lexile 880</div>
-                </div>
-            </div>
-        </section>
+        <section id="view-tree" class="view-section"><h2 class="rune-text" style="text-align: center;">Etymology Constellations</h2></section>
+        <section id="view-archive" class="view-section"><h2 class="rune-text" style="text-align: center;">Decoding Log Archive</h2></section>
     </main>
 
     <script>
-        // 處理視圖切換的 JavaScript
+        // === 1. 視圖切換邏輯 ===
         function switchView(viewName) {
-            // 隱藏所有視圖
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // 移除所有按鈕的 active 狀態
-            document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('active');
-            });
-
-            // 顯示目標視圖並標記對應按鈕
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
             document.getElementById('view-' + viewName).classList.add('active');
             event.currentTarget.classList.add('active');
+        }
+
+        // === 2. 核心拖曳引擎 (Word Forge Logic) ===
+        let draggedRune = null;
+        let completedParts = 0;
+        let stability = 100;
+        const totalParts = 4; // UNPREDICTABLE 需要 4 個零件
+
+        const runes = document.querySelectorAll('.rune');
+        const slots = document.querySelectorAll('.slot');
+        const orb = document.getElementById('stability-display');
+
+        // 綁定符文 (Parts) 的拖曳事件
+        runes.forEach(rune => {
+            rune.addEventListener('dragstart', function(e) {
+                draggedRune = this;
+                e.dataTransfer.setData('text/plain', this.dataset.val);
+                setTimeout(() => this.style.opacity = '0.4', 0); // 拖曳時半透明
+            });
+
+            rune.addEventListener('dragend', function() {
+                this.style.opacity = '1';
+                draggedRune = null;
+            });
+        });
+
+        // 綁定插槽 (Slots) 的放置事件
+        slots.forEach(slot => {
+            slot.addEventListener('dragover', function(e) {
+                e.preventDefault(); // 必須阻止預設行為才能接收 Drop
+                if (!this.classList.contains('filled')) {
+                    this.classList.add('drag-over');
+                }
+            });
+
+            slot.addEventListener('dragleave', function() {
+                this.classList.remove('drag-over');
+            });
+
+            slot.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+
+                if (!draggedRune || this.classList.contains('filled')) return;
+
+                // 邏輯驗證：檢查拖過來的零件是否等於插槽預期的值
+                if (draggedRune.dataset.val === this.dataset.expected) {
+                    // ✅ 放置正確 (Success)
+                    this.textContent = draggedRune.dataset.val;
+                    this.classList.add('filled');
+                    draggedRune.classList.add('hidden'); // 把零件庫裡的隱藏起來
+                    
+                    completedParts++;
+                    checkVictory();
+                } else {
+                    // ❌ 放置錯誤 (Error)
+                    triggerError(this);
+                }
+            });
+        });
+
+        // 錯誤懲罰與視覺回饋
+        function triggerError(slotElement) {
+            slotElement.classList.add('error');
+            
+            // 扣除穩定度
+            stability -= 5;
+            if (stability < 0) stability = 0;
+            orb.textContent = `${stability}%`;
+            
+            // 改變水晶球顏色
+            if (stability < 80) {
+                orb.style.background = 'radial-gradient(circle at 30% 30%, #fca5a5, #ef4444, #7f1d1d)';
+                orb.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.4), inset -10px -10px 20px rgba(0,0,0,0.4)';
+            }
+
+            // 0.4 秒後恢復原狀，不打斷她的心急節奏
+            setTimeout(() => {
+                slotElement.classList.remove('error');
+            }, 400);
+        }
+
+        // 檢查是否完成藍圖
+        function checkVictory() {
+            if (completedParts === totalParts) {
+                setTimeout(() => {
+                    document.getElementById('blueprint-board').style.borderColor = '#d97706';
+                    document.getElementById('blueprint-board').style.boxShadow = '0 0 30px rgba(217, 119, 6, 0.2)';
+                    document.getElementById('success-msg').style.display = 'block';
+                }, 300);
+            }
         }
     </script>
 </body>
