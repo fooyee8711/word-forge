@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Forge - Artistic Edition</title>
+    <title>Word Forge - Macaron Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
 
         :root {
-            --bg-color: #e8dcc4;
-            --paper-color: #fdf6e3;
-            --magic-blue: #5fa8d3;
-            --magic-gold: #d4a373;
-            --ink: #3c2f2f;
-            --success: #82a3a1;
+            --bg-color: #fff9fb; /* 淺粉底 */
+            --paper-color: #ffffff;
+            --macaron-blue: #bde0fe;
+            --macaron-pink: #ffafcc;
+            --macaron-green: #caffbf;
+            --macaron-yellow: #fdffb6;
+            --macaron-purple: #cdb4db;
+            --ink: #5b5b5b;
         }
 
         body {
@@ -29,28 +31,27 @@
             overflow: hidden;
         }
 
-        /* 水彩邊緣容器 */
         .watercolor-panel {
             background: var(--paper-color);
-            width: 90vw;
+            width: 92vw;
             max-width: 1000px;
             height: 85vh;
             padding: 40px;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 15px 15px 40px rgba(255, 175, 204, 0.2);
             position: relative;
-            /* 模擬手撕紙邊緣 */
-            clip-path: polygon(0.5% 1%, 99% 0.5%, 100% 99%, 0.2% 100%, 0% 50%);
+            clip-path: polygon(1% 2%, 98% 1%, 100% 98%, 2% 100%, 0% 40%);
             display: flex;
             flex-direction: column;
-            transition: all 0.5s ease;
+            border: 8px solid var(--macaron-pink);
+            border-image: linear-gradient(to right, var(--macaron-pink), var(--macaron-blue)) 1;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid rgba(60,47,47,0.1);
-            padding-bottom: 20px;
+            border-bottom: 2px solid var(--macaron-blue);
+            padding-bottom: 15px;
             margin-bottom: 20px;
         }
 
@@ -58,59 +59,69 @@
             font-family: 'Cinzel', serif;
             margin: 0;
             font-size: 1.8rem;
-            color: #2a4d69;
+            color: #ff85a1;
         }
 
-        /* 階段控制項 */
         .view-step { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
         .view-step.active { display: flex; }
 
-        /* --- 階段 1: 拖拽組裝 (Forge) --- */
-        .forge-zone { text-align: center; }
-        .slots { display: flex; justify-content: center; gap: 20px; margin: 40px 0; }
+        /* Step 1: Forge */
+        .slots { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
         .slot {
-            width: 100px; height: 100px;
-            border: 2px dashed var(--magic-blue);
-            background: rgba(255,255,255,0.5);
-            border-radius: 10px;
+            width: 90px; height: 90px;
+            border: 3px dashed var(--macaron-blue);
+            background: var(--bg-color);
+            border-radius: 15px;
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Cinzel', serif; font-weight: bold;
+            font-family: 'Cinzel', serif; font-size: 0.8rem;
         }
-        .slot.filled { background: white; border-style: solid; box-shadow: 0 0 15px var(--magic-blue); }
-        .parts-pool { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .slot.filled { background: var(--macaron-yellow); border-style: solid; font-size: 1.2rem; }
+
+        .parts-pool { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
         .rune {
-            background: white; border: 1px solid var(--ink);
-            padding: 10px 20px; border-radius: 5px; cursor: grab;
+            background: white; border: 2px solid var(--macaron-blue);
+            padding: 10px 18px; border-radius: 12px; cursor: grab;
             font-family: 'Cinzel', serif; transition: 0.3s;
+            box-shadow: 3px 3px 0px var(--macaron-blue);
         }
+        .rune:hover { transform: scale(1.05); background: var(--macaron-yellow); }
 
-        /* --- 階段 2: 12句句子理解 (Sentences) --- */
-        .sentence-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-            padding: 10px;
-        }
+        /* Step 2: Sentences */
+        .sentence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .sentence-card {
-            background: rgba(255,255,255,0.6); padding: 12px;
-            border-left: 4px solid var(--magic-blue);
-            font-size: 0.95rem; line-height: 1.4;
+            background: var(--macaron-green); padding: 12px;
+            border-radius: 10px; font-size: 0.9rem; line-height: 1.4;
+            opacity: 0.9;
         }
-        .highlight { color: var(--magic-blue); font-weight: bold; text-decoration: underline; }
+        .highlight { color: #d64933; font-weight: bold; }
 
-        /* --- 階段 3 & 4 通用 --- */
-        .quiz-area { text-align: center; padding: 20px; }
+        /* Step 3: Cloze */
+        .cloze-input {
+            border: none; border-bottom: 3px solid var(--macaron-pink);
+            background: transparent; font-family: 'Lora'; font-size: 1.2rem;
+            width: 200px; text-align: center; color: #ff85a1;
+            outline: none;
+        }
+        .cloze-input.correct { background: var(--macaron-green); border-radius: 5px; }
+
+        /* Step 4: Game */
+        .game-rune {
+            cursor: pointer; padding: 15px; border-radius: 10px; border: 2px solid var(--macaron-purple);
+            background: white; transition: 0.3s; font-family: 'Cinzel';
+        }
+
         .btn-next {
-            margin-top: auto; align-self: center;
-            background: #2a4d69; color: white; border: none;
-            padding: 12px 30px; font-family: 'Cinzel', serif;
-            cursor: pointer; border-radius: 4px; transition: 0.3s;
+            margin-top: 20px; align-self: center;
+            background: var(--macaron-blue); color: #2a4d69; border: none;
+            padding: 12px 40px; font-family: 'Cinzel', serif; font-weight: bold;
+            cursor: pointer; border-radius: 20px; box-shadow: 0 4px 0px #90e0ef;
         }
-        .btn-next:hover { background: var(--magic-blue); transform: scale(1.05); }
+        .btn-next:hover { transform: translateY(-3px); box-shadow: 0 7px 0px #90e0ef; }
 
-        /* 穩定性球 */
         .orb {
-            width: 50px; height: 50px; border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #b8e994, #78e08f);
-            box-shadow: 0 0 15px #78e08f;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, var(--macaron-pink));
+            box-shadow: 0 0 15px var(--macaron-pink);
         }
     </style>
 </head>
@@ -119,120 +130,173 @@
     <div class="watercolor-panel">
         <header>
             <div class="title-area">
-                <h1>WORD FORGE 詞彙鍛造爐</h1>
-                <small>Amelia's Learning Journey</small>
+                <h1>WORD FORGE 詞彙鍛造</h1>
+                <small id="current-tier-display">Level: Loading...</small>
             </div>
             <div class="orb"></div>
         </header>
 
         <section id="step-forge" class="view-step active">
-            <h2 style="text-align: center; font-family: 'Cinzel';">TARGET: UNPREDICTABLE</h2>
-            <div class="slots" id="main-slots">
-                <div class="slot" data-expected="un-">PREFIX</div>
-                <div class="slot" data-expected="pre-">PREFIX</div>
-                <div class="slot" data-expected="dict">ROOT</div>
-                <div class="slot" data-expected="-able">SUFFIX</div>
-            </div>
-            <div class="parts-pool">
-                <div class="rune" draggable="true" data-val="un-">un-</div>
-                <div class="rune" draggable="true" data-val="pre-">pre-</div>
-                <div class="rune" draggable="true" data-val="dict">dict</div>
-                <div class="rune" draggable="true" data-val="-able">-able</div>
-                <div class="rune" draggable="true" data-val="re-">re-</div>
-                <div class="rune" draggable="true" data-val="port">port</div>
-            </div>
+            <h2 style="text-align: center; font-family: 'Cinzel';" id="target-display">TARGET: ???</h2>
+            <div class="slots" id="main-slots"></div>
+            <div class="parts-pool" id="parts-pool"></div>
         </section>
 
         <section id="step-sentences" class="view-step">
-            <h2 style="font-family: 'Cinzel';">Sentence Mastery (12 Contexts)</h2>
-            <div class="sentence-grid" id="sentence-container">
-                </div>
-            <button class="btn-next" onclick="goToStep('step-cloze')">Next: Reading Cloze ➔</button>
+            <h2 style="font-family: 'Cinzel'; color: #ff85a1;">Sentence Mastery</h2>
+            <div class="sentence-grid" id="sentence-container"></div>
+            <button class="btn-next" onclick="goToStep('step-cloze')">Next: Quiz ➔</button>
         </section>
 
-        <section id="step-cloze" class="view-step quiz-area">
-            <h2 style="font-family: 'Cinzel';">Reading Cloze Challenge</h2>
-            <p style="font-size: 1.2rem; line-height: 2;">
-                The ocean weather is very <span style="border-bottom: 2px solid #000; padding: 0 20px;">_______</span>. 
-                Even the most experienced sailors cannot <span style="border-bottom: 2px solid #000; padding: 0 20px;">_______</span> 
-                when a storm will strike.
-            </p>
-            <button class="btn-next" onclick="goToStep('step-game')">Next: Root Match Game ➔</button>
+        <section id="step-cloze" class="view-step" style="text-align: center; padding: 40px;">
+            <h2 style="font-family: 'Cinzel';">Reading Challenge</h2>
+            <div id="cloze-content" style="font-size: 1.3rem; line-height: 2.5; margin-top: 20px;"></div>
+            <p id="cloze-feedback" style="font-weight: bold; margin-top: 15px;"></p>
+            <button id="cloze-btn" class="btn-next" style="display:none;" onclick="goToStep('step-game')">Next: Word Game ➔</button>
         </section>
 
-        <section id="step-game" class="view-step quiz-area">
-            <h2 style="font-family: 'Cinzel';">Etymology Match: ROOT [DICT]</h2>
-            <p>Select all words that share the same root "to say":</p>
-            <div class="parts-pool" style="margin-top: 30px;">
-                <div class="rune" onclick="this.style.background='#82a3a1'">Prediction</div>
-                <div class="rune" onclick="this.style.background='#82a3a1'">Dictionary</div>
-                <div class="rune" onclick="this.style.background='#82a3a1'">Dictator</div>
-                <div class="rune" onclick="this.style.background='#ff7675'">Portable</div>
-            </div>
-            <button class="btn-next" onclick="location.reload()">Finish & New Quest</button>
+        <section id="step-game" class="view-step" style="text-align: center;">
+            <h2 style="font-family: 'Cinzel';">Family Match</h2>
+            <p id="game-task"></p>
+            <div class="parts-pool" id="game-pool"></div>
+            <button class="btn-next" onclick="finishCycle()">Finish & Next Word ➔</button>
         </section>
     </div>
 
     <script>
-        let dragged = null;
+        let wordList = [];
+        let currentWordObj = null;
         let filledCount = 0;
 
-        // 初始化拖拽
-        document.querySelectorAll('.rune').forEach(rune => {
-            rune.addEventListener('dragstart', e => { dragged = e.target; });
-        });
+        // 1. 初始化系統
+        async function init() {
+            const response = await fetch('words.json');
+            const data = await response.json();
+            // 挑選 Level 3 的字作為示範
+            wordList = data.formulas.filter(f => f.lexile_level >= 800);
+            loadWord(0);
+        }
 
-        document.querySelectorAll('.slot').forEach(slot => {
-            slot.addEventListener('dragover', e => e.preventDefault());
-            slot.addEventListener('drop', e => {
-                e.preventDefault();
-                if (dragged.dataset.val === slot.dataset.expected) {
-                    slot.textContent = dragged.dataset.val;
+        // 2. 加載單字
+        function loadWord(index) {
+            filledCount = 0;
+            currentWordObj = wordList[index % wordList.length];
+            document.getElementById('target-display').textContent = `TARGET: ${currentWordObj.word}`;
+            document.getElementById('current-tier-display').textContent = `Lexile: ${currentWordObj.lexile_level}`;
+            
+            // 生成插槽
+            const slotContainer = document.getElementById('main-slots');
+            slotContainer.innerHTML = '';
+            currentWordObj.formula.forEach(partId => {
+                // 從 components 找對應的 value
+                const comp = data_components.find(c => c.id === partId);
+                const slot = document.createElement('div');
+                slot.className = 'slot';
+                slot.dataset.expected = comp.value;
+                slot.textContent = comp.type.toUpperCase();
+                setupSlot(slot);
+                slotContainer.appendChild(slot);
+            });
+
+            // 生成零件池
+            generatePartsPool();
+            goToStep('step-forge');
+        }
+
+        // 此處模擬 components 資料，實際應從 fetch 獲取
+        const data_components = [
+            { id: "P_UN", type: "prefix", value: "un-" },
+            { id: "P_PRE", type: "prefix", value: "pre-" },
+            { id: "P_TRANS", type: "prefix", value: "trans-" },
+            { id: "P_SYN", type: "prefix", value: "syn-" },
+            { id: "R_DICT", type: "root", value: "dict" },
+            { id: "R_FORM", type: "root", value: "form" },
+            { id: "R_CHRON", type: "root", value: "chron" },
+            { id: "S_ABLE", type: "suffix", value: "-able" },
+            { id: "S_ATION", type: "suffix", value: "-ation" },
+            { id: "S_IZE", type: "suffix", value: "-ize" }
+        ];
+
+        function generatePartsPool() {
+            const pool = document.getElementById('parts-pool');
+            pool.innerHTML = '';
+            // 正確零件 + 隨機幾個
+            const correctOnes = currentWordObj.formula.map(id => data_components.find(c => c.id === id).value);
+            const others = ["re-", "port", "in-", "struct"].filter(v => !correctOnes.includes(v));
+            const all = [...correctOnes, ...others].sort(() => Math.random() - 0.5);
+
+            all.forEach(val => {
+                const rune = document.createElement('div');
+                rune.className = 'rune';
+                rune.draggable = true;
+                rune.textContent = val;
+                rune.dataset.val = val;
+                rune.ontouchstart = rune.ondragstart = (e) => { window.draggedVal = val; window.draggedEl = rune; };
+                pool.appendChild(rune);
+            });
+        }
+
+        function setupSlot(slot) {
+            slot.ondragover = (e) => e.preventDefault();
+            slot.ondrop = (e) => {
+                if (window.draggedVal === slot.dataset.expected) {
+                    slot.textContent = window.draggedVal;
                     slot.classList.add('filled');
-                    dragged.style.visibility = 'hidden';
+                    window.draggedEl.style.visibility = 'hidden';
                     filledCount++;
-                    if (filledCount === 4) {
-                        setTimeout(() => {
-                            generateSentences();
-                            goToStep('step-sentences');
-                        }, 600);
+                    if (filledCount === currentWordObj.formula.length) {
+                        setTimeout(() => startSecondPhase(), 600);
                     }
                 } else {
-                    slot.style.borderColor = 'red';
-                    setTimeout(() => slot.style.borderColor = '', 400);
+                    slot.style.background = '#ffafcc';
+                    setTimeout(() => slot.style.background = '', 400);
                 }
-            });
-        });
-
-        function goToStep(stepId) {
-            document.querySelectorAll('.view-step').forEach(s => s.classList.remove('active'));
-            document.getElementById(stepId).classList.add('active');
+            };
         }
 
-        function generateSentences() {
+        function startSecondPhase() {
+            // 生成 12 句
             const container = document.getElementById('sentence-container');
-            const word = "unpredictable";
-            const sentences = [
-                "The cat's mood is ________; one minute it's purring, the next it's running away.",
-                "In the jungle, the weather is ________ and rains every hour.",
-                "Mountain hiking is fun but the wind can be ________.",
-                "The plot of the movie was so ________ that I couldn't guess the ending.",
-                "Sports games are ________, which is why they are so exciting to watch.",
-                "Magic spells in stories are often ________ and dangerous.",
-                "My little brother is ________ when he gets hungry.",
-                "The stock market is ________ and changes every second.",
-                "In science, we try to make things less ________ through experiments.",
-                "An ________ enemy is much harder to defeat.",
-                "The robot's movements were ________ due to a glitch.",
-                "Life is full of ________ surprises!"
-            ];
+            container.innerHTML = '';
+            for(let i=0; i<12; i++) {
+                const div = document.createElement('div');
+                div.className = 'sentence-card';
+                div.innerHTML = `<b>${i+1}.</b> The context for <span class="highlight">${currentWordObj.word}</span> helps us understand its logic in sentence ${i+1}.`;
+                container.appendChild(div);
+            }
             
-            container.innerHTML = sentences.map((s, i) => `
-                <div class="sentence-card">
-                    <b>${i+1}.</b> ${s.replace('________', `<span class="highlight">${word}</span>`)}
-                </div>
-            `).join('');
+            // 生成填空內容
+            const clozeArea = document.getElementById('cloze-content');
+            clozeArea.innerHTML = `The situation was completely <input type="text" id="cloze-input" class="cloze-input" placeholder="type word">. No one knew what would happen.`;
+            
+            const input = document.getElementById('cloze-input');
+            input.oninput = () => {
+                if(input.value.toLowerCase() === currentWordObj.word.toLowerCase()) {
+                    input.classList.add('correct');
+                    document.getElementById('cloze-feedback').textContent = "✨ Correct! Well done!";
+                    document.getElementById('cloze-btn').style.display = 'inline-block';
+                }
+            };
+
+            // 生成遊戲
+            document.getElementById('game-task').textContent = `Find a word with a similar root as ${currentWordObj.word}:`;
+            const gPool = document.getElementById('game-pool');
+            gPool.innerHTML = `<div class="game-rune">Dictionary</div><div class="game-rune">Portable</div><div class="game-rune">Format</div>`;
+
+            goToStep('step-sentences');
         }
+
+        function finishCycle() {
+            const nextIdx = (wordList.indexOf(currentWordObj) + 1);
+            loadWord(nextIdx);
+        }
+
+        function goToStep(id) {
+            document.querySelectorAll('.view-step').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        window.onload = init;
     </script>
 </body>
 </html>
