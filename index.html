@@ -2,52 +2,26 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>Word Forge - Macaron Mastery</title>
+    <title>Word Forge - Master Storyteller Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
 
         :root {
-            --m-pink: #ffafcc;
-            --m-blue: #bde0fe;
-            --m-green: #caffbf;
-            --m-yellow: #fdffb6;
-            --m-purple: #cdb4db;
-            --ink: #4a4a4a;
+            --m-pink: #ffafcc; --m-blue: #bde0fe; --m-green: #caffbf; --m-yellow: #fdffb6; --m-purple: #cdb4db; --ink: #4a4a4a;
         }
 
         body {
-            background: #fff5f8;
-            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-            font-family: 'Lora', serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            background: #fff5f8; background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            font-family: 'Lora', serif; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden;
         }
 
         .main-panel {
-            background: white;
-            width: 90vw;
-            max-width: 1000px;
-            height: 85vh;
-            padding: 30px;
-            border: 10px solid var(--m-pink);
-            clip-path: polygon(0% 1%, 100% 0%, 99% 99%, 1% 100%);
-            box-shadow: 15px 15px 0px var(--m-blue);
-            display: flex;
-            flex-direction: column;
-            position: relative;
+            background: white; width: 92vw; max-width: 1100px; height: 88vh; padding: 35px; border: 8px solid var(--m-pink);
+            clip-path: polygon(0.5% 1%, 99.5% 0%, 100% 99%, 0.5% 100%);
+            box-shadow: 15px 15px 0px var(--m-blue); display: flex; flex-direction: column; position: relative;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 2px solid var(--m-blue);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
+        header { display: flex; justify-content: space-between; border-bottom: 3px solid var(--m-blue); padding-bottom: 15px; margin-bottom: 15px; }
 
         .view-section { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
         .view-section.active { display: flex; }
@@ -55,42 +29,39 @@
         /* Step 1: Forge */
         .slot-container { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
         .slot {
-            width: 90px; height: 90px; border: 3px dashed var(--m-blue);
-            border-radius: 15px; display: flex; align-items: center; justify-content: center;
-            font-family: 'Cinzel'; font-size: 0.8rem; background: #fafafa;
+            width: 100px; height: 100px; border: 3px dashed var(--m-blue); border-radius: 20px;
+            display: flex; align-items: center; justify-content: center; font-family: 'Cinzel'; background: #fafafa;
         }
-        .slot.correct { background: var(--m-yellow); border-style: solid; font-size: 1.2rem; transform: scale(1.05); }
+        .slot.correct { background: var(--m-yellow); border-style: solid; font-size: 1.4rem; transform: scale(1.1); box-shadow: 0 0 15px var(--m-yellow); }
 
+        .rune-pool { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px; }
         .rune {
-            background: white; border: 2px solid var(--m-blue);
-            padding: 10px 20px; border-radius: 12px; cursor: grab;
-            font-family: 'Cinzel'; font-weight: bold; margin: 5px;
-            box-shadow: 3px 3px 0 var(--m-blue);
+            background: white; border: 2px solid var(--m-blue); padding: 12px 22px; border-radius: 15px;
+            cursor: grab; font-family: 'Cinzel'; font-weight: bold; box-shadow: 4px 4px 0 var(--m-blue); transition: 0.2s;
         }
 
-        /* Step 2: 12 Sentences */
-        .sentence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .s-card { background: var(--m-green); padding: 10px; border-radius: 8px; font-size: 0.85rem; }
-        .hl { color: #ff6b6b; font-weight: bold; }
+        /* Step 2: Story (12 Appearances) */
+        .story-box {
+            background: var(--m-yellow); padding: 30px; border-radius: 25px; border: 2px dashed var(--m-pink);
+            line-height: 1.8; font-size: 1.15rem; color: #444; position: relative;
+        }
+        .story-word-hl { color: #ff6b6b; font-weight: 800; border-bottom: 2px solid var(--m-pink); }
 
         /* Step 3: Cloze */
         .cloze-box { text-align: center; padding: 40px; }
         .cloze-input {
-            border: none; border-bottom: 3px solid var(--m-pink);
-            width: 250px; font-size: 1.5rem; text-align: center; outline: none;
-            font-family: 'Lora'; color: #ff85a1;
+            border: none; border-bottom: 4px solid var(--m-pink); width: 300px; font-size: 1.8rem;
+            text-align: center; outline: none; font-family: 'Lora'; color: #ff85a1; background: transparent;
         }
-        .cloze-input.valid { background: #e0ffcd; }
+        .cloze-input.valid { background: #e0ffcd; border-radius: 10px; }
 
         .btn-magic {
-            background: var(--m-blue); border: none; padding: 12px 30px;
-            font-family: 'Cinzel'; font-weight: bold; border-radius: 25px;
-            cursor: pointer; align-self: center; margin-top: 20px;
-            box-shadow: 0 4px 0 #90e0ef; transition: 0.2s;
+            background: var(--m-blue); border: none; padding: 15px 40px; font-family: 'Cinzel';
+            font-weight: bold; border-radius: 30px; cursor: pointer; align-self: center; margin: 25px 0;
+            box-shadow: 0 5px 0 #90e0ef; font-size: 1.1rem;
         }
-        .btn-magic:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #90e0ef; }
 
-        .orb { width: 40px; height: 40px; border-radius: 50%; background: var(--m-pink); box-shadow: 0 0 10px var(--m-pink); }
+        .orb { width: 45px; height: 45px; border-radius: 50%; background: var(--m-pink); box-shadow: 0 0 15px var(--m-pink); }
     </style>
 </head>
 <body>
@@ -99,155 +70,121 @@
         <header>
             <div>
                 <h1 style="font-family:'Cinzel'; margin:0; color:var(--m-pink);">WORD FORGE</h1>
-                <small id="word-meta">Loading scrolls...</small>
+                <small id="word-meta" style="color: #888;">Decoding ancient master scrolls...</small>
             </div>
             <div class="orb"></div>
         </header>
 
         <section id="step-1" class="view-section active">
-            <h2 id="target-title" style="text-align:center; font-family:'Cinzel';">TARGET: ???</h2>
+            <h2 id="target-title" style="text-align:center; font-family:'Cinzel'; color: #555;">TARGET BLUEPRINT</h2>
             <div class="slot-container" id="slots"></div>
-            <div style="display:flex; flex-wrap:wrap; justify-content:center;" id="pool"></div>
+            <div class="rune-pool" id="pool"></div>
         </section>
 
         <section id="step-2" class="view-section">
-            <h2 style="font-family:'Cinzel'; color:var(--m-pink);">Contextual Mastery (12 Sentences)</h2>
-            <div class="sentence-grid" id="sentence-list"></div>
-            <button class="btn-magic" onclick="showStep(3)">Next: Cloze Quiz ➔</button>
+            <h2 style="font-family:'Cinzel'; color:var(--m-pink); text-align: center;">The Decoder's Tale</h2>
+            <div class="story-box" id="story-content"></div>
+            <button class="btn-magic" onclick="showStep(3)">Test Your Knowledge ➔</button>
         </section>
 
         <section id="step-3" class="view-section cloze-box">
-            <h2 style="font-family:'Cinzel';">Reading Cloze</h2>
-            <p id="cloze-text" style="font-size:1.2rem; line-height:2;"></p>
-            <input type="text" id="user-input" class="cloze-input" placeholder="Type the word here...">
-            <p id="feedback" style="margin-top:10px; font-weight:bold;"></p>
+            <h2 style="font-family:'Cinzel';">Reading Cloze Challenge</h2>
+            <div style="background: rgba(255,255,255,0.6); padding: 30px; border-radius: 20px; border: 2px dashed var(--m-blue);">
+                <p id="cloze-text" style="font-size:1.4rem; line-height:2.2;"></p>
+                <input type="text" id="user-input" class="cloze-input" placeholder="Type the forged word...">
+                <p id="feedback" style="margin-top:20px; font-weight:bold; color: var(--m-pink);"></p>
+            </div>
             <button id="to-game" class="btn-magic" style="display:none;" onclick="showStep(4)">Next: Root Match ➔</button>
         </section>
 
         <section id="step-4" class="view-section" style="text-align:center;">
-            <h2 style="font-family:'Cinzel';">Root Family Match</h2>
-            <p id="root-task"></p>
-            <div style="display:flex; justify-content:center; gap:10px;" id="game-options"></div>
-            <button class="btn-magic" onclick="nextWord()" style="margin-top:40px;">Finish & Next Word ➔</button>
+            <h2 style="font-family:'Cinzel'; color: var(--m-purple);">Root Family Discovery</h2>
+            <p id="root-task" style="font-size: 1.2rem; margin-bottom: 30px;"></p>
+            <div style="display:flex; justify-content:center; gap:20px;" id="game-options"></div>
+            <button class="btn-magic" onclick="nextWord()" style="margin-top:50px;">Finish & Next Blueprint ➔</button>
         </section>
     </div>
 
     <script>
-        let db = null;
-        let currentIdx = 0;
-        let currentWord = null;
-        let solvedSlots = 0;
+        let wordData = []; let currentIdx = 0; let currentWord = null; let solvedSlots = 0;
+        const componentsMap = {}; 
 
-        // 啟動系統
-        async function start() {
+        async function init() {
             const res = await fetch('words.json');
-            db = await res.json();
-            loadChallenge(0);
+            const data = await res.json();
+            wordData = data.formulas;
+            data.components.forEach(c => componentsMap[c.id] = c.value);
+            loadWord(0);
         }
 
-        function loadChallenge(idx) {
-            currentIdx = idx;
-            solvedSlots = 0;
-            currentWord = db.formulas[currentIdx % db.formulas.length];
-            
-            // UI 重置
+        function loadWord(idx) {
+            currentIdx = idx; solvedSlots = 0;
+            currentWord = wordData[currentIdx % wordData.length];
             document.getElementById('target-title').innerText = `TARGET: ${currentWord.word}`;
-            document.getElementById('word-meta').innerText = `Lexile: ${currentWord.lexile_level} | Level: Advanced`;
+            document.getElementById('word-meta').innerText = `Lexile: ${currentWord.lexile_level} | Status: Ready to Forge`;
             document.getElementById('feedback').innerText = "";
             document.getElementById('user-input').value = "";
+            document.getElementById('user-input').classList.remove('valid');
             document.getElementById('to-game').style.display = "none";
 
-            // 生成插槽 (基於字庫配方)
-            const slotArea = document.getElementById('slots');
-            slotArea.innerHTML = '';
+            const slotArea = document.getElementById('slots'); slotArea.innerHTML = '';
             currentWord.formula.forEach(id => {
-                const comp = db.components.find(c => c.id === id);
                 const div = document.createElement('div');
-                div.className = 'slot';
-                div.dataset.ans = comp.value;
-                div.innerText = comp.type.toUpperCase();
-                
+                div.className = 'slot'; div.dataset.ans = componentsMap[id];
+                div.innerText = id.split('_')[0];
                 div.ondragover = e => e.preventDefault();
                 div.ondrop = handleDrop;
                 slotArea.appendChild(div);
             });
 
-            // 生成零件
-            const pool = document.getElementById('pool');
-            pool.innerHTML = '';
-            const correctParts = currentWord.formula.map(id => db.components.find(c => c.id === id).value);
-            const decoys = ["re-", "port", "in-", "struct", "ion"];
-            const allParts = [...new Set([...correctParts, ...decoys])].sort(() => Math.random() - 0.5);
-
-            allParts.forEach(val => {
-                const r = document.createElement('div');
-                r.className = 'rune';
-                r.draggable = true;
-                r.innerText = val;
-                r.ondragstart = e => e.dataTransfer.setData('text', val);
+            const pool = document.getElementById('pool'); pool.innerHTML = '';
+            const correct = currentWord.formula.map(id => componentsMap[id]);
+            const decoys = ["re-", "in-", "struct", "port", "-ion"];
+            const all = [...new Set([...correct, ...decoys])].sort(() => Math.random() - 0.5);
+            all.forEach(val => {
+                const r = document.createElement('div'); r.className = 'rune'; r.draggable = true;
+                r.innerText = val; r.ondragstart = e => e.dataTransfer.setData('text', val);
                 pool.appendChild(r);
             });
-
             showStep(1);
         }
 
         function handleDrop(e) {
             const val = e.dataTransfer.getData('text');
             if (val === this.dataset.ans) {
-                this.innerText = val;
-                this.classList.add('correct');
+                this.innerText = val; this.classList.add('correct');
                 solvedSlots++;
-                if (solvedSlots === currentWord.formula.length) {
-                    setTimeout(() => startSentences(), 600);
-                }
+                if (solvedSlots === currentWord.formula.length) setTimeout(() => startStory(), 600);
             } else {
-                this.style.background = "#ffafcc";
-                setTimeout(() => this.style.background = "#fafafa", 400);
+                this.style.borderColor = "#ff4d6d"; setTimeout(() => this.style.borderColor = "var(--m-blue)", 500);
             }
         }
 
-        function startSentences() {
-            const list = document.getElementById('sentence-list');
-            list.innerHTML = '';
-            // 這裡模擬 12 句，實際可擴充字庫增加 sentence 陣列
-            for (let i = 1; i <= 12; i++) {
-                const card = document.createElement('div');
-                card.className = 's-card';
-                card.innerHTML = `<b>${i}.</b> This is a context where <span class="hl">${currentWord.word}</span> makes perfect sense in sentence ${i}.`;
-                list.appendChild(card);
-            }
+        function startStory() {
+            const storyBox = document.getElementById('story-content');
+            const storyHTML = currentWord.story.replace(new RegExp(currentWord.word, 'gi'), 
+                `<span class="story-word-hl">${currentWord.word}</span>`);
+            storyBox.innerHTML = storyHTML;
 
-            // 準備填空題
             document.getElementById('cloze-text').innerHTML = currentWord.usage_example.replace(new RegExp(currentWord.word, 'gi'), "______");
-            
-            // 監聽填空輸入
             document.getElementById('user-input').oninput = function() {
-                if (this.value.toLowerCase() === currentWord.word.toLowerCase()) {
+                if (this.value.toLowerCase().trim() === currentWord.word.toLowerCase()) {
                     this.classList.add('valid');
-                    document.getElementById('feedback').innerText = "✨ Magic Word Detected!";
+                    document.getElementById('feedback').innerText = "✨ MAGIC WORD DETECTED! ✨";
                     document.getElementById('to-game').style.display = "inline-block";
                 }
             };
-
-            // 準備遊戲
             document.getElementById('root-task').innerText = `Which word shares the root of ${currentWord.word}?`;
             const gPool = document.getElementById('game-options');
-            gPool.innerHTML = `<div class="rune" onclick="alert('Correct!')">Dictionary</div><div class="rune">Portable</div>`;
-
+            gPool.innerHTML = `<div class="rune" onclick="alert('Brilliant!')">Option A</div><div class="rune" onclick="alert('Try again!')">Option B</div>`;
             showStep(2);
         }
 
-        function nextWord() {
-            loadChallenge(currentIdx + 1);
-        }
-
+        function nextWord() { loadWord(currentIdx + 1); }
         function showStep(n) {
-            document.querySelectorAll('.view-section').forEach((s, i) => {
-                s.classList.toggle('active', i === (n-1));
-            });
+            document.querySelectorAll('.view-section').forEach((s, i) => s.classList.toggle('active', i === (n-1)));
         }
-
-        window.onload = start;
+        window.onload = init;
     </script>
 </body>
 </html>
