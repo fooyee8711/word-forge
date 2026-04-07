@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Forge - Terminal</title>
+    <title>Word Forge - Clean Lab</title>
     <style>
-        /* 現代科技實驗室風格 (Cyber/Lab UI) */
+        /* 明亮極簡實驗室風格 (Clean Modern Lab UI) */
         body {
-            background-color: #0d1117; /* 深色科技背景 */
-            color: #c9d1d9;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #f4f7f9; /* 乾淨的淺灰藍底色 */
+            color: #334155; /* 深灰文字，降低純黑色的對比疲勞 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,70 +19,83 @@
         }
 
         h1 {
-            color: #58a6ff;
+            color: #0ea5e9; /* 科技亮藍色 */
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 5px;
+            font-weight: 800;
         }
 
         .hud {
             display: flex;
             justify-content: space-between;
             width: 600px;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 2px solid #cbd5e1;
             padding-bottom: 10px;
             margin-bottom: 30px;
-            font-size: 0.9rem;
-            color: #8b949e;
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 600;
         }
 
         #stability-bar {
-            color: #3fb950;
+            color: #10b981; /* 成功綠 */
             font-weight: bold;
         }
 
         /* 藍圖插槽區 */
+        .blueprint-container {
+            width: 600px;
+            margin-bottom: 30px;
+        }
+
         .blueprint {
             display: flex;
             gap: 20px;
-            margin-bottom: 40px;
-            background: rgba(22, 27, 34, 0.5);
-            padding: 30px;
-            border: 1px dashed #30363d;
-            border-radius: 10px;
+            justify-content: center;
+            background: #ffffff;
+            padding: 40px;
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
         }
 
         .slot {
-            width: 120px;
-            height: 60px;
-            border: 2px solid #30363d;
-            border-radius: 6px;
+            width: 130px;
+            height: 65px;
+            border: 2px solid #cbd5e1;
+            background: #f8fafc;
+            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            color: #8b949e;
+            color: #94a3b8;
+            font-size: 1.1rem;
             transition: all 0.2s ease;
         }
 
-        /* 插槽狀態特效 */
+        /* 插槽狀態特效 (明亮版) */
         .slot.drag-over {
-            border-color: #58a6ff;
-            box-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
-            background-color: rgba(88, 166, 255, 0.1);
+            border-color: #0ea5e9;
+            background-color: #f0f9ff;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+            color: #0ea5e9;
         }
 
         .slot.success {
-            border-color: #3fb950;
-            color: #3fb950;
-            box-shadow: 0 0 15px rgba(63, 185, 80, 0.4);
-            background-color: rgba(63, 185, 80, 0.1);
+            border-color: #10b981;
+            color: #10b981;
+            background-color: #ecfdf5;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
         }
 
         .slot.error {
-            border-color: #f85149;
-            box-shadow: 0 0 15px rgba(248, 81, 73, 0.4);
-            background-color: rgba(248, 81, 73, 0.1);
+            border-color: #ef4444;
+            color: #ef4444;
+            background-color: #fef2f2;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
         }
 
         /* 零件庫區 */
@@ -92,22 +105,29 @@
             flex-wrap: wrap;
             justify-content: center;
             width: 600px;
-            padding: 20px;
-            background: #161b22;
-            border-radius: 8px;
-            border: 1px solid #21262d;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
         .part {
-            background-color: #21262d;
-            border: 1px solid #30363d;
-            padding: 10px 20px;
-            border-radius: 4px;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            padding: 12px 24px;
+            border-radius: 6px;
             cursor: grab;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #e6edf3;
-            transition: transform 0.1s;
+            color: #334155;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.1s, border-color 0.2s;
+        }
+
+        .part:hover {
+            border-color: #94a3b8;
+            transform: translateY(-2px);
         }
 
         .part:active {
@@ -116,23 +136,50 @@
         }
 
         .part.hidden {
-            visibility: hidden; /* 拖入成功後隱藏原零件 */
+            display: none; /* 完全隱藏以騰出空間 */
         }
 
         /* 翻譯與訊息終端機 */
         .console {
-            margin-top: 40px;
-            width: 600px;
-            height: 100px;
-            background: #000;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 15px;
-            font-family: 'Courier New', Courier, monospace;
-            color: #3fb950;
-            overflow: hidden;
+            margin-top: 30px;
+            width: 570px; /* 扣除 padding */
+            min-height: 80px;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            color: #475569;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* NEXT 按鈕設計 */
+        #next-btn {
+            display: none; /* 預設隱藏 */
+            margin-top: 20px;
+            background-color: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(14, 165, 233, 0.3);
+            transition: all 0.2s;
+        }
+
+        #next-btn:hover {
+            background-color: #0284c7;
+            transform: translateY(-2px);
+        }
+        
+        #next-btn:active {
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -144,65 +191,141 @@
         <span>Stability: <span id="stability-bar">100%</span></span>
     </div>
 
-    <div style="margin-bottom: 20px; color: #8b949e;">
-        > TARGET BLUEPRINT: <span style="color: #fff; font-weight: bold; font-size: 1.2rem;">DESTRUCTION</span>
+    <div class="blueprint-container">
+        <div style="margin-bottom: 15px; color: #64748b; font-weight: bold;">
+            > TARGET BLUEPRINT: <span id="target-word" style="color: #0ea5e9; font-size: 1.4rem;">LOADING...</span>
+        </div>
+        <div class="blueprint" id="blueprint-area"></div>
     </div>
 
-    <div class="blueprint">
-        <div class="slot" data-type="prefix" id="slot-prefix">Prefix</div>
-        <div class="slot" data-type="root" id="slot-root">Root</div>
-        <div class="slot" data-type="suffix" id="slot-suffix">Suffix</div>
-    </div>
-
-    <div class="parts-pool">
-        <div class="part" draggable="true" data-type="prefix" data-value="un-">un-</div>
-        <div class="part" draggable="true" data-type="suffix" data-value="-able">-able</div>
-        <div class="part" draggable="true" data-type="root" data-value="struct">struct</div>
-        <div class="part" draggable="true" data-type="prefix" data-value="de-">de-</div>
-        <div class="part" draggable="true" data-type="root" data-value="port">port</div>
-        <div class="part" draggable="true" data-type="suffix" data-value="-ion">-ion</div>
-    </div>
+    <div class="parts-pool" id="parts-pool"></div>
 
     <div class="console" id="console-log">
-        > System ready. Awaiting module insertion...
+        > Establishing connection to local database...
     </div>
 
+    <button id="next-btn" onclick="loadNextWord()">NEXT BLUEPRINT ➔</button>
+
     <script>
-        // 目標配方設定
-        const targetFormula = {
-            prefix: "de-",
-            root: "struct",
-            suffix: "-ion"
-        };
-
-        // 穩定度設定
+        // 全域變數
+        let wordDatabase = { components: [], formulas: [] };
+        let currentFormulaIndex = 0;
         let stability = 100;
+        let totalRequiredSlots = 0;
         let completedSlots = 0;
-
-        const parts = document.querySelectorAll('.part');
-        const slots = document.querySelectorAll('.slot');
-        const consoleLog = document.getElementById('console-log');
-        const stabilityBar = document.getElementById('stability-bar');
-
         let draggedPart = null;
 
-        // 1. 設定拖曳事件 (零件端)
-        parts.forEach(part => {
-            part.addEventListener('dragstart', function(e) {
-                draggedPart = this;
-                // 為了相容性，設定傳輸資料
-                e.dataTransfer.setData('text/plain', this.dataset.value);
+        const blueprintArea = document.getElementById('blueprint-area');
+        const partsPool = document.getElementById('parts-pool');
+        const consoleLog = document.getElementById('console-log');
+        const stabilityBar = document.getElementById('stability-bar');
+        const targetWordDisplay = document.getElementById('target-word');
+        const nextBtn = document.getElementById('next-btn');
+
+        // 1. 初始化：載入 JSON 資料庫
+        async function initSystem() {
+            try {
+                const response = await fetch('words.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                wordDatabase = await response.json();
+                consoleLog.innerHTML = `<span style="color:#10b981;">> SYSTEM ONLINE. Data loaded successfully.</span>`;
+                
+                // 載入第一個單字
+                loadNextWord();
+                
+            } catch (error) {
+                consoleLog.innerHTML = `<span style="color:#ef4444;">> ERROR: Failed to load words.json. Are you running a Local Server?</span>`;
+                console.error("Fetch error:", error);
+            }
+        }
+
+        // 2. 核心遊戲循環：載入下一個單字配方
+        function loadNextWord() {
+            // 如果已經做完所有題目，回到第一題（循環）
+            if (currentFormulaIndex >= wordDatabase.formulas.length) {
+                currentFormulaIndex = 0; 
+            }
+
+            const currentFormula = wordDatabase.formulas[currentFormulaIndex];
+            targetWordDisplay.textContent = currentFormula.word;
+            
+            // 重置 UI 與計數器
+            completedSlots = 0;
+            blueprintArea.innerHTML = '';
+            partsPool.innerHTML = '';
+            nextBtn.style.display = 'none';
+            blueprintArea.style.borderColor = "#94a3b8";
+            blueprintArea.style.boxShadow = "none";
+            consoleLog.innerHTML = `> Blueprint ready. Awaiting components...`;
+
+            // 抓取這個單字需要的正確零件資料
+            const requiredComponents = currentFormula.formula.map(
+                id => wordDatabase.components.find(c => c.id === id)
+            );
+            
+            totalRequiredSlots = requiredComponents.length;
+
+            // 動態生成插槽 (Slots)
+            requiredComponents.forEach(comp => {
+                const slot = document.createElement('div');
+                slot.className = 'slot';
+                slot.dataset.type = comp.type;   // 例如: prefix
+                slot.dataset.value = comp.value; // 例如: de-
+                slot.textContent = comp.type.toUpperCase(); // 顯示 PREFIX, ROOT 等
+                
+                // 綁定放置事件
+                setupSlotEvents(slot);
+                blueprintArea.appendChild(slot);
             });
 
+            // 準備零件庫：包含正確零件 + 隨機干擾零件
+            let partsToDisplay = [...requiredComponents];
+            
+            // 加入 3 個隨機干擾零件
+            while(partsToDisplay.length < requiredComponents.length + 3) {
+                const randomComp = wordDatabase.components[Math.floor(Math.random() * wordDatabase.components.length)];
+                if (!partsToDisplay.some(p => p.id === randomComp.id)) {
+                    partsToDisplay.push(randomComp);
+                }
+            }
+
+            // 打亂零件順序
+            partsToDisplay.sort(() => Math.random() - 0.5);
+
+            // 動態生成零件 (Parts)
+            partsToDisplay.forEach(comp => {
+                const part = document.createElement('div');
+                part.className = 'part';
+                part.draggable = true;
+                part.dataset.type = comp.type;
+                part.dataset.value = comp.value;
+                part.textContent = comp.value;
+
+                // 綁定拖曳事件
+                setupPartEvents(part);
+                partsPool.appendChild(part);
+            });
+
+            // 準備下一題的索引
+            currentFormulaIndex++;
+        }
+
+        // 3. 綁定零件拖曳事件
+        function setupPartEvents(part) {
+            part.addEventListener('dragstart', function(e) {
+                draggedPart = this;
+                e.dataTransfer.setData('text/plain', this.dataset.value);
+            });
             part.addEventListener('dragend', function() {
                 draggedPart = null;
             });
-        });
+        }
 
-        // 2. 設定放置事件 (插槽端)
-        slots.forEach(slot => {
+        // 4. 綁定插槽放置與判定邏輯
+        function setupSlotEvents(slot) {
             slot.addEventListener('dragover', function(e) {
-                e.preventDefault(); // 必須阻止預設行為才能允許放置
+                e.preventDefault();
                 if (!this.classList.contains('success')) {
                     this.classList.add('drag-over');
                 }
@@ -218,63 +341,67 @@
 
                 if (!draggedPart || this.classList.contains('success')) return;
 
-                const slotType = this.dataset.type; // prefix, root, or suffix
-                const partValue = draggedPart.dataset.value;
-                const partType = draggedPart.dataset.type;
-
-                // 邏輯驗證：檢查零件類型是否正確，且值是否符合目標配方
-                if (partType === slotType && partValue === targetFormula[slotType]) {
-                    // 驗證成功 (綠燈)
-                    this.textContent = partValue;
+                // 核心判定邏輯：比對 Type 和 Value 是否吻合
+                if (draggedPart.dataset.type === this.dataset.type && 
+                    draggedPart.dataset.value === this.dataset.value) {
+                    
+                    // 正確 (綠燈)
+                    this.textContent = draggedPart.dataset.value;
                     this.classList.add('success');
-                    draggedPart.classList.add('hidden'); // 隱藏已使用的零件
-                    consoleLog.innerHTML = `> MODULE [${partValue}] ACCEPTED.`;
-                    consoleLog.style.color = "#3fb950";
+                    draggedPart.classList.add('hidden'); // 隱藏拖曳的零件
                     
                     completedSlots++;
                     checkWinCondition();
                 } else {
-                    // 驗證失敗 (紅燈)
-                    triggerError(this, partValue);
+                    // 錯誤 (紅燈)
+                    triggerError(this, draggedPart.dataset.value);
                 }
             });
-        });
+        }
 
-        // 觸發紅燈與扣除穩定度
+        // 5. 錯誤懲罰機制
         function triggerError(slotElement, invalidValue) {
             slotElement.classList.add('error');
-            consoleLog.innerHTML = `> INVALID FORMULA: [${invalidValue}] is rejected by the system.`;
-            consoleLog.style.color = "#f85149";
+            consoleLog.innerHTML = `<span style="color:#ef4444; font-weight:bold;">> INVALID COMPONENT: [${invalidValue}] is rejected.</span>`;
             
-            // 扣除穩定度
             stability -= 5;
             if (stability < 0) stability = 0;
             stabilityBar.textContent = `${stability}%`;
-            if (stability < 80) stabilityBar.style.color = "#f85149";
+            if (stability < 80) stabilityBar.style.color = "#ef4444";
 
-            // 短暫延遲後移除紅燈效果 (迎合心急特質，快速重置)
+            // 迎合心急特質，極速恢復，不打斷節奏
             setTimeout(() => {
                 slotElement.classList.remove('error');
-            }, 500);
+            }, 400);
         }
 
-        // 檢查是否完成所有插槽
+        // 6. 勝利結算與顯示 Next 按鈕
         function checkWinCondition() {
-            if (completedSlots === 3) {
+            if (completedSlots === totalRequiredSlots) {
+                // 取得當前成功完成的單字資料
+                const currentFormula = wordDatabase.formulas[currentFormulaIndex - 1];
+                
+                // 動畫延遲，營造組裝完成的質感
                 setTimeout(() => {
+                    // 顯示英文解釋
                     consoleLog.innerHTML = `
-                        > DESTRUCTION (Success!) <br>
-                        > De- (Down/Away) + Struct (Build) <br>
-                        > Definition: The act of taking down or destroying something that was built.
+                        <span style="color:#0ea5e9; font-weight:bold; font-size:1.2rem;">> ${currentFormula.word} (Success!)</span><br>
+                        <span style="color:#10b981;">> Definition: ${currentFormula.definition}</span><br>
+                        <span style="color:#475569; font-style:italic; margin-top:5px; display:block;">" ${currentFormula.usage_example} "</span>
                     `;
-                    consoleLog.style.color = "#58a6ff";
                     
-                    // 觸發整個藍圖發光特效
-                    document.querySelector('.blueprint').style.borderColor = "#58a6ff";
-                    document.querySelector('.blueprint').style.boxShadow = "0 0 20px rgba(88, 166, 255, 0.5)";
-                }, 400);
+                    // 藍圖區發出光芒
+                    blueprintArea.style.borderColor = "#0ea5e9";
+                    blueprintArea.style.boxShadow = "0 0 20px rgba(14, 165, 233, 0.2)";
+                    
+                    // 顯示 NEXT 按鈕
+                    nextBtn.style.display = "block";
+                }, 300);
             }
         }
+
+        // 網頁載入時啟動系統
+        window.onload = initSystem;
     </script>
 </body>
 </html>
