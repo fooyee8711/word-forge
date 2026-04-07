@@ -3,405 +3,506 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Forge - Clean Lab</title>
+    <title>Word Forge - Magical Archive</title>
     <style>
-        /* 明亮極簡實驗室風格 (Clean Modern Lab UI) */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            /* 水彩/羊皮紙色系 */
+            --paper-bg: #f5ebd9;
+            --paper-dark: #e8d5b5;
+            --ink-dark: #2c3e50;
+            --ink-brown: #4e342e;
+            
+            /* 魔法發光色系 */
+            --magic-blue: #0ea5e9;
+            --magic-blue-glow: rgba(14, 165, 233, 0.4);
+            --magic-green: #10b981;
+            --magic-gold: #d97706;
+            
+            /* 邊框與陰影 */
+            --rune-border: rgba(78, 52, 46, 0.3);
+            --watercolor-shadow: 0 8px 24px rgba(44, 62, 80, 0.1), inset 0 0 40px rgba(232, 213, 181, 0.3);
+        }
+
         body {
-            background-color: #f4f7f9; /* 乾淨的淺灰藍底色 */
-            color: #334155; /* 深灰文字，降低純黑色的對比疲勞 */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
             margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--paper-bg) 0%, #faecd4 50%, var(--paper-dark) 100%);
+            color: var(--ink-dark);
+            font-family: 'Lora', serif; /* 內文字體 */
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
             user-select: none;
         }
 
-        h1 {
-            color: #0ea5e9; /* 科技亮藍色 */
-            text-transform: uppercase;
+        h1, h2, h3, .rune-text {
+            font-family: 'Cinzel', serif; /* 標題/符文字體 */
+            color: var(--ink-brown);
+        }
+
+        /* 側邊導覽列 (Sidebar Navigation) */
+        nav {
+            width: 260px;
+            background: rgba(245, 235, 217, 0.8);
+            backdrop-filter: blur(10px);
+            border-right: 2px solid var(--rune-border);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px dashed var(--rune-border);
+            padding-bottom: 1rem;
+        }
+
+        .logo-area h1 {
+            font-size: 1.8rem;
+            margin: 0;
             letter-spacing: 2px;
-            margin-bottom: 5px;
-            font-weight: 800;
+            color: var(--ink-brown);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .hud {
-            display: flex;
-            justify-content: space-between;
-            width: 600px;
-            border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            font-size: 0.95rem;
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        #stability-bar {
-            color: #10b981; /* 成功綠 */
+        .logo-area .subtitle {
+            font-size: 0.9rem;
+            color: var(--magic-blue);
             font-weight: bold;
+            letter-spacing: 4px;
         }
 
-        /* 藍圖插槽區 */
-        .blueprint-container {
-            width: 600px;
-            margin-bottom: 30px;
-        }
-
-        .blueprint {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            background: #ffffff;
-            padding: 40px;
-            border: 2px dashed #94a3b8;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        .nav-btn {
+            background: transparent;
+            border: none;
+            border-left: 4px solid transparent;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--ink-dark);
+            cursor: pointer;
             transition: all 0.3s ease;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .nav-btn:hover {
+            background: rgba(232, 213, 181, 0.5);
+            color: var(--magic-blue);
+        }
+
+        .nav-btn.active {
+            border-left-color: var(--magic-blue);
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.1) 0%, transparent 100%);
+            color: var(--magic-blue);
+            text-shadow: 0 0 10px var(--magic-blue-glow);
+        }
+
+        /* 穩定性水晶球 (Stability Orb) */
+        .crystal-orb-container {
+            margin-top: auto;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.3);
+            border-radius: 15px;
+            border: 1px solid var(--rune-border);
+        }
+
+        .crystal-orb {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #a7f3d0, var(--magic-green), #064e3b);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), inset -10px -10px 20px rgba(0,0,0,0.4);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* 主要內容區 */
+        main {
+            flex: 1;
+            padding: 3rem 4rem;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === 首頁 (Index View) === */
+        .profile-card {
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>'), rgba(253, 246, 227, 0.7);
+            border: 2px solid var(--rune-border);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: var(--watercolor-shadow);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .profile-card h2 { font-size: 2.5rem; margin-bottom: 0.5rem;}
+        .rank-title { color: var(--magic-gold); font-style: italic; font-size: 1.2rem; margin-bottom: 2rem;}
+
+        /* === 每日鍛造 (Daily Sprint View) === */
+        .forge-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .blueprint-area {
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px dashed var(--rune-border);
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.03);
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+        }
+
+        /* 裝飾性星盤線條 */
+        .astrolabe-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .target-word {
+            font-size: 2rem;
+            color: var(--magic-blue);
+            letter-spacing: 5px;
+            text-shadow: 0 0 15px var(--magic-blue-glow);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slots {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .slot {
-            width: 130px;
-            height: 65px;
-            border: 2px solid #cbd5e1;
-            background: #f8fafc;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: #94a3b8;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-        }
-
-        /* 插槽狀態特效 (明亮版) */
-        .slot.drag-over {
-            border-color: #0ea5e9;
-            background-color: #f0f9ff;
-            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
-            color: #0ea5e9;
-        }
-
-        .slot.success {
-            border-color: #10b981;
-            color: #10b981;
-            background-color: #ecfdf5;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .slot.error {
-            border-color: #ef4444;
-            color: #ef4444;
-            background-color: #fef2f2;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
-        }
-
-        /* 零件庫區 */
-        .parts-pool {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 600px;
-            padding: 30px;
-            background: #ffffff;
+            width: 120px;
+            height: 120px;
+            border: 2px solid rgba(78, 52, 46, 0.5);
+            background: rgba(250, 236, 212, 0.8);
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-        }
-
-        .part {
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            padding: 12px 24px;
-            border-radius: 6px;
-            cursor: grab;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #334155;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            transition: transform 0.1s, border-color 0.2s;
-        }
-
-        .part:hover {
-            border-color: #94a3b8;
-            transform: translateY(-2px);
-        }
-
-        .part:active {
-            cursor: grabbing;
-            transform: scale(0.95);
-        }
-
-        .part.hidden {
-            display: none; /* 完全隱藏以騰出空間 */
-        }
-
-        /* 翻譯與訊息終端機 */
-        .console {
-            margin-top: 30px;
-            width: 570px; /* 扣除 padding */
-            min-height: 80px;
-            background: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 20px;
-            color: #475569;
-            font-size: 1.05rem;
-            line-height: 1.5;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            color: rgba(78, 52, 46, 0.6);
+            transition: all 0.3s;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* NEXT 按鈕設計 */
-        #next-btn {
-            display: none; /* 預設隱藏 */
-            margin-top: 20px;
-            background-color: #0ea5e9;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
+        .slot.filled {
+            border-color: var(--magic-gold);
+            color: var(--ink-brown);
+            background: #fff;
+            box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
+            font-size: 1.5rem;
             font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(14, 165, 233, 0.3);
-            transition: all 0.2s;
         }
 
-        #next-btn:hover {
-            background-color: #0284c7;
-            transform: translateY(-2px);
+        .parts-pool {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 800px;
+        }
+
+        .rune {
+            background: #fffdf8;
+            border: 2px solid var(--rune-border);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--ink-dark);
+            cursor: pointer;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .rune:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(14, 165, 233, 0.2);
+            border-color: var(--magic-blue);
+            color: var(--magic-blue);
+        }
+
+        /* === 科技樹 (Tech Tree View) === */
+        .tree-container {
+            text-align: center;
+            height: 100%;
         }
         
-        #next-btn:active {
-            transform: translateY(0);
+        .constellation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            position: relative;
         }
+
+        .tree-node {
+            background: rgba(255,255,255,0.7);
+            border: 2px solid var(--rune-border);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .tree-node.unlocked {
+            border-color: var(--magic-blue);
+            color: var(--magic-blue);
+            box-shadow: 0 0 20px var(--magic-blue-glow);
+        }
+        
+        .tree-node.ancient {
+            border-color: #8b5cf6; /* 古老紫 */
+            color: #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* 連接線 */
+        .line {
+            position: absolute;
+            width: 2px;
+            height: 3rem;
+            background: var(--rune-border);
+            z-index: 1;
+        }
+
+        /* === 檔案館 (Archive View) === */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .parchment-card {
+            background: #fffbf0;
+            border: 1px solid #d7ccc8;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* 模擬羊皮紙卷角 */
+        .parchment-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            border-width: 0 20px 20px 0;
+            border-style: solid;
+            border-color: #f5ebd9 #f5ebd9 #e8d5b5 #e8d5b5;
+            box-shadow: -2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .word-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--magic-blue);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .word-logic {
+            font-family: 'Courier New', monospace;
+            color: var(--magic-green);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .word-def {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--ink-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .word-meta {
+            font-style: italic;
+            color: #795548;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
     </style>
 </head>
 <body>
 
-    <h1>Word Forge</h1>
-    <div class="hud">
-        <span>Operator: AMELIA // Level: Novice Splicer</span>
-        <span>Stability: <span id="stability-bar">100%</span></span>
-    </div>
-
-    <div class="blueprint-container">
-        <div style="margin-bottom: 15px; color: #64748b; font-weight: bold;">
-            > TARGET BLUEPRINT: <span id="target-word" style="color: #0ea5e9; font-size: 1.4rem;">LOADING...</span>
+    <nav>
+        <div class="logo-area">
+            <h1>WORD FORGE</h1>
+            <div class="subtitle">詞彙鍛造爐</div>
         </div>
-        <div class="blueprint" id="blueprint-area"></div>
-    </div>
 
-    <div class="parts-pool" id="parts-pool"></div>
+        <button class="nav-btn active" onclick="switchView('index')">✧ Index Portal</button>
+        <button class="nav-btn" onclick="switchView('sprint')">⚙️ Daily Sprint</button>
+        <button class="nav-btn" onclick="switchView('tree')">🌌 Tech Tree</button>
+        <button class="nav-btn" onclick="switchView('archive')">📜 Archive</button>
 
-    <div class="console" id="console-log">
-        > Establishing connection to local database...
-    </div>
+        <div class="crystal-orb-container">
+            <div style="font-size: 0.85rem; margin-bottom: 5px; color: var(--ink-brown);">System Stability</div>
+            <div class="crystal-orb">100%</div>
+            <div style="font-size: 0.8rem; margin-top: 10px; font-style: italic;">Perfect Alignment</div>
+        </div>
+    </nav>
 
-    <button id="next-btn" onclick="loadNextWord()">NEXT BLUEPRINT ➔</button>
+    <main>
+        <section id="view-index" class="view-section active">
+            <div class="profile-card">
+                <h2>Welcome, Amelia</h2>
+                <div class="rank-title">Rank: Apprentice Word Sculptor</div>
+                <p>The machinery of language awaits your command. Your Lexile sensors are currently tuned to <b>800-1100</b>.</p>
+                <p style="color: var(--magic-blue); font-style: italic; margin-top: 2rem;">"Decode the ancient roots, master the logic."</p>
+            </div>
+        </section>
+
+        <section id="view-sprint" class="view-section">
+            <div class="forge-container">
+                <div class="blueprint-area">
+                    <div class="astrolabe-bg"></div>
+                    <div class="rune-text" style="color: rgba(78,52,46,0.6); margin-bottom: 10px;">TARGET BLUEPRINT:</div>
+                    <div class="target-word">UNPREDICTABLE</div>
+                    
+                    <div class="slots">
+                        <div class="slot filled" style="border-color: var(--magic-blue); box-shadow: 0 0 15px rgba(14,165,233,0.3);">un-</div>
+                        <div class="slot filled">pre-</div>
+                        <div class="slot">ROOT</div>
+                        <div class="slot">SUFFIX</div>
+                    </div>
+                </div>
+
+                <div class="rune-text" style="font-size: 1.2rem; color: var(--ink-brown); margin-top: 1rem;">✧ Parts Pool ✧</div>
+                <div class="parts-pool">
+                    <div class="rune">dict</div>
+                    <div class="rune">-able</div>
+                    <div class="rune">port</div>
+                    <div class="rune">re-</div>
+                    <div class="rune">struct</div>
+                    <div class="rune">in-</div>
+                    <div class="rune">-ology</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-tree" class="view-section">
+            <h2 class="rune-text" style="text-align: center; font-size: 2rem;">Etymology Constellations</h2>
+            <p style="text-align: center; color: var(--ink-brown); font-style: italic;">Map your journey through the roots of language.</p>
+            
+            <div class="constellation">
+                <div class="tree-node unlocked">Level 1: Directional Prefixes</div>
+                <div class="line" style="top: 3.5rem;"></div>
+                <div class="tree-node unlocked" style="margin-top: 3rem;">Level 2: Physical Roots (struct, port)</div>
+                <div class="line" style="top: 10rem;"></div>
+                <div class="tree-node unlocked" style="margin-top: 3rem;">Level 3: Abstract Roots (bio, chron)</div>
+                <div class="line" style="top: 16.5rem;"></div>
+                <div class="tree-node ancient" style="margin-top: 3rem;">✧ Ancient Lexicon: Greco-Latin ✧</div>
+            </div>
+        </section>
+
+        <section id="view-archive" class="view-section">
+            <h2 class="rune-text" style="margin-bottom: 2rem; border-bottom: 2px solid var(--rune-border); padding-bottom: 1rem;">Decoding Log Archive</h2>
+            
+            <div class="archive-grid">
+                <div class="parchment-card">
+                    <div class="word-title">UNPREDICTABLE</div>
+                    <div class="word-logic">[ un- ] + [ pre- ] + [ dict ] + [ -able ]</div>
+                    <div class="word-def">Not able to be foreseen or known beforehand.</div>
+                    <div style="font-style: italic; color: #666; margin-bottom: 1rem;">"The weather in the mountains can be highly unpredictable."</div>
+                    <div class="word-meta">Level 3 | Lexile 850</div>
+                </div>
+
+                <div class="parchment-card">
+                    <div class="word-title">SYNCHRONIZE</div>
+                    <div class="word-logic">[ syn- ] + [ chron ] + [ -ize ]</div>
+                    <div class="word-def">To cause to happen at the exact same time or rate.</div>
+                    <div style="font-style: italic; color: #666; margin-bottom: 1rem;">"The spies had to synchronize their watches."</div>
+                    <div class="word-meta" style="color: #8b5cf6;">Ancient | Lexile 950</div>
+                </div>
+                
+                <div class="parchment-card">
+                    <div class="word-title">TRANSFORMATION</div>
+                    <div class="word-logic">[ trans- ] + [ form ] + [ -ation ]</div>
+                    <div class="word-def">A thorough or dramatic change in form or appearance.</div>
+                    <div style="font-style: italic; color: #666; margin-bottom: 1rem;">"The caterpillar's transformation was complete."</div>
+                    <div class="word-meta">Level 2 | Lexile 880</div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script>
-        // 全域變數
-        let wordDatabase = { components: [], formulas: [] };
-        let currentFormulaIndex = 0;
-        let stability = 100;
-        let totalRequiredSlots = 0;
-        let completedSlots = 0;
-        let draggedPart = null;
-
-        const blueprintArea = document.getElementById('blueprint-area');
-        const partsPool = document.getElementById('parts-pool');
-        const consoleLog = document.getElementById('console-log');
-        const stabilityBar = document.getElementById('stability-bar');
-        const targetWordDisplay = document.getElementById('target-word');
-        const nextBtn = document.getElementById('next-btn');
-
-        // 1. 初始化：載入 JSON 資料庫
-        async function initSystem() {
-            try {
-                const response = await fetch('words.json');
-                if (!response.ok) throw new Error('Network response was not ok');
-                
-                wordDatabase = await response.json();
-                consoleLog.innerHTML = `<span style="color:#10b981;">> SYSTEM ONLINE. Data loaded successfully.</span>`;
-                
-                // 載入第一個單字
-                loadNextWord();
-                
-            } catch (error) {
-                consoleLog.innerHTML = `<span style="color:#ef4444;">> ERROR: Failed to load words.json. Are you running a Local Server?</span>`;
-                console.error("Fetch error:", error);
-            }
-        }
-
-        // 2. 核心遊戲循環：載入下一個單字配方
-        function loadNextWord() {
-            // 如果已經做完所有題目，回到第一題（循環）
-            if (currentFormulaIndex >= wordDatabase.formulas.length) {
-                currentFormulaIndex = 0; 
-            }
-
-            const currentFormula = wordDatabase.formulas[currentFormulaIndex];
-            targetWordDisplay.textContent = currentFormula.word;
+        // 處理視圖切換的 JavaScript
+        function switchView(viewName) {
+            // 隱藏所有視圖
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+            });
             
-            // 重置 UI 與計數器
-            completedSlots = 0;
-            blueprintArea.innerHTML = '';
-            partsPool.innerHTML = '';
-            nextBtn.style.display = 'none';
-            blueprintArea.style.borderColor = "#94a3b8";
-            blueprintArea.style.boxShadow = "none";
-            consoleLog.innerHTML = `> Blueprint ready. Awaiting components...`;
-
-            // 抓取這個單字需要的正確零件資料
-            const requiredComponents = currentFormula.formula.map(
-                id => wordDatabase.components.find(c => c.id === id)
-            );
-            
-            totalRequiredSlots = requiredComponents.length;
-
-            // 動態生成插槽 (Slots)
-            requiredComponents.forEach(comp => {
-                const slot = document.createElement('div');
-                slot.className = 'slot';
-                slot.dataset.type = comp.type;   // 例如: prefix
-                slot.dataset.value = comp.value; // 例如: de-
-                slot.textContent = comp.type.toUpperCase(); // 顯示 PREFIX, ROOT 等
-                
-                // 綁定放置事件
-                setupSlotEvents(slot);
-                blueprintArea.appendChild(slot);
+            // 移除所有按鈕的 active 狀態
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('active');
             });
 
-            // 準備零件庫：包含正確零件 + 隨機干擾零件
-            let partsToDisplay = [...requiredComponents];
-            
-            // 加入 3 個隨機干擾零件
-            while(partsToDisplay.length < requiredComponents.length + 3) {
-                const randomComp = wordDatabase.components[Math.floor(Math.random() * wordDatabase.components.length)];
-                if (!partsToDisplay.some(p => p.id === randomComp.id)) {
-                    partsToDisplay.push(randomComp);
-                }
-            }
-
-            // 打亂零件順序
-            partsToDisplay.sort(() => Math.random() - 0.5);
-
-            // 動態生成零件 (Parts)
-            partsToDisplay.forEach(comp => {
-                const part = document.createElement('div');
-                part.className = 'part';
-                part.draggable = true;
-                part.dataset.type = comp.type;
-                part.dataset.value = comp.value;
-                part.textContent = comp.value;
-
-                // 綁定拖曳事件
-                setupPartEvents(part);
-                partsPool.appendChild(part);
-            });
-
-            // 準備下一題的索引
-            currentFormulaIndex++;
+            // 顯示目標視圖並標記對應按鈕
+            document.getElementById('view-' + viewName).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
-
-        // 3. 綁定零件拖曳事件
-        function setupPartEvents(part) {
-            part.addEventListener('dragstart', function(e) {
-                draggedPart = this;
-                e.dataTransfer.setData('text/plain', this.dataset.value);
-            });
-            part.addEventListener('dragend', function() {
-                draggedPart = null;
-            });
-        }
-
-        // 4. 綁定插槽放置與判定邏輯
-        function setupSlotEvents(slot) {
-            slot.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                if (!this.classList.contains('success')) {
-                    this.classList.add('drag-over');
-                }
-            });
-
-            slot.addEventListener('dragleave', function() {
-                this.classList.remove('drag-over');
-            });
-
-            slot.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.classList.remove('drag-over');
-
-                if (!draggedPart || this.classList.contains('success')) return;
-
-                // 核心判定邏輯：比對 Type 和 Value 是否吻合
-                if (draggedPart.dataset.type === this.dataset.type && 
-                    draggedPart.dataset.value === this.dataset.value) {
-                    
-                    // 正確 (綠燈)
-                    this.textContent = draggedPart.dataset.value;
-                    this.classList.add('success');
-                    draggedPart.classList.add('hidden'); // 隱藏拖曳的零件
-                    
-                    completedSlots++;
-                    checkWinCondition();
-                } else {
-                    // 錯誤 (紅燈)
-                    triggerError(this, draggedPart.dataset.value);
-                }
-            });
-        }
-
-        // 5. 錯誤懲罰機制
-        function triggerError(slotElement, invalidValue) {
-            slotElement.classList.add('error');
-            consoleLog.innerHTML = `<span style="color:#ef4444; font-weight:bold;">> INVALID COMPONENT: [${invalidValue}] is rejected.</span>`;
-            
-            stability -= 5;
-            if (stability < 0) stability = 0;
-            stabilityBar.textContent = `${stability}%`;
-            if (stability < 80) stabilityBar.style.color = "#ef4444";
-
-            // 迎合心急特質，極速恢復，不打斷節奏
-            setTimeout(() => {
-                slotElement.classList.remove('error');
-            }, 400);
-        }
-
-        // 6. 勝利結算與顯示 Next 按鈕
-        function checkWinCondition() {
-            if (completedSlots === totalRequiredSlots) {
-                // 取得當前成功完成的單字資料
-                const currentFormula = wordDatabase.formulas[currentFormulaIndex - 1];
-                
-                // 動畫延遲，營造組裝完成的質感
-                setTimeout(() => {
-                    // 顯示英文解釋
-                    consoleLog.innerHTML = `
-                        <span style="color:#0ea5e9; font-weight:bold; font-size:1.2rem;">> ${currentFormula.word} (Success!)</span><br>
-                        <span style="color:#10b981;">> Definition: ${currentFormula.definition}</span><br>
-                        <span style="color:#475569; font-style:italic; margin-top:5px; display:block;">" ${currentFormula.usage_example} "</span>
-                    `;
-                    
-                    // 藍圖區發出光芒
-                    blueprintArea.style.borderColor = "#0ea5e9";
-                    blueprintArea.style.boxShadow = "0 0 20px rgba(14, 165, 233, 0.2)";
-                    
-                    // 顯示 NEXT 按鈕
-                    nextBtn.style.display = "block";
-                }, 300);
-            }
-        }
-
-        // 網頁載入時啟動系統
-        window.onload = initSystem;
     </script>
 </body>
 </html>
