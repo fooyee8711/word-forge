@@ -1,70 +1,137 @@
 {
-  "version": "1.0",
+  "version": "3.0",
   "metadata": {
-    "target_lexile": 800,
-    "theme": "Sci-Fi / Decoder Lab"
+    "target_lexile": "600-1100",
+    "theme": "British International School Curriculum (KS1-KS3)"
   },
   "components": [
-    { "id": "P_DE", "type": "prefix", "value": "de-", "meaning": "Down / Away", "tier": "Standard" },
-    { "id": "P_IN", "type": "prefix", "value": "in-", "meaning": "Not / Opposite of", "tier": "Standard" },
-    { "id": "P_TRANS", "type": "prefix", "value": "trans-", "meaning": "Across / Change through", "tier": "Standard" },
-    { "id": "P_IM", "type": "prefix", "value": "im-", "meaning": "Not (used before b, m, p)", "tier": "Standard" },
+    { "id": "P_UN", "type": "prefix", "value": "un-", "meaning": "Not / Opposite", "tier": "Level 1" },
+    { "id": "P_RE", "type": "prefix", "value": "re-", "meaning": "Again / Back", "tier": "Level 1" },
+    { "id": "P_PRE", "type": "prefix", "value": "pre-", "meaning": "Before", "tier": "Level 2" },
+    { "id": "P_DIS", "type": "prefix", "value": "dis-", "meaning": "Apart / Away / Negative", "tier": "Level 2" },
+    { "id": "P_MIS", "type": "prefix", "value": "mis-", "meaning": "Wrong", "tier": "Level 2" },
+    { "id": "P_IN", "type": "prefix", "value": "in-", "meaning": "Not / Into", "tier": "Level 2" },
+    { "id": "P_IM", "type": "prefix", "value": "im-", "meaning": "Not (before p, b, m)", "tier": "Level 2" },
+    { "id": "P_TRANS", "type": "prefix", "value": "trans-", "meaning": "Across / Beyond", "tier": "Level 3" },
+    { "id": "P_INTER", "type": "prefix", "value": "inter-", "meaning": "Between / Among", "tier": "Level 3" },
+    { "id": "P_AUTO", "type": "prefix", "value": "auto-", "meaning": "Self", "tier": "Level 3" },
+    { "id": "P_SUPER", "type": "prefix", "value": "super-", "meaning": "Above / Beyond", "tier": "Level 3" },
     
-    { "id": "R_STRUCT", "type": "root", "value": "struct", "meaning": "Build", "category": "Science", "tier": "Standard" },
-    { "id": "R_VIS", "type": "root", "value": "vis", "meaning": "See / Look", "category": "Science", "tier": "Standard" },
-    { "id": "R_FORM", "type": "root", "value": "form", "meaning": "Shape", "category": "Science", "tier": "Standard" },
-    { "id": "R_CRED", "type": "root", "value": "cred", "meaning": "Believe", "category": "Fiction", "tier": "Standard" },
-    { "id": "R_MUT", "type": "root", "value": "mut", "meaning": "Change", "category": "Fiction", "tier": "Standard" },
-    { "id": "R_MORT", "type": "root", "value": "mort", "meaning": "Death", "category": "Fiction", "tier": "Standard" },
+    { "id": "P_SYM", "type": "prefix", "value": "sym-", "meaning": "Together / Same", "tier": "Ancient" },
+    { "id": "P_SYN", "type": "prefix", "value": "syn-", "meaning": "Together / Same", "tier": "Ancient" },
+    { "id": "P_OMNI", "type": "prefix", "value": "omni-", "meaning": "All / Every", "tier": "Ancient" },
+    { "id": "P_PAN", "type": "prefix", "value": "pan-", "meaning": "All", "tier": "Ancient" },
+    { "id": "P_HYPER", "type": "prefix", "value": "hyper-", "meaning": "Over / Above", "tier": "Ancient" },
+    { "id": "P_HYPO", "type": "prefix", "value": "hypo-", "meaning": "Under / Below", "tier": "Ancient" },
+    { "id": "P_CONTRA", "type": "prefix", "value": "contra-", "meaning": "Against", "tier": "Ancient" },
 
-    { "id": "S_ION", "type": "suffix", "value": "-ion", "meaning": "Act or Process (Noun)", "tier": "Standard" },
-    { "id": "S_IBLE", "type": "suffix", "value": "-ible", "meaning": "Able to be (Adjective)", "tier": "Standard" },
-    { "id": "S_ED", "type": "suffix", "value": "-ed", "meaning": "Past action / State (Adjective/Verb)", "tier": "Standard" },
-    { "id": "S_AL", "type": "suffix", "value": "-al", "meaning": "Relating to (Adjective)", "tier": "Standard" },
-    { "id": "S_ATION", "type": "suffix", "value": "-ation", "meaning": "State or Process (Noun)", "tier": "Standard" }
+    { "id": "R_STRUCT", "type": "root", "value": "struct", "meaning": "Build", "tier": "Level 2" },
+    { "id": "R_PORT", "type": "root", "value": "port", "meaning": "Carry", "tier": "Level 2" },
+    { "id": "R_FORM", "type": "root", "value": "form", "meaning": "Shape", "tier": "Level 2" },
+    { "id": "R_DICT", "type": "root", "value": "dict", "meaning": "Say / Speak", "tier": "Level 3" },
+    { "id": "R_SPECT", "type": "root", "value": "spect", "meaning": "Look / See", "tier": "Level 3" },
+    { "id": "R_BIO", "type": "root", "value": "bio", "meaning": "Life", "tier": "Level 3" },
+    { "id": "R_PHON", "type": "root", "value": "phon", "meaning": "Sound", "tier": "Level 3" },
+    { "id": "R_CHRON", "type": "root", "value": "chron", "meaning": "Time", "tier": "Level 3" },
+    { "id": "R_COGN", "type": "root", "value": "cogn", "meaning": "Know", "tier": "Level 3" },
+
+    { "id": "R_PHIL", "type": "root", "value": "phil", "meaning": "Love", "tier": "Ancient" },
+    { "id": "R_SOPH", "type": "root", "value": "soph", "meaning": "Wisdom", "tier": "Ancient" },
+    { "id": "R_PATH", "type": "root", "value": "path", "meaning": "Feeling / Disease", "tier": "Ancient" },
+    { "id": "R_ANTHROP", "type": "root", "value": "anthrop", "meaning": "Human", "tier": "Ancient" },
+    { "id": "R_DEM", "type": "root", "value": "dem", "meaning": "People", "tier": "Ancient" },
+    { "id": "R_GEN", "type": "root", "value": "gen", "meaning": "Birth / Origin", "tier": "Ancient" },
+    { "id": "R_VOC", "type": "root", "value": "voc", "meaning": "Voice / Call", "tier": "Ancient" },
+
+    { "id": "S_S", "type": "suffix", "value": "-s", "meaning": "More than one", "tier": "Level 1" },
+    { "id": "S_ED", "type": "suffix", "value": "-ed", "meaning": "Past tense", "tier": "Level 1" },
+    { "id": "S_ING", "type": "suffix", "value": "-ing", "meaning": "Happening now", "tier": "Level 1" },
+    { "id": "S_FUL", "type": "suffix", "value": "-ful", "meaning": "Full of", "tier": "Level 2" },
+    { "id": "S_LESS", "type": "suffix", "value": "-less", "meaning": "Without", "tier": "Level 2" },
+    { "id": "S_NESS", "type": "suffix", "value": "-ness", "meaning": "State of", "tier": "Level 2" },
+    { "id": "S_MENT", "type": "suffix", "value": "-ment", "meaning": "Result of an action", "tier": "Level 2" },
+    { "id": "S_ABLE", "type": "suffix", "value": "-able", "meaning": "Can be done", "tier": "Level 3" },
+    { "id": "S_IBLE", "type": "suffix", "value": "-ible", "meaning": "Can be done", "tier": "Level 3" },
+    { "id": "S_ATION", "type": "suffix", "value": "-ation", "meaning": "Action or process", "tier": "Level 3" },
+    { "id": "S_ION", "type": "suffix", "value": "-ion", "meaning": "Action or process", "tier": "Level 3" },
+    { "id": "S_OLOGY", "type": "suffix", "value": "-ology", "meaning": "Study of", "tier": "Level 3" },
+    { "id": "S_Y", "type": "suffix", "value": "-y", "meaning": "State or Condition", "tier": "Level 3" },
+    
+    { "id": "S_ISM", "type": "suffix", "value": "-ism", "meaning": "Belief / System", "tier": "Ancient" },
+    { "id": "S_CRACY", "type": "suffix", "value": "-cracy", "meaning": "Rule / Power", "tier": "Ancient" },
+    { "id": "S_CIDE", "type": "suffix", "value": "-cide", "meaning": "Kill / Cut", "tier": "Ancient" },
+    { "id": "S_IZE", "type": "suffix", "value": "-ize", "meaning": "Make / Cause to be", "tier": "Ancient" }
   ],
   "formulas": [
     {
-      "word": "DESTRUCTION",
-      "formula": ["P_DE", "R_STRUCT", "S_ION"],
-      "definition": "The act of taking down or destroying something that was built.",
-      "usage_example": "The dragon's fiery breath caused massive destruction to the castle walls.",
-      "lexile_level": 750
+      "word": "REFORM",
+      "formula": ["P_RE", "R_FORM"],
+      "definition": "To make changes in order to improve something.",
+      "usage_example": "The school decided to reform its rules to be more fair.",
+      "lexile_level": 650
     },
     {
-      "word": "INVISIBLE",
-      "formula": ["P_IN", "R_VIS", "S_IBLE"],
-      "definition": "Something that cannot be seen.",
-      "usage_example": "The hero wore an invisible cloak to sneak past the sleeping giant.",
-      "lexile_level": 780
+      "word": "PORTABLE",
+      "formula": ["R_PORT", "S_ABLE"],
+      "definition": "Able to be easily carried or moved.",
+      "usage_example": "We brought a portable stove on our camping trip.",
+      "lexile_level": 700
     },
     {
-      "word": "TRANSFORMED",
-      "formula": ["P_TRANS", "R_FORM", "S_ED"],
-      "definition": "Completely changed in form, appearance, or nature.",
-      "usage_example": "Under the full moon, the quiet boy transformed into a howling werewolf.",
-      "lexile_level": 820
+      "word": "BIOLOGY",
+      "formula": ["R_BIO", "S_OLOGY"],
+      "definition": "The scientific study of life and living organisms.",
+      "usage_example": "In biology class, we looked at plant cells under a microscope.",
+      "lexile_level": 800
     },
     {
-      "word": "INCREDIBLE",
-      "formula": ["P_IN", "R_CRED", "S_IBLE"],
-      "definition": "Hard to believe; extraordinary.",
-      "usage_example": "The wizard possessed incredible power, able to move mountains with a single spell.",
-      "lexile_level": 750
-    },
-    {
-      "word": "MUTATION",
-      "formula": ["R_MUT", "S_ATION"],
-      "definition": "A significant change or alteration, often in biology or magic.",
-      "usage_example": "The green glowing liquid caused a strange mutation in the laboratory rats.",
+      "word": "UNPREDICTABLE",
+      "formula": ["P_UN", "P_PRE", "R_DICT", "S_ABLE"],
+      "definition": "Not able to be foreseen or known beforehand.",
+      "usage_example": "The weather in the mountains can be highly unpredictable.",
       "lexile_level": 850
     },
     {
-      "word": "IMMORTAL",
-      "formula": ["P_IM", "R_MORT", "S_AL"],
-      "definition": "Living forever; never dying.",
-      "usage_example": "The ancient elves were immortal beings who had witnessed the dawn of the world.",
-      "lexile_level": 800
+      "word": "TRANSFORMATION",
+      "formula": ["P_TRANS", "R_FORM", "S_ATION"],
+      "definition": "A complete change in shape, appearance, or nature.",
+      "usage_example": "The caterpillar's transformation into a butterfly is magical.",
+      "lexile_level": 880
+    },
+    {
+      "word": "CONTRADICT",
+      "formula": ["P_CONTRA", "R_DICT"],
+      "definition": "To state the opposite of what someone else has said.",
+      "usage_example": "The witness's new story seemed to contradict the evidence.",
+      "lexile_level": 920
+    },
+    {
+      "word": "SYNCHRONIZE",
+      "formula": ["P_SYN", "R_CHRON", "S_IZE"],
+      "definition": "To cause things to happen at exactly the same time.",
+      "usage_example": "The dancers had to perfectly synchronize their movements.",
+      "lexile_level": 950
+    },
+    {
+      "word": "DEMOCRACY",
+      "formula": ["R_DEM", "S_CRACY"],
+      "definition": "A system of government where power is held by the people.",
+      "usage_example": "Voting in elections is a core part of a democracy.",
+      "lexile_level": 980
+    },
+    {
+      "word": "PHILOSOPHY",
+      "formula": ["R_PHIL", "R_SOPH", "S_Y"],
+      "definition": "The study of the fundamental nature of knowledge, reality, and existence.",
+      "usage_example": "Ancient Greek philosophy still influences how we think today.",
+      "lexile_level": 1050
+    },
+    {
+      "word": "ANTHROPOLOGY",
+      "formula": ["R_ANTHROP", "S_OLOGY"],
+      "definition": "The study of human societies, cultures, and development.",
+      "usage_example": "Anthropology helps us understand how ancient humans lived and survived.",
+      "lexile_level": 1100
     }
   ]
 }
