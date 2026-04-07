@@ -1,137 +1,50 @@
 {
-  "version": "3.0",
-  "metadata": {
-    "target_lexile": "600-1100",
-    "theme": "British International School Curriculum (KS1-KS3)"
-  },
   "components": [
-    { "id": "P_UN", "type": "prefix", "value": "un-", "meaning": "Not / Opposite", "tier": "Level 1" },
-    { "id": "P_RE", "type": "prefix", "value": "re-", "meaning": "Again / Back", "tier": "Level 1" },
-    { "id": "P_PRE", "type": "prefix", "value": "pre-", "meaning": "Before", "tier": "Level 2" },
-    { "id": "P_DIS", "type": "prefix", "value": "dis-", "meaning": "Apart / Away / Negative", "tier": "Level 2" },
-    { "id": "P_MIS", "type": "prefix", "value": "mis-", "meaning": "Wrong", "tier": "Level 2" },
-    { "id": "P_IN", "type": "prefix", "value": "in-", "meaning": "Not / Into", "tier": "Level 2" },
-    { "id": "P_IM", "type": "prefix", "value": "im-", "meaning": "Not (before p, b, m)", "tier": "Level 2" },
-    { "id": "P_TRANS", "type": "prefix", "value": "trans-", "meaning": "Across / Beyond", "tier": "Level 3" },
-    { "id": "P_INTER", "type": "prefix", "value": "inter-", "meaning": "Between / Among", "tier": "Level 3" },
-    { "id": "P_AUTO", "type": "prefix", "value": "auto-", "meaning": "Self", "tier": "Level 3" },
-    { "id": "P_SUPER", "type": "prefix", "value": "super-", "meaning": "Above / Beyond", "tier": "Level 3" },
-    
-    { "id": "P_SYM", "type": "prefix", "value": "sym-", "meaning": "Together / Same", "tier": "Ancient" },
-    { "id": "P_SYN", "type": "prefix", "value": "syn-", "meaning": "Together / Same", "tier": "Ancient" },
-    { "id": "P_OMNI", "type": "prefix", "value": "omni-", "meaning": "All / Every", "tier": "Ancient" },
-    { "id": "P_PAN", "type": "prefix", "value": "pan-", "meaning": "All", "tier": "Ancient" },
-    { "id": "P_HYPER", "type": "prefix", "value": "hyper-", "meaning": "Over / Above", "tier": "Ancient" },
-    { "id": "P_HYPO", "type": "prefix", "value": "hypo-", "meaning": "Under / Below", "tier": "Ancient" },
-    { "id": "P_CONTRA", "type": "prefix", "value": "contra-", "meaning": "Against", "tier": "Ancient" },
-
-    { "id": "R_STRUCT", "type": "root", "value": "struct", "meaning": "Build", "tier": "Level 2" },
-    { "id": "R_PORT", "type": "root", "value": "port", "meaning": "Carry", "tier": "Level 2" },
-    { "id": "R_FORM", "type": "root", "value": "form", "meaning": "Shape", "tier": "Level 2" },
-    { "id": "R_DICT", "type": "root", "value": "dict", "meaning": "Say / Speak", "tier": "Level 3" },
-    { "id": "R_SPECT", "type": "root", "value": "spect", "meaning": "Look / See", "tier": "Level 3" },
-    { "id": "R_BIO", "type": "root", "value": "bio", "meaning": "Life", "tier": "Level 3" },
-    { "id": "R_PHON", "type": "root", "value": "phon", "meaning": "Sound", "tier": "Level 3" },
-    { "id": "R_CHRON", "type": "root", "value": "chron", "meaning": "Time", "tier": "Level 3" },
-    { "id": "R_COGN", "type": "root", "value": "cogn", "meaning": "Know", "tier": "Level 3" },
-
-    { "id": "R_PHIL", "type": "root", "value": "phil", "meaning": "Love", "tier": "Ancient" },
-    { "id": "R_SOPH", "type": "root", "value": "soph", "meaning": "Wisdom", "tier": "Ancient" },
-    { "id": "R_PATH", "type": "root", "value": "path", "meaning": "Feeling / Disease", "tier": "Ancient" },
-    { "id": "R_ANTHROP", "type": "root", "value": "anthrop", "meaning": "Human", "tier": "Ancient" },
-    { "id": "R_DEM", "type": "root", "value": "dem", "meaning": "People", "tier": "Ancient" },
-    { "id": "R_GEN", "type": "root", "value": "gen", "meaning": "Birth / Origin", "tier": "Ancient" },
-    { "id": "R_VOC", "type": "root", "value": "voc", "meaning": "Voice / Call", "tier": "Ancient" },
-
-    { "id": "S_S", "type": "suffix", "value": "-s", "meaning": "More than one", "tier": "Level 1" },
-    { "id": "S_ED", "type": "suffix", "value": "-ed", "meaning": "Past tense", "tier": "Level 1" },
-    { "id": "S_ING", "type": "suffix", "value": "-ing", "meaning": "Happening now", "tier": "Level 1" },
-    { "id": "S_FUL", "type": "suffix", "value": "-ful", "meaning": "Full of", "tier": "Level 2" },
-    { "id": "S_LESS", "type": "suffix", "value": "-less", "meaning": "Without", "tier": "Level 2" },
-    { "id": "S_NESS", "type": "suffix", "value": "-ness", "meaning": "State of", "tier": "Level 2" },
-    { "id": "S_MENT", "type": "suffix", "value": "-ment", "meaning": "Result of an action", "tier": "Level 2" },
-    { "id": "S_ABLE", "type": "suffix", "value": "-able", "meaning": "Can be done", "tier": "Level 3" },
-    { "id": "S_IBLE", "type": "suffix", "value": "-ible", "meaning": "Can be done", "tier": "Level 3" },
-    { "id": "S_ATION", "type": "suffix", "value": "-ation", "meaning": "Action or process", "tier": "Level 3" },
-    { "id": "S_ION", "type": "suffix", "value": "-ion", "meaning": "Action or process", "tier": "Level 3" },
-    { "id": "S_OLOGY", "type": "suffix", "value": "-ology", "meaning": "Study of", "tier": "Level 3" },
-    { "id": "S_Y", "type": "suffix", "value": "-y", "meaning": "State or Condition", "tier": "Level 3" },
-    
-    { "id": "S_ISM", "type": "suffix", "value": "-ism", "meaning": "Belief / System", "tier": "Ancient" },
-    { "id": "S_CRACY", "type": "suffix", "value": "-cracy", "meaning": "Rule / Power", "tier": "Ancient" },
-    { "id": "S_CIDE", "type": "suffix", "value": "-cide", "meaning": "Kill / Cut", "tier": "Ancient" },
-    { "id": "S_IZE", "type": "suffix", "value": "-ize", "meaning": "Make / Cause to be", "tier": "Ancient" }
+    { "id": "P_UN", "type": "prefix", "value": "un-" },
+    { "id": "P_PRE", "type": "prefix", "value": "pre-" },
+    { "id": "P_TRANS", "type": "prefix", "value": "trans-" },
+    { "id": "P_AUTO", "type": "prefix", "value": "auto-" },
+    { "id": "R_DICT", "type": "root", "value": "dict" },
+    { "id": "R_FORM", "type": "root", "value": "form" },
+    { "id": "R_BIO", "type": "root", "value": "bio" },
+    { "id": "R_PORT", "type": "root", "value": "port" },
+    { "id": "R_CHRON", "type": "root", "value": "chron" },
+    { "id": "R_SOPH", "type": "root", "value": "soph" },
+    { "id": "R_PHIL", "type": "root", "value": "phil" },
+    { "id": "S_ABLE", "type": "suffix", "value": "-able" },
+    { "id": "S_ATION", "type": "suffix", "value": "-ation" },
+    { "id": "S_GRAPHY", "type": "suffix", "value": "-graphy" },
+    { "id": "S_IZE", "type": "suffix", "value": "-ize" },
+    { "id": "S_Y", "type": "suffix", "value": "-y" }
   ],
   "formulas": [
     {
-      "word": "REFORM",
-      "formula": ["P_RE", "R_FORM"],
-      "definition": "To make changes in order to improve something.",
-      "usage_example": "The school decided to reform its rules to be more fair.",
-      "lexile_level": 650
-    },
-    {
-      "word": "PORTABLE",
-      "formula": ["R_PORT", "S_ABLE"],
-      "definition": "Able to be easily carried or moved.",
-      "usage_example": "We brought a portable stove on our camping trip.",
-      "lexile_level": 700
-    },
-    {
-      "word": "BIOLOGY",
-      "formula": ["R_BIO", "S_OLOGY"],
-      "definition": "The scientific study of life and living organisms.",
-      "usage_example": "In biology class, we looked at plant cells under a microscope.",
-      "lexile_level": 800
-    },
-    {
       "word": "UNPREDICTABLE",
       "formula": ["P_UN", "P_PRE", "R_DICT", "S_ABLE"],
-      "definition": "Not able to be foreseen or known beforehand.",
-      "usage_example": "The weather in the mountains can be highly unpredictable.",
+      "story": "Today in the science lab, our experiment became very UNPREDICTABLE. Usually, mixing blue and yellow makes green, but an UNPREDICTABLE flash of pink smoke appeared instead! My teacher said that nature is often UNPREDICTABLE, just like the wild wind. Even the most advanced computers find the storm's path UNPREDICTABLE. When I feel UNPREDICTABLE moods, I like to sit quietly. My little kitten is also UNPREDICTABLE; she hides in boots and jumps out! We learned that an UNPREDICTABLE bounce of a ball is caused by gravity and friction. In my favorite story, the dragon has an UNPREDICTABLE temper, so the hero must be brave. Sometimes, an UNPREDICTABLE ending to a movie is the best part. I tried to draw an UNPREDICTABLE pattern with my watercolors today. Is it UNPREDICTABLE whether it will rain during our picnic? Life is full of UNPREDICTABLE surprises, and that is what makes learning so exciting!",
+      "usage_example": "The ocean weather is very unpredictable for sailors.",
       "lexile_level": 850
     },
     {
       "word": "TRANSFORMATION",
       "formula": ["P_TRANS", "R_FORM", "S_ATION"],
-      "definition": "A complete change in shape, appearance, or nature.",
-      "usage_example": "The caterpillar's transformation into a butterfly is magical.",
-      "lexile_level": 880
+      "story": "I witnessed a magical TRANSFORMATION in the garden this morning. A tiny green caterpillar began its TRANSFORMATION inside a hard, gold cocoon. This biological TRANSFORMATION takes many days of quiet waiting. In my storybook, the wizard performed a TRANSFORMATION to turn a stone into a singing bird. We also studied the TRANSFORMATION of ice into steam when it gets very hot. The old playground underwent a total TRANSFORMATION and is now a beautiful park. Seeing the TRANSFORMATION of my messy room into a clean space made my mum happy. Every autumn, we see the TRANSFORMATION of green leaves into brilliant red. The actor's TRANSFORMATION for the alien role took five hours of makeup! Using a solar panel causes a TRANSFORMATION from sunlight into electricity. I love the TRANSFORMATION of a blank piece of paper into a painting. My teacher says that learning a new language is a TRANSFORMATION for our brains.",
+      "usage_example": "The transformation from a caterpillar to a butterfly is amazing.",
+      "lexile_level": 900
     },
     {
-      "word": "CONTRADICT",
-      "formula": ["P_CONTRA", "R_DICT"],
-      "definition": "To state the opposite of what someone else has said.",
-      "usage_example": "The witness's new story seemed to contradict the evidence.",
-      "lexile_level": 920
-    },
-    {
-      "word": "SYNCHRONIZE",
-      "formula": ["P_SYN", "R_CHRON", "S_IZE"],
-      "definition": "To cause things to happen at exactly the same time.",
-      "usage_example": "The dancers had to perfectly synchronize their movements.",
+      "word": "AUTOBIOGRAPHY",
+      "formula": ["P_AUTO", "R_BIO", "S_GRAPHY"],
+      "story": "Today, I decided to start writing my own AUTOBIOGRAPHY. An AUTOBIOGRAPHY is a special book where the author tells their own life story. I read a famous AUTOBIOGRAPHY by an astronaut who walked on the moon. Writing an AUTOBIOGRAPHY helps me remember my favorite childhood memories. My grandfather is writing his AUTOBIOGRAPHY to tell us about life in the old days. In school, we learned that an AUTOBIOGRAPHY is different from a biography because it's written by 'self.' I put a picture of my first kitten on the first page of my AUTOBIOGRAPHY. Every AUTOBIOGRAPHY in the library has a different and exciting adventure. Sharing my AUTOBIOGRAPHY with my friends made us laugh at my funny mistakes. I think a cat's AUTOBIOGRAPHY would be full of stories about napping! Our teacher said that an AUTOBIOGRAPHY is a gift to the future. I can't wait to finish the first chapter of my very own AUTOBIOGRAPHY!",
+      "usage_example": "The famous inventor wrote an autobiography about her life.",
       "lexile_level": 950
-    },
-    {
-      "word": "DEMOCRACY",
-      "formula": ["R_DEM", "S_CRACY"],
-      "definition": "A system of government where power is held by the people.",
-      "usage_example": "Voting in elections is a core part of a democracy.",
-      "lexile_level": 980
     },
     {
       "word": "PHILOSOPHY",
       "formula": ["R_PHIL", "R_SOPH", "S_Y"],
-      "definition": "The study of the fundamental nature of knowledge, reality, and existence.",
+      "story": "In our quiet reading corner, we discussed the meaning of PHILOSOPHY. To me, PHILOSOPHY is the way we think about the world and our place in it. My teacher explained that Greek PHILOSOPHY started with people asking 'why' about everything. Learning PHILOSOPHY helps us understand fairness and kindness. Even a young child can have a PHILOSOPHY of life, like being brave every day. I read about a PHILOSOPHY that says we should always protect nature. Our family PHILOSOPHY is to help each other during difficult times. Studying PHILOSOPHY makes my brain feel like it's growing bigger and stronger! I found a book of PHILOSOPHY for kids that used funny stories to explain big ideas. My personal PHILOSOPHY is that every mistake is just a chance to learn. The deep PHILOSOPHY of the ancient thinkers still influences us today. Amelia thinks that the PHILOSOPHY of friendship is the most important one of all.",
       "usage_example": "Ancient Greek philosophy still influences how we think today.",
       "lexile_level": 1050
-    },
-    {
-      "word": "ANTHROPOLOGY",
-      "formula": ["R_ANTHROP", "S_OLOGY"],
-      "definition": "The study of human societies, cultures, and development.",
-      "usage_example": "Anthropology helps us understand how ancient humans lived and survived.",
-      "lexile_level": 1100
     }
   ]
 }
