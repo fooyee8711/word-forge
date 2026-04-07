@@ -1,307 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Forge - Magical Archive</title>
+    <title>Word Forge - Artistic Edition</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
 
         :root {
-            var(--paper-bg): #f5ebd9;
-            var(--paper-dark): #e8d5b5;
-            var(--ink-dark): #2c3e50;
-            var(--ink-brown): #4e342e;
-            var(--magic-blue): #0ea5e9;
-            var(--magic-blue-glow): rgba(14, 165, 233, 0.4);
-            var(--magic-green): #10b981;
-            var(--magic-gold): #d97706;
-            var(--rune-border): rgba(78, 52, 46, 0.3);
-            var(--watercolor-shadow): 0 8px 24px rgba(44, 62, 80, 0.1), inset 0 0 40px rgba(232, 213, 181, 0.3);
+            --bg-color: #e8dcc4;
+            --paper-color: #fdf6e3;
+            --magic-blue: #5fa8d3;
+            --magic-gold: #d4a373;
+            --ink: #3c2f2f;
+            --success: #82a3a1;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f5ebd9 0%, #faecd4 50%, #e8d5b5 100%);
-            color: #2c3e50;
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
             font-family: 'Lora', serif;
+            color: var(--ink);
+            margin: 0;
             display: flex;
-            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             overflow: hidden;
-            user-select: none;
         }
 
-        h1, h2, h3, .rune-text {
-            font-family: 'Cinzel', serif;
-            color: #4e342e;
-        }
-
-        /* Sidebar Navigation */
-        nav {
-            width: 260px;
-            background: rgba(245, 235, 217, 0.8);
-            backdrop-filter: blur(10px);
-            border-right: 2px solid rgba(78, 52, 46, 0.3);
+        /* 水彩邊緣容器 */
+        .watercolor-panel {
+            background: var(--paper-color);
+            width: 90vw;
+            max-width: 1000px;
+            height: 85vh;
+            padding: 40px;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            /* 模擬手撕紙邊緣 */
+            clip-path: polygon(0.5% 1%, 99% 0.5%, 100% 99%, 0.2% 100%, 0% 50%);
             display: flex;
             flex-direction: column;
-            padding: 2rem 1rem;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
-            z-index: 10;
-        }
-
-        .logo-area { text-align: center; margin-bottom: 3rem; border-bottom: 1px dashed rgba(78, 52, 46, 0.3); padding-bottom: 1rem; }
-        .logo-area h1 { font-size: 1.8rem; margin: 0; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .logo-area .subtitle { font-size: 0.9rem; color: #0ea5e9; font-weight: bold; letter-spacing: 4px; }
-
-        .nav-btn {
-            background: transparent;
-            border: none;
-            border-left: 4px solid transparent;
-            padding: 1rem 1.5rem;
-            margin-bottom: 0.5rem;
-            text-align: left;
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2c3e50;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 0 8px 8px 0;
-        }
-        .nav-btn:hover { background: rgba(232, 213, 181, 0.5); color: #0ea5e9; }
-        .nav-btn.active {
-            border-left-color: #0ea5e9;
-            background: linear-gradient(90deg, rgba(14, 165, 233, 0.1) 0%, transparent 100%);
-            color: #0ea5e9;
-            text-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
-        }
-
-        .crystal-orb-container { margin-top: auto; text-align: center; padding: 1rem; background: rgba(255,255,255,0.3); border-radius: 15px; border: 1px solid rgba(78, 52, 46, 0.3); }
-        .crystal-orb {
-            width: 80px; height: 80px; border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #a7f3d0, #10b981, #064e3b);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), inset -10px -10px 20px rgba(0,0,0,0.4);
-            margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;
-            color: white; font-family: 'Cinzel', serif; font-weight: bold; font-size: 1.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
-
-        main { flex: 1; padding: 3rem 4rem; position: relative; overflow-y: auto; }
-        .view-section { display: none; animation: fadeIn 0.5s ease-in-out; }
-        .view-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Index View */
-        .profile-card {
-            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>'), rgba(253, 246, 227, 0.7);
-            border: 2px solid rgba(78, 52, 46, 0.3); border-radius: 12px; padding: 3rem; text-align: center; max-width: 600px; margin: 0 auto;
-        }
-
-        /* Daily Sprint View */
-        .forge-container { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
-        .blueprint-area {
-            background: rgba(255, 255, 255, 0.4); border: 2px dashed rgba(78, 52, 46, 0.3); padding: 3rem; border-radius: 16px;
-            text-align: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.03); width: 100%; max-width: 800px; position: relative;
             transition: all 0.5s ease;
         }
-        .astrolabe-bg {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; height: 90%; border: 1px solid rgba(14, 165, 233, 0.1); border-radius: 50%; pointer-events: none; z-index: 0;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(60,47,47,0.1);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
         }
 
-        .target-word { font-size: 2rem; color: #0ea5e9; letter-spacing: 5px; text-shadow: 0 0 15px rgba(14, 165, 233, 0.4); margin-bottom: 2rem; position: relative; z-index: 1; }
-        
-        .slots { display: flex; justify-content: center; gap: 1.5rem; position: relative; z-index: 1; }
+        .title-area h1 {
+            font-family: 'Cinzel', serif;
+            margin: 0;
+            font-size: 1.8rem;
+            color: #2a4d69;
+        }
+
+        /* 階段控制項 */
+        .view-step { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
+        .view-step.active { display: flex; }
+
+        /* --- 階段 1: 拖拽組裝 (Forge) --- */
+        .forge-zone { text-align: center; }
+        .slots { display: flex; justify-content: center; gap: 20px; margin: 40px 0; }
         .slot {
-            width: 120px; height: 120px; border: 2px solid rgba(78, 52, 46, 0.5); background: rgba(250, 236, 212, 0.8);
-            border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            font-family: 'Cinzel', serif; color: rgba(78, 52, 46, 0.6); transition: all 0.2s; box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            width: 100px; height: 100px;
+            border: 2px dashed var(--magic-blue);
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel', serif; font-weight: bold;
         }
-        .slot.drag-over { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.1); box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); color: #0ea5e9; }
-        .slot.filled {
-            border-color: #d97706; color: #4e342e; background: #fff; box-shadow: 0 0 20px rgba(217, 119, 6, 0.3); font-size: 1.5rem; font-weight: bold;
-        }
-        .slot.error { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); color: #ef4444; }
-
-        .parts-pool { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; max-width: 800px; }
+        .slot.filled { background: white; border-style: solid; box-shadow: 0 0 15px var(--magic-blue); }
+        .parts-pool { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .rune {
-            background: #fffdf8; border: 2px solid rgba(78, 52, 46, 0.3); padding: 1rem 1.5rem; border-radius: 8px;
-            font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: bold; color: #2c3e50; cursor: grab;
-            box-shadow: 2px 4px 8px rgba(0,0,0,0.05); transition: all 0.2s;
+            background: white; border: 1px solid var(--ink);
+            padding: 10px 20px; border-radius: 5px; cursor: grab;
+            font-family: 'Cinzel', serif; transition: 0.3s;
         }
-        .rune:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(14, 165, 233, 0.2); border-color: #0ea5e9; color: #0ea5e9; }
-        .rune:active { cursor: grabbing; transform: scale(0.95); }
-        .rune.hidden { visibility: hidden; opacity: 0; pointer-events: none; } /* 隱藏但保留空間 */
 
-        /* 成功動畫訊息 */
-        #success-msg {
-            display: none; color: #d97706; font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: bold; 
-            margin-top: 1rem; animation: fadeIn 1s; text-shadow: 0 0 10px rgba(217, 119, 6, 0.4);
+        /* --- 階段 2: 12句句子理解 (Sentences) --- */
+        .sentence-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+            padding: 10px;
         }
-        
+        .sentence-card {
+            background: rgba(255,255,255,0.6); padding: 12px;
+            border-left: 4px solid var(--magic-blue);
+            font-size: 0.95rem; line-height: 1.4;
+        }
+        .highlight { color: var(--magic-blue); font-weight: bold; text-decoration: underline; }
+
+        /* --- 階段 3 & 4 通用 --- */
+        .quiz-area { text-align: center; padding: 20px; }
+        .btn-next {
+            margin-top: auto; align-self: center;
+            background: #2a4d69; color: white; border: none;
+            padding: 12px 30px; font-family: 'Cinzel', serif;
+            cursor: pointer; border-radius: 4px; transition: 0.3s;
+        }
+        .btn-next:hover { background: var(--magic-blue); transform: scale(1.05); }
+
+        /* 穩定性球 */
+        .orb {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #b8e994, #78e08f);
+            box-shadow: 0 0 15px #78e08f;
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo-area">
-            <h1>WORD FORGE</h1>
-            <div class="subtitle">詞彙鍛造爐</div>
-        </div>
+    <div class="watercolor-panel">
+        <header>
+            <div class="title-area">
+                <h1>WORD FORGE 詞彙鍛造爐</h1>
+                <small>Amelia's Learning Journey</small>
+            </div>
+            <div class="orb"></div>
+        </header>
 
-        <button class="nav-btn active" onclick="switchView('index')">✧ Index Portal</button>
-        <button class="nav-btn" onclick="switchView('sprint')">⚙️ Daily Sprint</button>
-        <button class="nav-btn" onclick="switchView('tree')">🌌 Tech Tree</button>
-        <button class="nav-btn" onclick="switchView('archive')">📜 Archive</button>
-
-        <div class="crystal-orb-container">
-            <div style="font-size: 0.85rem; margin-bottom: 5px; color: #4e342e;">System Stability</div>
-            <div class="crystal-orb" id="stability-display">100%</div>
-        </div>
-    </nav>
-
-    <main>
-        <section id="view-index" class="view-section active">
-            <div class="profile-card">
-                <h2>Welcome, Amelia</h2>
-                <div style="color: #d97706; font-style: italic; font-size: 1.2rem; margin-bottom: 2rem;">Rank: Apprentice Word Sculptor</div>
-                <p>The machinery of language awaits your command.</p>
+        <section id="step-forge" class="view-step active">
+            <h2 style="text-align: center; font-family: 'Cinzel';">TARGET: UNPREDICTABLE</h2>
+            <div class="slots" id="main-slots">
+                <div class="slot" data-expected="un-">PREFIX</div>
+                <div class="slot" data-expected="pre-">PREFIX</div>
+                <div class="slot" data-expected="dict">ROOT</div>
+                <div class="slot" data-expected="-able">SUFFIX</div>
+            </div>
+            <div class="parts-pool">
+                <div class="rune" draggable="true" data-val="un-">un-</div>
+                <div class="rune" draggable="true" data-val="pre-">pre-</div>
+                <div class="rune" draggable="true" data-val="dict">dict</div>
+                <div class="rune" draggable="true" data-val="-able">-able</div>
+                <div class="rune" draggable="true" data-val="re-">re-</div>
+                <div class="rune" draggable="true" data-val="port">port</div>
             </div>
         </section>
 
-        <section id="view-sprint" class="view-section">
-            <div class="forge-container">
-                <div class="blueprint-area" id="blueprint-board">
-                    <div class="astrolabe-bg"></div>
-                    <div class="rune-text" style="color: rgba(78,52,46,0.6); margin-bottom: 10px;">TARGET BLUEPRINT:</div>
-                    <div class="target-word">UNPREDICTABLE</div>
-                    
-                    <div class="slots">
-                        <div class="slot" data-expected="un-">PREFIX</div>
-                        <div class="slot" data-expected="pre-">PREFIX</div>
-                        <div class="slot" data-expected="dict">ROOT</div>
-                        <div class="slot" data-expected="-able">SUFFIX</div>
-                    </div>
-                    
-                    <div id="success-msg">✧ MASTERPIECE FORGED ✧</div>
+        <section id="step-sentences" class="view-step">
+            <h2 style="font-family: 'Cinzel';">Sentence Mastery (12 Contexts)</h2>
+            <div class="sentence-grid" id="sentence-container">
                 </div>
-
-                <div class="rune-text" style="font-size: 1.2rem; margin-top: 1rem;">✧ Parts Pool ✧</div>
-                <div class="parts-pool">
-                    <div class="rune" draggable="true" data-val="dict">dict</div>
-                    <div class="rune" draggable="true" data-val="-able">-able</div>
-                    <div class="rune" draggable="true" data-val="port">port</div>
-                    <div class="rune" draggable="true" data-val="re-">re-</div>
-                    <div class="rune" draggable="true" data-val="un-">un-</div>
-                    <div class="rune" draggable="true" data-val="struct">struct</div>
-                    <div class="rune" draggable="true" data-val="pre-">pre-</div>
-                </div>
-            </div>
+            <button class="btn-next" onclick="goToStep('step-cloze')">Next: Reading Cloze ➔</button>
         </section>
 
-        <section id="view-tree" class="view-section"><h2 class="rune-text" style="text-align: center;">Etymology Constellations</h2></section>
-        <section id="view-archive" class="view-section"><h2 class="rune-text" style="text-align: center;">Decoding Log Archive</h2></section>
-    </main>
+        <section id="step-cloze" class="view-step quiz-area">
+            <h2 style="font-family: 'Cinzel';">Reading Cloze Challenge</h2>
+            <p style="font-size: 1.2rem; line-height: 2;">
+                The ocean weather is very <span style="border-bottom: 2px solid #000; padding: 0 20px;">_______</span>. 
+                Even the most experienced sailors cannot <span style="border-bottom: 2px solid #000; padding: 0 20px;">_______</span> 
+                when a storm will strike.
+            </p>
+            <button class="btn-next" onclick="goToStep('step-game')">Next: Root Match Game ➔</button>
+        </section>
+
+        <section id="step-game" class="view-step quiz-area">
+            <h2 style="font-family: 'Cinzel';">Etymology Match: ROOT [DICT]</h2>
+            <p>Select all words that share the same root "to say":</p>
+            <div class="parts-pool" style="margin-top: 30px;">
+                <div class="rune" onclick="this.style.background='#82a3a1'">Prediction</div>
+                <div class="rune" onclick="this.style.background='#82a3a1'">Dictionary</div>
+                <div class="rune" onclick="this.style.background='#82a3a1'">Dictator</div>
+                <div class="rune" onclick="this.style.background='#ff7675'">Portable</div>
+            </div>
+            <button class="btn-next" onclick="location.reload()">Finish & New Quest</button>
+        </section>
+    </div>
 
     <script>
-        // === 1. 視圖切換邏輯 ===
-        function switchView(viewName) {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById('view-' + viewName).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
+        let dragged = null;
+        let filledCount = 0;
 
-        // === 2. 核心拖曳引擎 (Word Forge Logic) ===
-        let draggedRune = null;
-        let completedParts = 0;
-        let stability = 100;
-        const totalParts = 4; // UNPREDICTABLE 需要 4 個零件
-
-        const runes = document.querySelectorAll('.rune');
-        const slots = document.querySelectorAll('.slot');
-        const orb = document.getElementById('stability-display');
-
-        // 綁定符文 (Parts) 的拖曳事件
-        runes.forEach(rune => {
-            rune.addEventListener('dragstart', function(e) {
-                draggedRune = this;
-                e.dataTransfer.setData('text/plain', this.dataset.val);
-                setTimeout(() => this.style.opacity = '0.4', 0); // 拖曳時半透明
-            });
-
-            rune.addEventListener('dragend', function() {
-                this.style.opacity = '1';
-                draggedRune = null;
-            });
+        // 初始化拖拽
+        document.querySelectorAll('.rune').forEach(rune => {
+            rune.addEventListener('dragstart', e => { dragged = e.target; });
         });
 
-        // 綁定插槽 (Slots) 的放置事件
-        slots.forEach(slot => {
-            slot.addEventListener('dragover', function(e) {
-                e.preventDefault(); // 必須阻止預設行為才能接收 Drop
-                if (!this.classList.contains('filled')) {
-                    this.classList.add('drag-over');
-                }
-            });
-
-            slot.addEventListener('dragleave', function() {
-                this.classList.remove('drag-over');
-            });
-
-            slot.addEventListener('drop', function(e) {
+        document.querySelectorAll('.slot').forEach(slot => {
+            slot.addEventListener('dragover', e => e.preventDefault());
+            slot.addEventListener('drop', e => {
                 e.preventDefault();
-                this.classList.remove('drag-over');
-
-                if (!draggedRune || this.classList.contains('filled')) return;
-
-                // 邏輯驗證：檢查拖過來的零件是否等於插槽預期的值
-                if (draggedRune.dataset.val === this.dataset.expected) {
-                    // ✅ 放置正確 (Success)
-                    this.textContent = draggedRune.dataset.val;
-                    this.classList.add('filled');
-                    draggedRune.classList.add('hidden'); // 把零件庫裡的隱藏起來
-                    
-                    completedParts++;
-                    checkVictory();
+                if (dragged.dataset.val === slot.dataset.expected) {
+                    slot.textContent = dragged.dataset.val;
+                    slot.classList.add('filled');
+                    dragged.style.visibility = 'hidden';
+                    filledCount++;
+                    if (filledCount === 4) {
+                        setTimeout(() => {
+                            generateSentences();
+                            goToStep('step-sentences');
+                        }, 600);
+                    }
                 } else {
-                    // ❌ 放置錯誤 (Error)
-                    triggerError(this);
+                    slot.style.borderColor = 'red';
+                    setTimeout(() => slot.style.borderColor = '', 400);
                 }
             });
         });
 
-        // 錯誤懲罰與視覺回饋
-        function triggerError(slotElement) {
-            slotElement.classList.add('error');
-            
-            // 扣除穩定度
-            stability -= 5;
-            if (stability < 0) stability = 0;
-            orb.textContent = `${stability}%`;
-            
-            // 改變水晶球顏色
-            if (stability < 80) {
-                orb.style.background = 'radial-gradient(circle at 30% 30%, #fca5a5, #ef4444, #7f1d1d)';
-                orb.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.4), inset -10px -10px 20px rgba(0,0,0,0.4)';
-            }
-
-            // 0.4 秒後恢復原狀，不打斷她的心急節奏
-            setTimeout(() => {
-                slotElement.classList.remove('error');
-            }, 400);
+        function goToStep(stepId) {
+            document.querySelectorAll('.view-step').forEach(s => s.classList.remove('active'));
+            document.getElementById(stepId).classList.add('active');
         }
 
-        // 檢查是否完成藍圖
-        function checkVictory() {
-            if (completedParts === totalParts) {
-                setTimeout(() => {
-                    document.getElementById('blueprint-board').style.borderColor = '#d97706';
-                    document.getElementById('blueprint-board').style.boxShadow = '0 0 30px rgba(217, 119, 6, 0.2)';
-                    document.getElementById('success-msg').style.display = 'block';
-                }, 300);
-            }
+        function generateSentences() {
+            const container = document.getElementById('sentence-container');
+            const word = "unpredictable";
+            const sentences = [
+                "The cat's mood is ________; one minute it's purring, the next it's running away.",
+                "In the jungle, the weather is ________ and rains every hour.",
+                "Mountain hiking is fun but the wind can be ________.",
+                "The plot of the movie was so ________ that I couldn't guess the ending.",
+                "Sports games are ________, which is why they are so exciting to watch.",
+                "Magic spells in stories are often ________ and dangerous.",
+                "My little brother is ________ when he gets hungry.",
+                "The stock market is ________ and changes every second.",
+                "In science, we try to make things less ________ through experiments.",
+                "An ________ enemy is much harder to defeat.",
+                "The robot's movements were ________ due to a glitch.",
+                "Life is full of ________ surprises!"
+            ];
+            
+            container.innerHTML = sentences.map((s, i) => `
+                <div class="sentence-card">
+                    <b>${i+1}.</b> ${s.replace('________', `<span class="highlight">${word}</span>`)}
+                </div>
+            `).join('');
         }
     </script>
 </body>
