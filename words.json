@@ -1,50 +1,52 @@
 {
-  "components": [
-    { "id": "P_UN", "type": "prefix", "value": "un-" },
-    { "id": "P_PRE", "type": "prefix", "value": "pre-" },
-    { "id": "P_TRANS", "type": "prefix", "value": "trans-" },
-    { "id": "P_AUTO", "type": "prefix", "value": "auto-" },
-    { "id": "R_DICT", "type": "root", "value": "dict" },
-    { "id": "R_FORM", "type": "root", "value": "form" },
-    { "id": "R_BIO", "type": "root", "value": "bio" },
-    { "id": "R_PORT", "type": "root", "value": "port" },
-    { "id": "R_CHRON", "type": "root", "value": "chron" },
-    { "id": "R_SOPH", "type": "root", "value": "soph" },
-    { "id": "R_PHIL", "type": "root", "value": "phil" },
-    { "id": "S_ABLE", "type": "suffix", "value": "-able" },
-    { "id": "S_ATION", "type": "suffix", "value": "-ation" },
-    { "id": "S_GRAPHY", "type": "suffix", "value": "-graphy" },
-    { "id": "S_IZE", "type": "suffix", "value": "-ize" },
-    { "id": "S_Y", "type": "suffix", "value": "-y" }
+  "audience": "8-year-old mobile English spelling learners",
+  "phonics_rules": [
+    { "id": "short-u-o", "title": "Short /u/ as 'o'", "zh": "o 讀短 /u/", "pattern": "o → /u/", "examples": ["mother", "monkey", "other", "above"] },
+    { "id": "short-i-y", "title": "Short /i/ as 'y'", "zh": "y 讀短 /i/", "pattern": "y → /i/", "examples": ["gym", "mystery", "symbol", "system"] },
+    { "id": "long-a-ey", "title": "Long /a/ as 'ey'", "zh": "ey 讀長 /a/", "pattern": "ey → /ā/", "examples": ["obey", "prey", "they", "grey"] },
+    { "id": "long-a-ai", "title": "Long /a/ as 'ai'", "zh": "ai 讀長 /a/", "pattern": "ai → /ā/", "examples": ["rain", "plain", "train", "paint"] },
+    { "id": "long-a-ei", "title": "Long /a/ as 'ei'", "zh": "ei 讀長 /a/", "pattern": "ei → /ā/", "examples": ["reign", "weight", "veil", "sleigh"] },
+    { "id": "ur-ear", "title": "Sound /ur/ as 'ear'", "zh": "ear 讀 /ur/", "pattern": "ear → /ûr/", "examples": ["earth", "learn", "early", "search"] },
+    { "id": "k-ch", "title": "Sound /k/ as 'ch'", "zh": "ch 發 /k/", "pattern": "ch → /k/", "examples": ["echo", "chaos", "stomach", "school"] },
+    { "id": "gue-que", "title": "gue / que endings", "zh": "特殊字尾", "pattern": "gue / que", "examples": ["league", "antique", "unique", "plaque"] },
+    { "id": "ary", "title": "-ary ending", "zh": "多音節字尾", "pattern": "-ary", "examples": ["dictionary", "library", "ordinary", "primary"] }
   ],
-  "formulas": [
-    {
-      "word": "UNPREDICTABLE",
-      "formula": ["P_UN", "P_PRE", "R_DICT", "S_ABLE"],
-      "story": "Today in the science lab, our experiment became very UNPREDICTABLE. Usually, mixing blue and yellow makes green, but an UNPREDICTABLE flash of pink smoke appeared instead! My teacher said that nature is often UNPREDICTABLE, just like the wild wind. Even the most advanced computers find the storm's path UNPREDICTABLE. When I feel UNPREDICTABLE moods, I like to sit quietly. My little kitten is also UNPREDICTABLE; she hides in boots and jumps out! We learned that an UNPREDICTABLE bounce of a ball is caused by gravity and friction. In my favorite story, the dragon has an UNPREDICTABLE temper, so the hero must be brave. Sometimes, an UNPREDICTABLE ending to a movie is the best part. I tried to draw an UNPREDICTABLE pattern with my watercolors today. Is it UNPREDICTABLE whether it will rain during our picnic? Life is full of UNPREDICTABLE surprises, and that is what makes learning so exciting!",
-      "usage_example": "The ocean weather is very unpredictable for sailors.",
-      "lexile_level": 850
-    },
-    {
-      "word": "TRANSFORMATION",
-      "formula": ["P_TRANS", "R_FORM", "S_ATION"],
-      "story": "I witnessed a magical TRANSFORMATION in the garden this morning. A tiny green caterpillar began its TRANSFORMATION inside a hard, gold cocoon. This biological TRANSFORMATION takes many days of quiet waiting. In my storybook, the wizard performed a TRANSFORMATION to turn a stone into a singing bird. We also studied the TRANSFORMATION of ice into steam when it gets very hot. The old playground underwent a total TRANSFORMATION and is now a beautiful park. Seeing the TRANSFORMATION of my messy room into a clean space made my mum happy. Every autumn, we see the TRANSFORMATION of green leaves into brilliant red. The actor's TRANSFORMATION for the alien role took five hours of makeup! Using a solar panel causes a TRANSFORMATION from sunlight into electricity. I love the TRANSFORMATION of a blank piece of paper into a painting. My teacher says that learning a new language is a TRANSFORMATION for our brains.",
-      "usage_example": "The transformation from a caterpillar to a butterfly is amazing.",
-      "lexile_level": 900
-    },
-    {
-      "word": "AUTOBIOGRAPHY",
-      "formula": ["P_AUTO", "R_BIO", "S_GRAPHY"],
-      "story": "Today, I decided to start writing my own AUTOBIOGRAPHY. An AUTOBIOGRAPHY is a special book where the author tells their own life story. I read a famous AUTOBIOGRAPHY by an astronaut who walked on the moon. Writing an AUTOBIOGRAPHY helps me remember my favorite childhood memories. My grandfather is writing his AUTOBIOGRAPHY to tell us about life in the old days. In school, we learned that an AUTOBIOGRAPHY is different from a biography because it's written by 'self.' I put a picture of my first kitten on the first page of my AUTOBIOGRAPHY. Every AUTOBIOGRAPHY in the library has a different and exciting adventure. Sharing my AUTOBIOGRAPHY with my friends made us laugh at my funny mistakes. I think a cat's AUTOBIOGRAPHY would be full of stories about napping! Our teacher said that an AUTOBIOGRAPHY is a gift to the future. I can't wait to finish the first chapter of my very own AUTOBIOGRAPHY!",
-      "usage_example": "The famous inventor wrote an autobiography about her life.",
-      "lexile_level": 950
-    },
-    {
-      "word": "PHILOSOPHY",
-      "formula": ["R_PHIL", "R_SOPH", "S_Y"],
-      "story": "In our quiet reading corner, we discussed the meaning of PHILOSOPHY. To me, PHILOSOPHY is the way we think about the world and our place in it. My teacher explained that Greek PHILOSOPHY started with people asking 'why' about everything. Learning PHILOSOPHY helps us understand fairness and kindness. Even a young child can have a PHILOSOPHY of life, like being brave every day. I read about a PHILOSOPHY that says we should always protect nature. Our family PHILOSOPHY is to help each other during difficult times. Studying PHILOSOPHY makes my brain feel like it's growing bigger and stronger! I found a book of PHILOSOPHY for kids that used funny stories to explain big ideas. My personal PHILOSOPHY is that every mistake is just a chance to learn. The deep PHILOSOPHY of the ancient thinkers still influences us today. Amelia thinks that the PHILOSOPHY of friendship is the most important one of all.",
-      "usage_example": "Ancient Greek philosophy still influences how we think today.",
-      "lexile_level": 1050
-    }
-  ]
+  "morphology": {
+    "prefixes": [
+      { "value": "un-", "meaning": "Not / 相反", "example": "unhappy" },
+      { "value": "re-", "meaning": "Again / 再次", "example": "replay" },
+      { "value": "dis-", "meaning": "Negative / 否定", "example": "disagree" },
+      { "value": "mis-", "meaning": "Wrongly / 錯誤地", "example": "misread" },
+      { "value": "pre-", "meaning": "Before / 之前", "example": "preview" },
+      { "value": "in-", "meaning": "Not / 不", "example": "inactive" },
+      { "value": "im-", "meaning": "Not / 不", "example": "impossible" },
+      { "value": "non-", "meaning": "Not / 非", "example": "nonstop" },
+      { "value": "over-", "meaning": "Too much / 過多", "example": "overcook" },
+      { "value": "sub-", "meaning": "Under / 在...之下", "example": "submarine" }
+    ],
+    "suffixes": [
+      { "value": "-ly", "meaning": "Basic change", "example": "quickly" },
+      { "value": "-ly", "meaning": "y changes to ily", "example": "happily" },
+      { "value": "-ly", "meaning": "le changes to ly", "example": "gently" },
+      { "value": "-ally", "meaning": "ic/al changes to ally", "example": "magically" },
+      { "value": "-ful", "meaning": "Full of / 充滿...", "example": "helpful" },
+      { "value": "-less", "meaning": "Without / 沒有...", "example": "careless" },
+      { "value": "-ness", "meaning": "State / 狀態", "example": "kindness" },
+      { "value": "-ment", "meaning": "Action/process / 動作或過程", "example": "movement" },
+      { "value": "-able", "meaning": "Can be / 可以被...", "example": "readable" }
+    ]
+  },
+  "visual_phonics": {
+    "red": "Short vowels",
+    "skyblue": "Long vowels / vowel teams",
+    "orange": "Digraphs / blends",
+    "purple": "R-controlled sounds",
+    "blue": "Silent letters",
+    "green": "Variant / schwa sounds"
+  },
+  "special_categories": {
+    "homophones": [["to", "two", "too"], ["rain", "reign"], ["plain", "plane"]],
+    "tricky_words": ["one", "said", "could", "because", "friend"],
+    "cool_words": ["pizza", "robot", "scooter", "dinosaur", "galaxy"]
+  }
 }
