@@ -1,50 +1,679 @@
 {
-  "components": [
-    { "id": "P_UN", "type": "prefix", "value": "un-" },
-    { "id": "P_PRE", "type": "prefix", "value": "pre-" },
-    { "id": "P_TRANS", "type": "prefix", "value": "trans-" },
-    { "id": "P_AUTO", "type": "prefix", "value": "auto-" },
-    { "id": "R_DICT", "type": "root", "value": "dict" },
-    { "id": "R_FORM", "type": "root", "value": "form" },
-    { "id": "R_BIO", "type": "root", "value": "bio" },
-    { "id": "R_PORT", "type": "root", "value": "port" },
-    { "id": "R_CHRON", "type": "root", "value": "chron" },
-    { "id": "R_SOPH", "type": "root", "value": "soph" },
-    { "id": "R_PHIL", "type": "root", "value": "phil" },
-    { "id": "S_ABLE", "type": "suffix", "value": "-able" },
-    { "id": "S_ATION", "type": "suffix", "value": "-ation" },
-    { "id": "S_GRAPHY", "type": "suffix", "value": "-graphy" },
-    { "id": "S_IZE", "type": "suffix", "value": "-ize" },
-    { "id": "S_Y", "type": "suffix", "value": "-y" }
-  ],
-  "formulas": [
+  "words": [
     {
-      "word": "UNPREDICTABLE",
-      "formula": ["P_UN", "P_PRE", "R_DICT", "S_ABLE"],
-      "story": "Today in the science lab, our experiment became very UNPREDICTABLE. Usually, mixing blue and yellow makes green, but an UNPREDICTABLE flash of pink smoke appeared instead! My teacher said that nature is often UNPREDICTABLE, just like the wild wind. Even the most advanced computers find the storm's path UNPREDICTABLE. When I feel UNPREDICTABLE moods, I like to sit quietly. My little kitten is also UNPREDICTABLE; she hides in boots and jumps out! We learned that an UNPREDICTABLE bounce of a ball is caused by gravity and friction. In my favorite story, the dragon has an UNPREDICTABLE temper, so the hero must be brave. Sometimes, an UNPREDICTABLE ending to a movie is the best part. I tried to draw an UNPREDICTABLE pattern with my watercolors today. Is it UNPREDICTABLE whether it will rain during our picnic? Life is full of UNPREDICTABLE surprises, and that is what makes learning so exciting!",
-      "usage_example": "The ocean weather is very unpredictable for sailors.",
-      "lexile_level": 850
+      "word": "mother",
+      "meaning": "a female parent",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "short-u-o"
+      ]
     },
     {
-      "word": "TRANSFORMATION",
-      "formula": ["P_TRANS", "R_FORM", "S_ATION"],
-      "story": "I witnessed a magical TRANSFORMATION in the garden this morning. A tiny green caterpillar began its TRANSFORMATION inside a hard, gold cocoon. This biological TRANSFORMATION takes many days of quiet waiting. In my storybook, the wizard performed a TRANSFORMATION to turn a stone into a singing bird. We also studied the TRANSFORMATION of ice into steam when it gets very hot. The old playground underwent a total TRANSFORMATION and is now a beautiful park. Seeing the TRANSFORMATION of my messy room into a clean space made my mum happy. Every autumn, we see the TRANSFORMATION of green leaves into brilliant red. The actor's TRANSFORMATION for the alien role took five hours of makeup! Using a solar panel causes a TRANSFORMATION from sunlight into electricity. I love the TRANSFORMATION of a blank piece of paper into a painting. My teacher says that learning a new language is a TRANSFORMATION for our brains.",
-      "usage_example": "The transformation from a caterpillar to a butterfly is amazing.",
-      "lexile_level": 900
+      "word": "monkey",
+      "meaning": "a playful animal",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "short-u-o"
+      ]
     },
     {
-      "word": "AUTOBIOGRAPHY",
-      "formula": ["P_AUTO", "R_BIO", "S_GRAPHY"],
-      "story": "Today, I decided to start writing my own AUTOBIOGRAPHY. An AUTOBIOGRAPHY is a special book where the author tells their own life story. I read a famous AUTOBIOGRAPHY by an astronaut who walked on the moon. Writing an AUTOBIOGRAPHY helps me remember my favorite childhood memories. My grandfather is writing his AUTOBIOGRAPHY to tell us about life in the old days. In school, we learned that an AUTOBIOGRAPHY is different from a biography because it's written by 'self.' I put a picture of my first kitten on the first page of my AUTOBIOGRAPHY. Every AUTOBIOGRAPHY in the library has a different and exciting adventure. Sharing my AUTOBIOGRAPHY with my friends made us laugh at my funny mistakes. I think a cat's AUTOBIOGRAPHY would be full of stories about napping! Our teacher said that an AUTOBIOGRAPHY is a gift to the future. I can't wait to finish the first chapter of my very own AUTOBIOGRAPHY!",
-      "usage_example": "The famous inventor wrote an autobiography about her life.",
-      "lexile_level": 950
+      "word": "brother",
+      "meaning": "a boy or man with the same parents",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "short-u-o"
+      ]
     },
     {
-      "word": "PHILOSOPHY",
-      "formula": ["R_PHIL", "R_SOPH", "S_Y"],
-      "story": "In our quiet reading corner, we discussed the meaning of PHILOSOPHY. To me, PHILOSOPHY is the way we think about the world and our place in it. My teacher explained that Greek PHILOSOPHY started with people asking 'why' about everything. Learning PHILOSOPHY helps us understand fairness and kindness. Even a young child can have a PHILOSOPHY of life, like being brave every day. I read about a PHILOSOPHY that says we should always protect nature. Our family PHILOSOPHY is to help each other during difficult times. Studying PHILOSOPHY makes my brain feel like it's growing bigger and stronger! I found a book of PHILOSOPHY for kids that used funny stories to explain big ideas. My personal PHILOSOPHY is that every mistake is just a chance to learn. The deep PHILOSOPHY of the ancient thinkers still influences us today. Amelia thinks that the PHILOSOPHY of friendship is the most important one of all.",
-      "usage_example": "Ancient Greek philosophy still influences how we think today.",
-      "lexile_level": 1050
+      "word": "gym",
+      "meaning": "a place to exercise",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "short-i-y"
+      ]
+    },
+    {
+      "word": "mystery",
+      "meaning": "something not yet explained",
+      "categories": [
+        "tricky"
+      ],
+      "phonics": [
+        "short-i-y"
+      ]
+    },
+    {
+      "word": "system",
+      "meaning": "parts that work together",
+      "categories": [
+        "tricky"
+      ],
+      "phonics": [
+        "short-i-y"
+      ]
+    },
+    {
+      "word": "obey",
+      "meaning": "to do what is asked",
+      "phonics": [
+        "long-a-ey"
+      ]
+    },
+    {
+      "word": "prey",
+      "meaning": "an animal hunted by another animal",
+      "categories": [
+        "homophone"
+      ],
+      "phonics": [
+        "long-a-ey"
+      ]
+    },
+    {
+      "word": "they",
+      "meaning": "more than one person or thing",
+      "categories": [
+        "homophone",
+        "tricky"
+      ],
+      "phonics": [
+        "long-a-ey"
+      ]
+    },
+    {
+      "word": "rain",
+      "meaning": "water drops from clouds",
+      "categories": [
+        "homophone",
+        "cool"
+      ],
+      "phonics": [
+        "long-a-ai"
+      ]
+    },
+    {
+      "word": "plain",
+      "meaning": "simple, or a flat wide land",
+      "categories": [
+        "homophone"
+      ],
+      "phonics": [
+        "long-a-ai"
+      ]
+    },
+    {
+      "word": "train",
+      "meaning": "cars pulled along a track",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "long-a-ai"
+      ]
+    },
+    {
+      "word": "reign",
+      "meaning": "rule as a king or queen",
+      "categories": [
+        "homophone",
+        "tricky"
+      ],
+      "phonics": [
+        "long-a-ei"
+      ]
+    },
+    {
+      "word": "weight",
+      "meaning": "how heavy something is",
+      "categories": [
+        "homophone"
+      ],
+      "phonics": [
+        "long-a-ei"
+      ]
+    },
+    {
+      "word": "eight",
+      "meaning": "the number after seven",
+      "categories": [
+        "homophone"
+      ],
+      "phonics": [
+        "long-a-ei"
+      ]
+    },
+    {
+      "word": "earth",
+      "meaning": "our planet or soil",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "ur-ear"
+      ]
+    },
+    {
+      "word": "learn",
+      "meaning": "to get knowledge or a skill",
+      "phonics": [
+        "ur-ear"
+      ]
+    },
+    {
+      "word": "early",
+      "meaning": "before the usual time",
+      "phonics": [
+        "ur-ear"
+      ]
+    },
+    {
+      "word": "echo",
+      "meaning": "a sound that bounces back",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "k-ch"
+      ]
+    },
+    {
+      "word": "chaos",
+      "meaning": "a big mess with no order",
+      "categories": [
+        "tricky"
+      ],
+      "phonics": [
+        "k-ch"
+      ]
+    },
+    {
+      "word": "stomach",
+      "meaning": "the body part that digests food",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "k-ch"
+      ]
+    },
+    {
+      "word": "league",
+      "meaning": "a group of teams",
+      "phonics": [
+        "gue-que"
+      ]
+    },
+    {
+      "word": "antique",
+      "meaning": "very old and valuable",
+      "phonics": [
+        "gue-que"
+      ]
+    },
+    {
+      "word": "unique",
+      "meaning": "one of a kind",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "gue-que"
+      ]
+    },
+    {
+      "word": "dictionary",
+      "meaning": "a book or app that explains words",
+      "phonics": [
+        "ary"
+      ]
+    },
+    {
+      "word": "library",
+      "meaning": "a place with many books",
+      "categories": [
+        "cool"
+      ],
+      "phonics": [
+        "ary"
+      ]
+    },
+    {
+      "word": "ordinary",
+      "meaning": "usual or normal",
+      "phonics": [
+        "ary"
+      ]
+    },
+    {
+      "word": "unhappy",
+      "meaning": "not happy",
+      "prefix": "un-",
+      "root": "happy",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "unsafe",
+      "meaning": "not safe",
+      "prefix": "un-",
+      "root": "safe",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "rewrite",
+      "meaning": "write again",
+      "prefix": "re-",
+      "root": "write",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "replay",
+      "meaning": "play again",
+      "prefix": "re-",
+      "root": "play",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "dislike",
+      "meaning": "not like",
+      "prefix": "dis-",
+      "root": "like",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "disagree",
+      "meaning": "not agree",
+      "prefix": "dis-",
+      "root": "agree",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "misread",
+      "meaning": "read wrongly",
+      "prefix": "mis-",
+      "root": "read",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "misplace",
+      "meaning": "put in the wrong place",
+      "prefix": "mis-",
+      "root": "place",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "preview",
+      "meaning": "see before",
+      "prefix": "pre-",
+      "root": "view",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "preheat",
+      "meaning": "heat before cooking",
+      "prefix": "pre-",
+      "root": "heat",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "inactive",
+      "meaning": "not active",
+      "prefix": "in-",
+      "root": "active",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "impossible",
+      "meaning": "not possible",
+      "prefix": "im-",
+      "root": "possible",
+      "suffix": "",
+      "categories": [
+        "morphology",
+        "tricky"
+      ]
+    },
+    {
+      "word": "nonstop",
+      "meaning": "not stopping",
+      "prefix": "non-",
+      "root": "stop",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "nonfiction",
+      "meaning": "writing that is not made up",
+      "prefix": "non-",
+      "root": "fiction",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "overcook",
+      "meaning": "cook too much",
+      "prefix": "over-",
+      "root": "cook",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "overload",
+      "meaning": "put too much on or in",
+      "prefix": "over-",
+      "root": "load",
+      "suffix": "",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "subway",
+      "meaning": "a train under the city",
+      "prefix": "sub-",
+      "root": "way",
+      "suffix": "",
+      "categories": [
+        "morphology",
+        "cool"
+      ]
+    },
+    {
+      "word": "submarine",
+      "meaning": "a ship under the sea",
+      "prefix": "sub-",
+      "root": "marine",
+      "suffix": "",
+      "categories": [
+        "morphology",
+        "cool"
+      ]
+    },
+    {
+      "word": "quickly",
+      "meaning": "in a quick way",
+      "root": "quick",
+      "suffix": "-ly",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "slowly",
+      "meaning": "in a slow way",
+      "root": "slow",
+      "suffix": "-ly",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "happily",
+      "meaning": "in a happy way",
+      "root": "happy",
+      "suffix": "-ily",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "easily",
+      "meaning": "in an easy way",
+      "root": "easy",
+      "suffix": "-ily",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "gently",
+      "meaning": "in a gentle way",
+      "root": "gentle",
+      "suffix": "-ly",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "simply",
+      "meaning": "in a simple way",
+      "root": "simple",
+      "suffix": "-ly",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "magically",
+      "meaning": "in a magical way",
+      "root": "magic",
+      "suffix": "-ally",
+      "categories": [
+        "morphology",
+        "cool"
+      ]
+    },
+    {
+      "word": "basically",
+      "meaning": "in a basic way",
+      "root": "basic",
+      "suffix": "-ally",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "hopeful",
+      "meaning": "full of hope",
+      "root": "hope",
+      "suffix": "-ful",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "careful",
+      "meaning": "full of care",
+      "root": "care",
+      "suffix": "-ful",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "fearless",
+      "meaning": "without fear",
+      "root": "fear",
+      "suffix": "-less",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "painless",
+      "meaning": "without pain",
+      "root": "pain",
+      "suffix": "-less",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "kindness",
+      "meaning": "the state of being kind",
+      "root": "kind",
+      "suffix": "-ness",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "darkness",
+      "meaning": "the state of being dark",
+      "root": "dark",
+      "suffix": "-ness",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "movement",
+      "meaning": "the act of moving",
+      "root": "move",
+      "suffix": "-ment",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "payment",
+      "meaning": "the act of paying",
+      "root": "pay",
+      "suffix": "-ment",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "readable",
+      "meaning": "able to be read",
+      "root": "read",
+      "suffix": "-able",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "washable",
+      "meaning": "able to be washed",
+      "root": "wash",
+      "suffix": "-able",
+      "categories": [
+        "morphology"
+      ]
+    },
+    {
+      "word": "their",
+      "meaning": "belonging to them",
+      "categories": [
+        "homophone",
+        "tricky"
+      ]
+    },
+    {
+      "word": "there",
+      "meaning": "in that place",
+      "categories": [
+        "homophone",
+        "tricky"
+      ]
+    },
+    {
+      "word": "they're",
+      "meaning": "short for they are",
+      "categories": [
+        "homophone",
+        "tricky"
+      ]
+    },
+    {
+      "word": "to",
+      "meaning": "toward",
+      "categories": [
+        "homophone",
+        "tricky"
+      ]
+    },
+    {
+      "word": "too",
+      "meaning": "also, or more than needed",
+      "categories": [
+        "homophone",
+        "tricky"
+      ]
+    },
+    {
+      "word": "two",
+      "meaning": "the number 2",
+      "categories": [
+        "homophone"
+      ]
+    },
+    {
+      "word": "knight",
+      "meaning": "a brave armored helper in old stories",
+      "categories": [
+        "tricky",
+        "cool"
+      ]
+    },
+    {
+      "word": "thumb",
+      "meaning": "the short thick finger",
+      "categories": [
+        "tricky",
+        "cool"
+      ]
+    },
+    {
+      "word": "pizza",
+      "meaning": "a round food with cheese and toppings",
+      "categories": [
+        "cool"
+      ]
+    },
+    {
+      "word": "robot",
+      "meaning": "a machine that can do tasks",
+      "categories": [
+        "cool"
+      ]
     }
   ]
 }

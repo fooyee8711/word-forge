@@ -2,282 +2,561 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <title>✨ Amelia Magic Lexicon Lab ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Word Forge Kids Phonics</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+        :root {
+            --bg: #f7fbff;
+            --card: #ffffff;
+            --ink: #26364f;
+            --muted: #65758b;
+            --primary: #5b7cfa;
+            --primary-dark: #3d57c7;
+            --sun: #ffd166;
+            --mint: #99f6c8;
+            --pink: #ffafcc;
+            --line: #dce7f7;
+            --red: #ef4444;
+            --skyblue: #0ea5e9;
+            --orange: #f97316;
+            --purple: #8b5cf6;
+            --blue: #2563eb;
+            --green: #16a34a;
         }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
         body {
+            margin: 0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #fff9ef 0%, #fff2e0 100%);
-            font-family: 'Segoe UI', 'Quicksand', 'Comic Neue', 'Caveat', system-ui, -apple-system, cursive;
-            padding: 24px 20px;
+            color: var(--ink);
+            font-family: "Nunito", "Comic Sans MS", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 209, 102, 0.32), transparent 32rem),
+                radial-gradient(circle at 100% 0%, rgba(91, 124, 250, 0.22), transparent 28rem),
+                var(--bg);
+        }
+
+        .app-shell {
+            width: min(100%, 520px);
+            margin: 0 auto;
+            padding: 16px 14px 92px;
+        }
+
+        .hero {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 14px 0 10px;
+            background: linear-gradient(180deg, rgba(247, 251, 255, 0.97) 78%, rgba(247, 251, 255, 0));
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-card,
+        .panel,
+        .word-card {
+            border: 2px solid rgba(220, 231, 247, 0.95);
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 14px 34px rgba(61, 87, 199, 0.12);
+        }
+
+        .hero-card { padding: 18px; }
+        .eyebrow {
+            margin: 0 0 6px;
+            color: var(--primary-dark);
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+        }
+        h1 { margin: 0; font-size: clamp(1.7rem, 8vw, 2.45rem); line-height: 1; }
+        .subtitle { margin: 10px 0 0; color: var(--muted); line-height: 1.45; font-weight: 700; }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .stat {
+            border-radius: 18px;
+            padding: 10px 8px;
+            background: #f3f7ff;
+            text-align: center;
+            font-weight: 900;
+        }
+        .stat span { display: block; color: var(--muted); font-size: 0.72rem; font-weight: 800; }
+
+        .tabs {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 12px 0 4px;
+            scrollbar-width: none;
         }
-        .grimoire {
-            max-width: 1200px;
-            width: 100%;
-            background: #fffef7;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255,220,180,0.2) 1%, transparent 1.5%);
-            border-radius: 56px 32px 64px 40px;
-            border: 2px solid #ffe0b5;
-            padding: 30px 28px 40px;
-            position: relative;
-            transition: all 0.2s ease;
-        }
-        .crystal-orb {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            width: 56px;
-            height: 56px;
-            background: radial-gradient(circle at 35% 35%, #bde0fe, #a0c4e8);
-            border-radius: 50%;
-            border: 2px solid #ffe6c7;
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            flex: 0 0 auto;
+            border: 0;
+            border-radius: 999px;
+            padding: 11px 14px;
+            background: #eaf0ff;
+            color: var(--primary-dark);
+            font: inherit;
+            font-weight: 900;
             cursor: pointer;
-            z-index: 20;
         }
-        .crystal-orb::after {
-            content: "✨";
-            position: absolute;
-            font-size: 28px;
-            top: 10px;
-            left: 14px;
-            opacity: 0.8;
+        .tab.active { background: var(--primary); color: white; box-shadow: 0 8px 18px rgba(91, 124, 250, 0.35); }
+
+        .panel { padding: 16px; margin-top: 14px; }
+        .panel h2 { margin: 0 0 10px; font-size: 1.2rem; }
+        .rule-grid { display: grid; gap: 10px; }
+        .rule-chip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            border: 0;
+            border-radius: 20px;
+            padding: 13px 14px;
+            background: #f8fbff;
+            color: var(--ink);
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            border: 2px solid transparent;
         }
-        .orb-pulse {
-            animation: breathPulse 1.2s ease-in-out infinite;
+        .rule-chip.active { border-color: var(--primary); background: #eef3ff; }
+        .rule-name { font-weight: 950; }
+        .rule-help { color: var(--muted); font-size: 0.86rem; font-weight: 800; }
+        .badge { border-radius: 999px; background: var(--sun); padding: 5px 9px; font-weight: 950; white-space: nowrap; }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
         }
-        @keyframes breathPulse {
-            0% { transform: scale(1); opacity: 0.7; background: radial-gradient(circle at 35% 35%, #bde0fe, #a0c4e8);}
-            50% { transform: scale(1.05); opacity: 1; background: radial-gradient(circle at 35% 35%, #cfe6ff, #b0d0f0);}
-            100% { transform: scale(1); opacity: 0.7; background: radial-gradient(circle at 35% 35%, #bde0fe, #a0c4e8);}
+        .legend-item {
+            border-radius: 16px;
+            padding: 9px 10px;
+            background: #f8fbff;
+            font-size: 0.88rem;
+            font-weight: 900;
         }
-        .phase { display: none; animation: fadeIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
-        .active-phase { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
-        :root { --cherry: #ffafcc; --mint: #caffbf; --lemon: #fdffb6; --glow-blue: #bde0fe; }
-        .hand-title {
-            font-size: 2rem; font-weight: bold; color: #c06c8c; letter-spacing: -0.3px;
-            border-left: 8px solid var(--cherry); padding-left: 20px; margin-bottom: 24px;
-            transform: rotate(-0.3deg);
+        .dot { display: inline-block; width: 0.82rem; height: 0.82rem; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+
+        .word-list { display: grid; gap: 12px; margin-top: 14px; }
+        .word-card { padding: 16px; overflow: hidden; }
+        .word-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+        .word-text { font-size: 2rem; line-height: 1.05; font-weight: 1000; letter-spacing: 0.01em; }
+        .speak {
+            flex: 0 0 auto;
+            border: 0;
+            border-radius: 18px;
+            background: var(--mint);
+            color: #075836;
+            font-size: 1.25rem;
+            padding: 10px 12px;
+            cursor: pointer;
         }
-        .target-word-card {
-            background: var(--lemon); border-radius: 60px; padding: 12px 28px; display: inline-block;
-            margin: 10px 0 20px; font-size: 1.8rem; font-weight: bold; color: #5a3e2e;
-            border: 2px solid #ffe0a3;
+        .meaning { margin: 8px 0 0; color: var(--muted); font-weight: 800; line-height: 1.45; }
+        .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+        .tag { border-radius: 999px; padding: 6px 9px; background: #eef3ff; color: var(--primary-dark); font-weight: 900; font-size: 0.78rem; }
+        .lego { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .brick { border-radius: 14px; padding: 9px 10px; background: #fff6d8; border: 2px solid #ffe59a; font-weight: 950; }
+        .brick small { display: block; color: #8a6b00; font-size: 0.68rem; text-transform: uppercase; }
+        .hint { margin-top: 12px; padding: 12px; border-radius: 18px; background: #f5f8ff; color: var(--muted); line-height: 1.45; font-weight: 800; }
+
+        .color-red { color: var(--red); background: rgba(239, 68, 68, 0.12); }
+        .color-skyblue { color: var(--skyblue); background: rgba(14, 165, 233, 0.13); }
+        .color-orange { color: var(--orange); background: rgba(249, 115, 22, 0.13); }
+        .color-purple { color: var(--purple); background: rgba(139, 92, 246, 0.13); }
+        .color-blue { color: var(--blue); background: rgba(37, 99, 235, 0.12); }
+        .color-green { color: var(--green); background: rgba(22, 163, 74, 0.13); }
+        .phonics-mark { border-radius: 0.35em; padding: 0 0.08em; }
+
+        .practice {
+            display: grid;
+            gap: 12px;
         }
-        .magic-glow { animation: goldenGlow 0.6s ease-out; }
-        @keyframes goldenGlow {
-            0% { background: #fdffb6; border-color: #ffe0a3; }
-            50% { background: #fff4b0; border-color: #ffcd94; box-shadow: 0 0 0 3px rgba(253,255,182,0.6);}
-            100% { background: #fdffb6; border-color: #ffe0a3; }
+        .question { font-size: 1.45rem; line-height: 1.3; font-weight: 950; }
+        .answer-input {
+            width: 100%;
+            min-height: 56px;
+            border: 2px solid var(--line);
+            border-radius: 20px;
+            padding: 12px 14px;
+            font: inherit;
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--ink);
         }
-        .slot-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; margin: 20px 0 30px; }
-        .slot { background: #fffaf0; border: 2px dashed #e2c7a1; border-radius: 32px; min-width: 170px; padding: 18px 12px; text-align: center; }
-        .slot-label { font-weight: bold; font-size: 1.2rem; background: var(--lemon); display: inline-block; padding: 4px 16px; border-radius: 40px; margin-bottom: 12px; color: #6b4c3b; border: 1px solid #ffe0a0; }
-        .slot-value { font-size: 1.5rem; font-weight: bold; min-height: 70px; background: rgba(202, 255, 191, 0.2); border-radius: 32px; padding: 10px; color: #2c5a5a; }
-        .rune-parts { background: #fef5e6; border-radius: 68px; padding: 20px; margin: 20px 0; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; border: 2px solid #ffd89a; }
-        .rune { background: var(--glow-blue); padding: 12px 24px; border-radius: 60px; font-size: 1.3rem; font-weight: bold; cursor: grab; display: inline-block; touch-action: none; color: #2c3e4e; border: 2px solid #fff6e0; }
-        .rune:active { cursor: grabbing; }
-        .story-card { background: #fffef0; border-radius: 48px; padding: 28px; line-height: 1.7; font-size: 1.2rem; border: 2px solid #ffe6c7; max-height: 400px; overflow-y: auto; }
-        .highlight-word { background-color: var(--cherry); font-weight: bold; padding: 0 5px; border-radius: 14px; text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: #ff6f91; }
-        .cloze-input { font-size: 1.3rem; padding: 12px 20px; border-radius: 60px; border: 2px solid #eeddbb; background: white; width: 100%; max-width: 320px; font-family: monospace; }
-        .cloze-correct { background-color: var(--mint) !important; border-color: #8fc97f !important; }
-        button { background: var(--cherry); border: none; padding: 12px 28px; border-radius: 60px; font-weight: bold; font-size: 1rem; margin-top: 20px; cursor: pointer; font-family: inherit; border: 2px solid #ffdbaf; }
-        button:active { transform: translateY(2px); }
-        .option-group { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; }
-        .root-option { background: var(--lemon); padding: 12px 24px; border-radius: 48px; cursor: pointer; font-weight: bold; border: 2px solid #ffe0a3; }
-        .root-option.selected-correct { background: var(--mint); border-color: #8fc97f; }
-        .disabled-btn { opacity: 0.5; pointer-events: none; }
-        .next-word-active { background: #b0e57c; border-color: #9acd6f; }
-        footer { text-align: center; margin-top: 30px; font-size: 0.8rem; color: #c0a080; }
-        @media (max-width: 700px) { .grimoire { padding: 20px; } .rune { font-size: 1rem; padding: 8px 18px; } .slot { min-width: 120px; } }
+        .answer-input:focus { outline: 4px solid rgba(91, 124, 250, 0.18); border-color: var(--primary); }
+        .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .big-btn {
+            border: 0;
+            border-radius: 20px;
+            padding: 13px 12px;
+            background: var(--primary);
+            color: white;
+            font: inherit;
+            font-weight: 950;
+            cursor: pointer;
+        }
+        .big-btn.secondary { background: #eaf0ff; color: var(--primary-dark); }
+        .feedback { min-height: 28px; font-weight: 950; }
+        .feedback.good { color: #15803d; }
+        .feedback.try { color: #dc2626; }
+
+        .bottom-nav {
+            position: fixed;
+            left: 50%;
+            bottom: 12px;
+            transform: translateX(-50%);
+            width: min(calc(100% - 22px), 500px);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 8px;
+            border-radius: 26px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 16px 36px rgba(38, 54, 79, 0.18);
+            border: 2px solid var(--line);
+        }
+        .nav-btn {
+            border: 0;
+            border-radius: 20px;
+            padding: 10px 6px;
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-weight: 1000;
+            cursor: pointer;
+        }
+        .nav-btn.active { background: #eef3ff; color: var(--primary-dark); }
+
+        @media (min-width: 760px) {
+            .app-shell { width: min(100%, 980px); }
+            .rule-grid, .word-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .legend { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
 <body>
-<div class="grimoire" style="position: relative;">
-    <div class="crystal-orb" id="crystalOrb"></div>
-    <h1 class="hand-title">✧ Lexicon Forge ✧</h1>
+    <main class="app-shell">
+        <header class="hero" id="top">
+            <section class="hero-card">
+                <p class="eyebrow">8歲手機英文拼字 · Phonics + Morphology</p>
+                <h1>🔨 Word Forge</h1>
+                <p class="subtitle">Tap a rule, see the sound colours, then spell. 適合小朋友用手指操作、聽讀、記顏色和拆字積木。</p>
+                <div class="stats" aria-label="learning stats">
+                    <div class="stat"><strong id="wordCount">0</strong><span>Words</span></div>
+                    <div class="stat"><strong id="ruleCount">31</strong><span>Rules</span></div>
+                    <div class="stat"><strong>6</strong><span>Colours</span></div>
+                </div>
+            </section>
+            <nav class="tabs" id="ruleTabs" aria-label="phonics and morphology filters"></nav>
+        </header>
 
-    <div id="phase1" class="phase active-phase">
-        <div style="text-align: center;">
-            <div class="target-word-card" id="targetWordDisplay">⚡ loading...</div>
-            <p style="margin: 8px 0 0; font-style: italic; color:#a8815f;">🔍 Drag the magical runes into the matching slots</p>
-        </div>
-        <div class="slot-container">
-            <div class="slot" data-slot-type="prefix"><div class="slot-label">📜 PREFIX</div><div class="slot-value" id="prefixVal">———</div></div>
-            <div class="slot" data-slot-type="root"><div class="slot-label">🌿 ROOT</div><div class="slot-value" id="rootVal">———</div></div>
-            <div class="slot" data-slot-type="suffix"><div class="slot-label">✨ SUFFIX</div><div class="slot-value" id="suffixVal">———</div></div>
-        </div>
-        <div class="rune-parts" id="runeLibrary"></div>
-        <button id="resetPhase1Btn">🪄 Reset Puzzle</button>
-    </div>
+        <section class="panel" id="learn">
+            <h2>🎯 Choose a training rule</h2>
+            <div class="rule-grid" id="ruleGrid"></div>
+        </section>
 
-    <div id="phase2" class="phase"><div class="story-card" id="storyText"></div><button id="toPhase3Btn">📖 Go to Spelling Trial →</button></div>
+        <section class="panel" id="legend">
+            <h2>🌈 Visual Phonics colours</h2>
+            <div class="legend">
+                <div class="legend-item"><span class="dot" style="background:var(--red)"></span>Red: short vowels</div>
+                <div class="legend-item"><span class="dot" style="background:var(--skyblue)"></span>Skyblue: long vowels</div>
+                <div class="legend-item"><span class="dot" style="background:var(--orange)"></span>Orange: digraphs/blends</div>
+                <div class="legend-item"><span class="dot" style="background:var(--purple)"></span>Purple: R-controlled</div>
+                <div class="legend-item"><span class="dot" style="background:var(--blue)"></span>Blue: silent letters</div>
+                <div class="legend-item"><span class="dot" style="background:var(--green)"></span>Green: variant/schwa</div>
+            </div>
+        </section>
 
-    <div id="phase3" class="phase">
-        <div style="background:#fff5e6; border-radius: 48px; padding: 24px; border: 2px solid #ffe0c0;">
-            <p style="font-size:1.4rem; margin-bottom: 16px;">✍️ Spell the missing word</p>
-            <div id="clozeSentence" style="font-size:1.2rem; margin-bottom: 20px; line-height:1.5;"></div>
-            <input type="text" id="spellInput" class="cloze-input" placeholder="type the full word here..." autocomplete="off">
-            <div><button id="nextPhase3Btn" style="display:none;">🔮 Etymology Game →</button></div>
-        </div>
-    </div>
+        <section class="word-list" id="wordList" aria-live="polite"></section>
 
-    <div id="phase4" class="phase">
-        <div style="background:#f6f2e3; border-radius: 48px; padding: 24px; border: 2px solid #ffe0c0;">
-            <p>🌱 Which word shares the same root family?</p>
-            <div id="rootOptions" class="option-group"></div>
-            <button id="nextWordBtn" class="disabled-btn">✨ Next Word ✨</button>
-        </div>
-    </div>
-    <footer>⚡ Crystal orb pulses when stability drops — place correct pieces to shine!</footer>
-</div>
+        <section class="panel practice" id="practice">
+            <h2>✍️ Mini spelling trial</h2>
+            <div class="question" id="questionText">Loading...</div>
+            <input class="answer-input" id="answerInput" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the word">
+            <div class="action-row">
+                <button class="big-btn" id="checkBtn">Check</button>
+                <button class="big-btn secondary" id="nextBtn">Next</button>
+            </div>
+            <div class="feedback" id="feedback"></div>
+        </section>
+    </main>
 
-<script>
-    // ------------------------------ 合并加载 words.json + words2.json ------------------------------
-    let wordsData = [];
-    let currentWordIndex = 0;
-    let currentWordObj = null;
-    let solvedSlots = { prefix: false, root: false, suffix: false };
+    <nav class="bottom-nav" aria-label="main navigation">
+        <button class="nav-btn active" data-jump="top">🏠 Home</button>
+        <button class="nav-btn" data-jump="learn">🧩 Rules</button>
+        <button class="nav-btn" data-jump="practice">✍️ Spell</button>
+    </nav>
 
-    const crystal = document.getElementById('crystalOrb');
-    const targetWordSpan = document.getElementById('targetWordDisplay');
-    const prefixSlotDiv = document.getElementById('prefixVal');
-    const rootSlotDiv = document.getElementById('rootVal');
-    const suffixSlotDiv = document.getElementById('suffixVal');
-    const runeLibrary = document.getElementById('runeLibrary');
-    const resetBtn = document.getElementById('resetPhase1Btn');
-    const storyContainer = document.getElementById('storyText');
-    const toPhase3Btn = document.getElementById('toPhase3Btn');
-    const clozeSentenceDiv = document.getElementById('clozeSentence');
-    const spellInput = document.getElementById('spellInput');
-    const nextPhase3Btn = document.getElementById('nextPhase3Btn');
-    const rootOptionsDiv = document.getElementById('rootOptions');
-    const nextWordBtn = document.getElementById('nextWordBtn');
+    <script>
+        const PHONICS_RULES = [
+            { id: 'short-u-o', name: "Short /u/ as 'o'", help: "mother, monkey: letter o can sound like /u/", examples: ['mother', 'monkey', 'brother'], colour: 'green' },
+            { id: 'short-i-y', name: "Short /i/ as 'y'", help: "gym, mystery: y can sound like short /i/", examples: ['gym', 'mystery', 'system'], colour: 'red' },
+            { id: 'long-a-ey', name: "Long /a/ as 'ey'", help: "obey, prey: ey says long a", examples: ['obey', 'prey', 'they'], colour: 'skyblue' },
+            { id: 'long-a-ai', name: "Long /a/ as 'ai'", help: "rain, plain: ai says long a", autoPattern: /ai/gi, examples: ['rain', 'plain', 'train'], colour: 'skyblue' },
+            { id: 'long-a-ei', name: "Long /a/ as 'ei'", help: "reign, weight: ei says long a", examples: ['reign', 'weight', 'eight'], colour: 'skyblue' },
+            { id: 'ur-ear', name: "Sound /ur/ as 'ear'", help: "earth, learn: ear can sound like /ur/", examples: ['earth', 'learn', 'early'], colour: 'purple' },
+            { id: 'k-ch', name: "Sound /k/ as 'ch'", help: "echo, chaos, stomach: ch can say /k/", examples: ['echo', 'chaos', 'stomach'], colour: 'orange' },
+            { id: 'gue-que', name: "Final gue / que", help: "league, antique, unique endings", autoPattern: /(gue|que)$/gi, examples: ['league', 'antique', 'unique'], colour: 'blue' },
+            { id: 'ary', name: "Suffix -ary", help: "dictionary, library: unstressed ending", autoPattern: /ary$/gi, examples: ['dictionary', 'library', 'ordinary'], colour: 'green' }
+        ];
 
-    // 备用词库（如果外部json加载失败）
-    const FALLBACK_WORDS = [
-        { word: "construction", prefix: "con-", root: "struct", suffix: "-ion", story: "The great cathedral was a marvel of construction. Construction is key.", cloze_context: "The ______ of the bridge took ten years.", related_options: ["instruct","structure","destruction"], correct_related: "structure" }
-    ];
+        const PREFIX_RULES = [
+            ['un-', 'Not / 相反'], ['re-', 'Again / 再次'], ['dis-', 'Negative / 否定'], ['mis-', 'Wrongly / 錯誤地'],
+            ['pre-', 'Before / 之前'], ['in-', 'Not / 不'], ['im-', 'Not / 不'], ['non-', 'Not / 非'], ['over-', 'Too much / 過多'], ['sub-', 'Under / 在...之下']
+        ];
+        const SUFFIX_RULES = [
+            ['-ly', 'Basic adverb'], ['-ily', 'y → ily'], ['-ly-from-le', 'le → ly'], ['-ally', 'ic/al → ally'],
+            ['-ful', 'Full of'], ['-less', 'Without'], ['-ness', 'State'], ['-ment', 'Action/process'], ['-able', 'Can be']
+        ];
 
-    function triggerInstability() {
-        crystal.classList.add('orb-pulse');
-        if (window.pulseTimer) clearTimeout(window.pulseTimer);
-        window.pulseTimer = setTimeout(() => crystal.classList.remove('orb-pulse'), 1200);
-    }
-    function addMagicGlow(el) { if(el) { el.classList.add('magic-glow'); setTimeout(() => el.classList.remove('magic-glow'), 700); } }
-    function showPhase(pid) { for(let i=1;i<=4;i++) document.getElementById(`phase${i}`).classList.remove('active-phase'); document.getElementById(`phase${pid}`).classList.add('active-phase'); }
-    function updateSlotsUI() {
-        prefixSlotDiv.innerText = solvedSlots.prefix ? currentWordObj.prefix : "———";
-        rootSlotDiv.innerText = solvedSlots.root ? currentWordObj.root : "———";
-        suffixSlotDiv.innerText = solvedSlots.suffix ? (currentWordObj.suffix || "—") : "———";
-    }
-    function generatePieces() {
-        let pieces = [];
-        pieces.push({ type: 'prefix', value: currentWordObj.prefix, isCorrect: true });
-        pieces.push({ type: 'root', value: currentWordObj.root, isCorrect: true });
-        if (currentWordObj.suffix && currentWordObj.suffix !== "") pieces.push({ type: 'suffix', value: currentWordObj.suffix, isCorrect: true });
-        const decoyPrefixes = ['re-', 'pre-', 'mis-', 'dis-', 'sub-'];
-        const decoyRoots = ['dict', 'ject', 'port', 'tract', 'form'];
-        const decoySuffixes = ['-ing', '-ed', '-tion', '-ment', '-ance'];
-        if (!solvedSlots.prefix) { let av = decoyPrefixes.filter(d=>d!==currentWordObj.prefix); pieces.push({ type:'prefix', value:av[0]||'anti-', isCorrect:false }); if(av.length>1) pieces.push({ type:'prefix', value:av[1], isCorrect:false }); }
-        if (!solvedSlots.root) { let av = decoyRoots.filter(d=>d!==currentWordObj.root); pieces.push({ type:'root', value:av[0]||'struct', isCorrect:false }); if(av.length>1) pieces.push({ type:'root', value:av[1], isCorrect:false }); }
-        if (currentWordObj.suffix && !solvedSlots.suffix) { let av = decoySuffixes.filter(d=>d!==currentWordObj.suffix); pieces.push({ type:'suffix', value:av[0]||'-al', isCorrect:false }); if(av.length>1) pieces.push({ type:'suffix', value:av[1], isCorrect:false }); }
-        for(let i=pieces.length-1;i>0;i--){ let j=Math.floor(Math.random()*(i+1)); [pieces[i],pieces[j]]=[pieces[j],pieces[i]]; }
-        return pieces;
-    }
-    function renderRuneLibrary() {
-        const pieces = generatePieces();
-        runeLibrary.innerHTML = '';
-        pieces.forEach(piece => {
-            const rune = document.createElement('div'); rune.className = 'rune'; rune.setAttribute('draggable','true');
-            rune.setAttribute('data-type', piece.type); rune.setAttribute('data-value', piece.value); rune.setAttribute('data-correct', piece.isCorrect);
-            rune.innerText = piece.value;
-            rune.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text/plain',JSON.stringify({type:piece.type,value:piece.value,correct:piece.isCorrect})); e.target.classList.add('dragging'); });
-            rune.addEventListener('dragend', e=>{ e.target.classList.remove('dragging'); });
-            rune.addEventListener('touchstart', handleTouchStart, {passive:false});
-            rune.addEventListener('touchmove', handleTouchMove, {passive:false});
-            rune.addEventListener('touchend', handleTouchEnd);
-            runeLibrary.appendChild(rune);
-        });
-    }
-    let touchTarget = null;
-    function handleTouchStart(e){ e.preventDefault(); touchTarget = this; this.style.opacity='0.6'; }
-    function handleTouchMove(e){ if(!touchTarget) return; const touch=e.touches[0]; const el=document.elementsFromPoint(touch.clientX,touch.clientY).find(el=>el.classList && el.classList.contains('slot')); if(el){ const slotType=el.dataset.slotType; const partType=touchTarget.dataset.type; const partVal=touchTarget.dataset.value; const isCor=touchTarget.dataset.correct==='true'; if(slotType===partType) processDrop(slotType,partType,partVal,isCor); touchTarget.style.opacity=''; touchTarget=null; } }
-    function handleTouchEnd(e){ if(touchTarget) touchTarget.style.opacity=''; touchTarget=null; }
-    function processDrop(slotType, partType, partValue, isCorrect){
-        if(slotType!==partType || solvedSlots[slotType]) { triggerInstability(); return; }
-        let expected = slotType==='prefix'?currentWordObj.prefix:(slotType==='root'?currentWordObj.root:currentWordObj.suffix||'');
-        if(partValue!==expected) { triggerInstability(); return; }
-        solvedSlots[slotType]=true; updateSlotsUI(); addMagicGlow(document.querySelector(`.slot[data-slot-type="${slotType}"] .slot-value`)); renderRuneLibrary(); checkCompletionAndJump();
-    }
-    function checkCompletionAndJump(){
-        let needed = (currentWordObj.suffix && currentWordObj.suffix!=="") ? 3 : 2;
-        let filled = (solvedSlots.prefix?1:0)+(solvedSlots.root?1:0)+(currentWordObj.suffix && solvedSlots.suffix?1:0);
-        if(filled>=needed) { addMagicGlow(document.querySelector('.slot-container')); setTimeout(()=>{ if(document.getElementById('phase1').classList.contains('active-phase')){ showPhase(2); renderStoryPhase(); } },800); }
-    }
-    function resetPhase1(){ solvedSlots = {prefix:false, root:false, suffix:false}; if(!currentWordObj.suffix || currentWordObj.suffix==="") solvedSlots.suffix=true; updateSlotsUI(); renderRuneLibrary(); showPhase(1); }
-    function renderStoryPhase(){ let story = currentWordObj.story; let regex = new RegExp(`\\b(${currentWordObj.word})\\b`,'gi'); storyContainer.innerHTML = story.replace(regex, match=>`<span class="highlight-word">${match}</span>`); }
-    function setupCloze(){ clozeSentenceDiv.innerHTML = currentWordObj.cloze_context; spellInput.value=''; spellInput.classList.remove('cloze-correct'); nextPhase3Btn.style.display='none'; spellInput.oninput = function(){ if(spellInput.value.trim().toLowerCase() === currentWordObj.word.toLowerCase()){ spellInput.classList.add('cloze-correct'); nextPhase3Btn.style.display='inline-block'; } else { spellInput.classList.remove('cloze-correct'); nextPhase3Btn.style.display='none'; if(spellInput.value.length>0) triggerInstability(); } }; }
-    function setupEtymologyGame(){
-        const options = currentWordObj.related_options; const correct = currentWordObj.correct_related; rootOptionsDiv.innerHTML=''; let unlocked=false;
-        options.forEach(opt=>{ let div = document.createElement('div'); div.className='root-option'; div.innerText=opt; div.addEventListener('click',()=>{ if(unlocked) return; if(opt===correct){ div.classList.add('selected-correct'); addMagicGlow(div); unlocked=true; nextWordBtn.classList.remove('disabled-btn'); nextWordBtn.classList.add('next-word-active'); } else { triggerInstability(); div.style.background="#ffd1b3"; setTimeout(()=>div.style.background="",300); } }); rootOptionsDiv.appendChild(div); });
-        nextWordBtn.classList.add('disabled-btn'); nextWordBtn.classList.remove('next-word-active');
-    }
-    function loadWord(idx){
-        currentWordObj = wordsData[idx % wordsData.length];
-        currentWordIndex = idx % wordsData.length;
-        targetWordSpan.innerText = `✨ ${currentWordObj.word} ✨`;
-        solvedSlots = {prefix:false, root:false, suffix:false};
-        if(!currentWordObj.suffix || currentWordObj.suffix==="") solvedSlots.suffix=true;
-        updateSlotsUI(); renderRuneLibrary(); if(spellInput) spellInput.value=""; if(nextPhase3Btn) nextPhase3Btn.style.display="none"; crystal.classList.remove('orb-pulse'); showPhase(1);
-    }
-    function nextWord(){ loadWord(currentWordIndex+1); }
+        const FALLBACK_WORDS = [
+            { word: 'mother', meaning: 'a female parent', categories: ['cool'], phonics: ['short-u-o'] },
+            { word: 'monkey', meaning: 'a playful animal', categories: ['cool'], phonics: ['short-u-o', 'long-a-ey'] },
+            { word: 'gym', meaning: 'a place to exercise', categories: ['cool'], phonics: ['short-i-y'] },
+            { word: 'mystery', meaning: 'something not yet explained', categories: ['tricky'], phonics: ['short-i-y'] },
+            { word: 'obey', meaning: 'to do what is asked', phonics: ['long-a-ey'] },
+            { word: 'prey', meaning: 'an animal hunted by another animal', categories: ['homophone'], phonics: ['long-a-ey'] },
+            { word: 'rain', meaning: 'water drops from clouds', categories: ['homophone', 'cool'], phonics: ['long-a-ai'] },
+            { word: 'plain', meaning: 'simple, or a flat wide land', categories: ['homophone'], phonics: ['long-a-ai'] },
+            { word: 'reign', meaning: 'rule as a king or queen', categories: ['homophone', 'tricky'], phonics: ['long-a-ei'] },
+            { word: 'weight', meaning: 'how heavy something is', categories: ['homophone'], phonics: ['long-a-ei'] },
+            { word: 'earth', meaning: 'our planet or soil', categories: ['cool'], phonics: ['ur-ear'] },
+            { word: 'learn', meaning: 'to get knowledge or a skill', phonics: ['ur-ear'] },
+            { word: 'echo', meaning: 'a sound that bounces back', categories: ['cool'], phonics: ['k-ch'] },
+            { word: 'chaos', meaning: 'a big mess with no order', categories: ['tricky'], phonics: ['k-ch'] },
+            { word: 'stomach', meaning: 'the body part that digests food', categories: ['cool'], phonics: ['k-ch'] },
+            { word: 'league', meaning: 'a group of teams', phonics: ['gue-que'] },
+            { word: 'antique', meaning: 'very old and valuable', phonics: ['gue-que'] },
+            { word: 'unique', meaning: 'one of a kind', categories: ['cool'], phonics: ['gue-que'] },
+            { word: 'dictionary', meaning: 'a book or app that explains words', phonics: ['ary'] },
+            { word: 'library', meaning: 'a place with many books', categories: ['cool'], phonics: ['ary'] },
+            { word: 'unhappy', meaning: 'not happy', prefix: 'un-', root: 'happy', suffix: '', categories: ['morphology'] },
+            { word: 'rewrite', meaning: 'write again', prefix: 're-', root: 'write', suffix: '', categories: ['morphology'] },
+            { word: 'dislike', meaning: 'not like', prefix: 'dis-', root: 'like', suffix: '', categories: ['morphology'] },
+            { word: 'misread', meaning: 'read wrongly', prefix: 'mis-', root: 'read', suffix: '', categories: ['morphology'] },
+            { word: 'preview', meaning: 'see before', prefix: 'pre-', root: 'view', suffix: '', categories: ['morphology'] },
+            { word: 'impossible', meaning: 'not possible', prefix: 'im-', root: 'poss', suffix: '-ible', categories: ['morphology', 'tricky'] },
+            { word: 'nonstop', meaning: 'not stopping', prefix: 'non-', root: 'stop', suffix: '', categories: ['morphology'] },
+            { word: 'overcook', meaning: 'cook too much', prefix: 'over-', root: 'cook', suffix: '', categories: ['morphology'] },
+            { word: 'subway', meaning: 'a train under the city', prefix: 'sub-', root: 'way', suffix: '', categories: ['morphology', 'cool'] },
+            { word: 'quickly', meaning: 'in a quick way', root: 'quick', suffix: '-ly', categories: ['morphology'] },
+            { word: 'happily', meaning: 'in a happy way', root: 'happy', suffix: '-ily', categories: ['morphology'] },
+            { word: 'gently', meaning: 'in a gentle way', root: 'gentle', suffix: '-ly', categories: ['morphology'] },
+            { word: 'magically', meaning: 'in a magical way', root: 'magic', suffix: '-ally', categories: ['morphology', 'cool'] },
+            { word: 'hopeful', meaning: 'full of hope', root: 'hope', suffix: '-ful', categories: ['morphology'] },
+            { word: 'fearless', meaning: 'without fear', root: 'fear', suffix: '-less', categories: ['morphology'] },
+            { word: 'kindness', meaning: 'the state of being kind', root: 'kind', suffix: '-ness', categories: ['morphology'] },
+            { word: 'movement', meaning: 'the act of moving', root: 'move', suffix: '-ment', categories: ['morphology'] },
+            { word: 'readable', meaning: 'able to be read', root: 'read', suffix: '-able', categories: ['morphology'] },
+            { word: 'their', meaning: 'belonging to them', categories: ['homophone', 'tricky'] },
+            { word: 'there', meaning: 'in that place', categories: ['homophone', 'tricky'] },
+            { word: 'they\'re', meaning: 'short for they are', categories: ['homophone', 'tricky'] }
+        ];
 
-    // 加载两个JSON文件并合并
-    async function initWords() {
-        try {
-            const [res1, res2] = await Promise.all([
-                fetch('words.json').then(r=>r.ok?r.json():null).catch(()=>null),
-                fetch('words2.json').then(r=>r.ok?r.json():null).catch(()=>null)
-            ]);
-            let combined = [];
-            if(res1 && res1.words) combined = combined.concat(res1.words);
-            if(res2 && res2.words) combined = combined.concat(res2.words);
-            if(combined.length === 0) throw new Error();
-            wordsData = combined;
-        } catch(e) {
-            console.warn("加载外部词库失败，使用备用词库");
-            wordsData = FALLBACK_WORDS;
+        const visualPatterns = [
+            { re: /(kn|wr|mb$|gue$|que$|igh)/gi, colour: 'blue' },
+            { re: /(ear|er|ir|ur|or)/gi, colour: 'purple' },
+            { re: /(ai|ay|ee|ea|ey|ei|oa|ow|ue|ui)/gi, colour: 'skyblue' },
+            { re: /(sh|ch|th|ph|wh|ck|bl|br|cl|cr|dr|fl|fr|gl|gr|pl|pr|sl|sm|sn|sp|st|tr)/gi, colour: 'orange' },
+            { re: /([aeiou])/gi, colour: 'red' },
+            { re: /(a|e|i|o|u|y)$/gi, colour: 'green' }
+        ];
+
+        let words = [];
+        let activeRule = 'all';
+        let practiceIndex = 0;
+
+        const ruleTabs = document.getElementById('ruleTabs');
+        const ruleGrid = document.getElementById('ruleGrid');
+        const wordList = document.getElementById('wordList');
+        const wordCount = document.getElementById('wordCount');
+        const ruleCount = document.getElementById('ruleCount');
+        const questionText = document.getElementById('questionText');
+        const answerInput = document.getElementById('answerInput');
+        const feedback = document.getElementById('feedback');
+
+        function escapeHtml(text) {
+            return String(text ?? '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
         }
-        loadWord(0);
-    }
 
-    // 事件绑定
-    resetBtn.addEventListener('click', resetPhase1);
-    toPhase3Btn.addEventListener('click', ()=>{ showPhase(3); setupCloze(); });
-    nextPhase3Btn.addEventListener('click', ()=>{ showPhase(4); setupEtymologyGame(); });
-    nextWordBtn.addEventListener('click', ()=>{ if(!nextWordBtn.classList.contains('disabled-btn')) nextWord(); });
-    // 为slot添加drop事件
-    document.querySelectorAll('.slot').forEach(slot=>{
-        slot.addEventListener('dragover', e=>e.preventDefault());
-        slot.addEventListener('drop', e=>{
-            e.preventDefault();
-            let dragData = JSON.parse(e.dataTransfer.getData('text/plain'));
-            if(dragData) processDrop(slot.dataset.slotType, dragData.type, dragData.value, dragData.correct);
-            e.dataTransfer.clearData();
+        function inferWord(raw) {
+            const item = { categories: [], phonics: [], ...raw };
+            const lower = item.word.toLowerCase();
+            item.phonics = Array.from(new Set([
+                ...item.phonics,
+                ...PHONICS_RULES.filter(rule => rule.examples?.includes(lower) || (rule.autoPattern && lower.match(rule.autoPattern))).map(rule => rule.id)
+            ]));
+            const prefix = PREFIX_RULES.find(([prefix]) => lower.startsWith(prefix.replace('-', '')));
+            const suffix = SUFFIX_RULES.find(([suffix]) => lower.endsWith(suffix.replace(/^-/, '').replace('-from-le', '')));
+            if (!item.prefix && prefix) item.prefix = prefix[0];
+            if (!item.suffix && suffix) item.suffix = suffix[0];
+            if (!item.root) {
+                const start = item.prefix ? item.prefix.replace('-', '').length : 0;
+                const end = item.suffix && item.suffix.startsWith('-') ? lower.length - item.suffix.replace('-', '').length : lower.length;
+                item.root = lower.slice(start, Math.max(start + 1, end));
+            }
+            if (item.prefix || item.suffix) item.categories = Array.from(new Set([...item.categories, 'morphology']));
+            return item;
+        }
+
+        function markVisualPhonics(word) {
+            const lower = word.toLowerCase();
+            const marks = [];
+            visualPatterns.forEach(({ re, colour }) => {
+                for (const match of lower.matchAll(re)) marks.push({ start: match.index, end: match.index + match[0].length, colour });
+            });
+            marks.sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start));
+            const chosen = [];
+            marks.forEach(mark => {
+                if (!chosen.some(existing => mark.start < existing.end && mark.end > existing.start)) chosen.push(mark);
+            });
+            chosen.sort((a, b) => a.start - b.start);
+            let output = '';
+            let cursor = 0;
+            chosen.forEach(mark => {
+                output += escapeHtml(word.slice(cursor, mark.start));
+                output += `<span class="phonics-mark color-${mark.colour}">${escapeHtml(word.slice(mark.start, mark.end))}</span>`;
+                cursor = mark.end;
+            });
+            output += escapeHtml(word.slice(cursor));
+            return output;
+        }
+
+        function allRules() {
+            return [
+                { id: 'all', name: 'All Words', help: '全部詞彙', count: words.length },
+                ...PHONICS_RULES.map(rule => ({ ...rule, count: words.filter(word => word.phonics.includes(rule.id)).length })),
+                { id: 'morphology', name: 'Morphology Lego', help: 'Prefix + root + suffix', count: words.filter(word => word.categories.includes('morphology')).length },
+                { id: 'homophone', name: 'Homophones', help: 'Same sound, different spelling', count: words.filter(word => word.categories.includes('homophone')).length },
+                { id: 'tricky', name: 'Tricky Words', help: 'Need memory power', count: words.filter(word => word.categories.includes('tricky')).length },
+                { id: 'cool', name: 'Cool Words', help: 'Fun everyday words', count: words.filter(word => word.categories.includes('cool')).length }
+            ];
+        }
+
+        function filterWords() {
+            if (activeRule === 'all') return words;
+            if (PHONICS_RULES.some(rule => rule.id === activeRule)) return words.filter(word => word.phonics.includes(activeRule));
+            return words.filter(word => word.categories.includes(activeRule));
+        }
+
+        function renderRules() {
+            const rules = allRules();
+            ruleTabs.innerHTML = rules.map(rule => `<button class="tab ${rule.id === activeRule ? 'active' : ''}" data-rule="${rule.id}">${escapeHtml(rule.name)}</button>`).join('');
+            ruleGrid.innerHTML = rules.slice(1).map(rule => `
+                <button class="rule-chip ${rule.id === activeRule ? 'active' : ''}" data-rule="${rule.id}">
+                    <span><span class="rule-name">${escapeHtml(rule.name)}</span><br><span class="rule-help">${escapeHtml(rule.help)}</span></span>
+                    <span class="badge">${rule.count}</span>
+                </button>
+            `).join('');
+            document.querySelectorAll('[data-rule]').forEach(button => button.addEventListener('click', () => setRule(button.dataset.rule)));
+        }
+
+        function renderWords() {
+            const visible = filterWords();
+            wordList.innerHTML = visible.map(word => `
+                <article class="word-card">
+                    <div class="word-top">
+                        <div>
+                            <div class="word-text">${markVisualPhonics(word.word)}</div>
+                            <p class="meaning">${escapeHtml(word.meaning)}</p>
+                        </div>
+                        <button class="speak" aria-label="Speak ${escapeHtml(word.word)}" data-say="${escapeHtml(word.word)}">🔊</button>
+                    </div>
+                    <div class="tags">
+                        ${word.phonics.map(id => `<span class="tag">${escapeHtml(PHONICS_RULES.find(rule => rule.id === id)?.name || id)}</span>`).join('')}
+                        ${word.categories.map(cat => `<span class="tag">${escapeHtml(cat)}</span>`).join('')}
+                    </div>
+                    <div class="lego">
+                        ${word.prefix ? `<span class="brick"><small>Prefix</small>${escapeHtml(word.prefix)}</span>` : ''}
+                        <span class="brick"><small>Root/Base</small>${escapeHtml(word.root)}</span>
+                        ${word.suffix ? `<span class="brick"><small>Suffix</small>${escapeHtml(word.suffix)}</span>` : ''}
+                    </div>
+                    <div class="hint">Kid hint: ${escapeHtml(makeHint(word))}</div>
+                </article>
+            `).join('');
+            document.querySelectorAll('[data-say]').forEach(button => button.addEventListener('click', () => speak(button.dataset.say)));
+            setupPractice();
+        }
+
+        function makeHint(word) {
+            const rule = PHONICS_RULES.find(item => word.phonics.includes(item.id));
+            if (rule) return rule.help;
+            if (word.prefix) return `${word.prefix} means ${PREFIX_RULES.find(([prefix]) => prefix === word.prefix)?.[1] || 'a word part'}.`;
+            if (word.suffix) return `${word.suffix} means ${SUFFIX_RULES.find(([suffix]) => suffix === word.suffix)?.[1] || 'a word ending'}.`;
+            return 'Look, say, cover, write, check.';
+        }
+
+        function setRule(ruleId) {
+            activeRule = ruleId;
+            practiceIndex = 0;
+            renderRules();
+            renderWords();
+            document.getElementById('wordList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function speak(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.78;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function setupPractice() {
+            const pool = filterWords();
+            if (!pool.length) return;
+            const word = pool[practiceIndex % pool.length];
+            questionText.innerHTML = `Spell this word: <strong>${escapeHtml(word.meaning)}</strong><br><span class="rule-help">${escapeHtml(makeHint(word))}</span>`;
+            answerInput.value = '';
+            feedback.textContent = '';
+            feedback.className = 'feedback';
+            questionText.dataset.answer = word.word.toLowerCase();
+            speak(word.word);
+        }
+
+        document.getElementById('checkBtn').addEventListener('click', () => {
+            const answer = questionText.dataset.answer;
+            const guess = answerInput.value.trim().toLowerCase();
+            if (guess === answer) {
+                feedback.textContent = 'Great forging! ✅';
+                feedback.className = 'feedback good';
+            } else {
+                feedback.textContent = `Try again. Hint: ${answer[0]} _ _ _`;
+                feedback.className = 'feedback try';
+            }
         });
-    });
-    initWords();
-</script>
+        document.getElementById('nextBtn').addEventListener('click', () => { practiceIndex += 1; setupPractice(); });
+        document.querySelectorAll('[data-jump]').forEach(button => button.addEventListener('click', () => {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            document.getElementById(button.dataset.jump).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }));
+
+        async function loadWords() {
+            try {
+                const response = await fetch('words.json');
+                const data = await response.json();
+                words = (data.words || FALLBACK_WORDS).map(inferWord);
+            } catch (error) {
+                words = FALLBACK_WORDS.map(inferWord);
+            }
+            wordCount.textContent = words.length;
+            ruleCount.textContent = PHONICS_RULES.length + PREFIX_RULES.length + SUFFIX_RULES.length + 3;
+            renderRules();
+            renderWords();
+        }
+
+        loadWords();
+    </script>
 </body>
 </html>
