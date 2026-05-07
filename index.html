@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Word Forge Kids Phonics</title>
+    <title>SpellBlocks - Crack English Like LEGO</title>
     <style>
         :root {
             --bg: #f7fbff;
             --card: #ffffff;
             --ink: #26364f;
             --muted: #65758b;
-            --primary: #5b7cfa;
-            --primary-dark: #3d57c7;
+            --primary: #6c63ff;
+            --primary-dark: #453dc4;
             --sun: #ffd166;
-            --mint: #99f6c8;
+            --mint: #8ef6c9;
             --pink: #ffafcc;
             --line: #dce7f7;
             --red: #ef4444;
@@ -22,6 +22,9 @@
             --purple: #8b5cf6;
             --blue: #2563eb;
             --green: #16a34a;
+            --lego-blue: #35a7ff;
+            --lego-yellow: #ffd447;
+            --lego-red: #ff6b6b;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -32,142 +35,101 @@
             color: var(--ink);
             font-family: "Nunito", "Comic Sans MS", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             background:
-                radial-gradient(circle at top left, rgba(255, 209, 102, 0.32), transparent 32rem),
-                radial-gradient(circle at 100% 0%, rgba(91, 124, 250, 0.22), transparent 28rem),
+                radial-gradient(circle at top left, rgba(255, 209, 102, 0.42), transparent 30rem),
+                radial-gradient(circle at 92% 4%, rgba(255, 175, 204, 0.34), transparent 24rem),
+                radial-gradient(circle at 100% 42%, rgba(108, 99, 255, 0.2), transparent 26rem),
                 var(--bg);
         }
 
-        .app-shell {
-            width: min(100%, 520px);
-            margin: 0 auto;
-            padding: 16px 14px 92px;
-        }
+        button, input { font: inherit; }
+        .app-shell { width: min(100%, 520px); margin: 0 auto; padding: 14px 14px 102px; }
+        .hero { position: sticky; top: 0; z-index: 10; padding: 12px 0 10px; background: linear-gradient(180deg, rgba(247, 251, 255, 0.98) 80%, rgba(247, 251, 255, 0)); backdrop-filter: blur(12px); }
+        .hero-card, .panel, .word-card, .mission-card { border: 2px solid rgba(220, 231, 247, 0.95); border-radius: 30px; background: rgba(255, 255, 255, 0.95); box-shadow: 0 16px 36px rgba(61, 87, 199, 0.13); }
+        .hero-card { padding: 18px; position: relative; overflow: hidden; }
+        .hero-card::after { content: "🧱"; position: absolute; right: 14px; top: 8px; font-size: 4.8rem; opacity: 0.13; transform: rotate(-10deg); }
+        .eyebrow { margin: 0 0 6px; color: var(--primary-dark); font-weight: 1000; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.78rem; }
+        h1 { margin: 0; font-size: clamp(2.1rem, 10vw, 3.25rem); line-height: 0.92; letter-spacing: -0.04em; }
+        .subtitle { margin: 10px 0 0; color: var(--muted); line-height: 1.45; font-weight: 800; max-width: 26rem; }
+        .crack { display: inline-block; margin-top: 12px; padding: 9px 12px; border-radius: 999px; background: #fff4c8; color: #8a6400; font-weight: 1000; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+        .stat { border-radius: 19px; padding: 10px 8px; background: #f3f7ff; text-align: center; font-weight: 1000; }
+        .stat span { display: block; color: var(--muted); font-size: 0.72rem; font-weight: 900; }
 
-        .hero {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            padding: 14px 0 10px;
-            background: linear-gradient(180deg, rgba(247, 251, 255, 0.97) 78%, rgba(247, 251, 255, 0));
-            backdrop-filter: blur(10px);
-        }
+        .quick-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+        .quick-btn { border: 0; border-radius: 24px; padding: 15px 12px; color: var(--ink); background: #eef3ff; font-weight: 1000; text-align: left; min-height: 72px; cursor: pointer; box-shadow: inset 0 -5px rgba(38, 54, 79, 0.06); }
+        .quick-btn strong { display: block; font-size: 1.02rem; }
+        .quick-btn span { display: block; margin-top: 2px; color: var(--muted); font-size: 0.78rem; font-weight: 900; }
+        .quick-btn:nth-child(1) { background: #fff4c8; }
+        .quick-btn:nth-child(2) { background: #dcfce7; }
+        .quick-btn:nth-child(3) { background: #e0f2fe; }
+        .quick-btn:nth-child(4) { background: #fce7f3; }
+        .quick-btn:nth-child(5) { background: #ede9fe; }
+        .quick-btn:nth-child(6) { background: #fee2e2; }
 
-        .hero-card,
-        .panel,
-        .word-card {
-            border: 2px solid rgba(220, 231, 247, 0.95);
-            border-radius: 28px;
-            background: rgba(255, 255, 255, 0.94);
-            box-shadow: 0 14px 34px rgba(61, 87, 199, 0.12);
-        }
-
-        .hero-card { padding: 18px; }
-        .eyebrow {
-            margin: 0 0 6px;
-            color: var(--primary-dark);
-            font-weight: 900;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            font-size: 0.78rem;
-        }
-        h1 { margin: 0; font-size: clamp(1.7rem, 8vw, 2.45rem); line-height: 1; }
-        .subtitle { margin: 10px 0 0; color: var(--muted); line-height: 1.45; font-weight: 700; }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 14px;
-        }
-        .stat {
-            border-radius: 18px;
-            padding: 10px 8px;
-            background: #f3f7ff;
-            text-align: center;
-            font-weight: 900;
-        }
-        .stat span { display: block; color: var(--muted); font-size: 0.72rem; font-weight: 800; }
-
-        .tabs {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 12px 0 4px;
-            scrollbar-width: none;
-        }
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 4px; scrollbar-width: none; }
         .tabs::-webkit-scrollbar { display: none; }
-        .tab {
-            flex: 0 0 auto;
-            border: 0;
-            border-radius: 999px;
-            padding: 11px 14px;
-            background: #eaf0ff;
-            color: var(--primary-dark);
-            font: inherit;
-            font-weight: 900;
-            cursor: pointer;
-        }
-        .tab.active { background: var(--primary); color: white; box-shadow: 0 8px 18px rgba(91, 124, 250, 0.35); }
-
+        .tab { flex: 0 0 auto; border: 0; border-radius: 999px; padding: 11px 14px; background: #eaf0ff; color: var(--primary-dark); font-weight: 1000; cursor: pointer; }
+        .tab.active { background: var(--primary); color: white; box-shadow: 0 8px 18px rgba(108, 99, 255, 0.34); }
         .panel { padding: 16px; margin-top: 14px; }
-        .panel h2 { margin: 0 0 10px; font-size: 1.2rem; }
-        .rule-grid { display: grid; gap: 10px; }
-        .rule-chip {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            border: 0;
-            border-radius: 20px;
-            padding: 13px 14px;
-            background: #f8fbff;
-            color: var(--ink);
-            font: inherit;
-            text-align: left;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-        .rule-chip.active { border-color: var(--primary); background: #eef3ff; }
-        .rule-name { font-weight: 950; }
-        .rule-help { color: var(--muted); font-size: 0.86rem; font-weight: 800; }
-        .badge { border-radius: 999px; background: var(--sun); padding: 5px 9px; font-weight: 950; white-space: nowrap; }
+        .panel h2 { margin: 0 0 10px; font-size: 1.26rem; }
+        .panel-copy { margin: -2px 0 14px; color: var(--muted); line-height: 1.45; font-weight: 850; }
 
-        .legend {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 8px;
-        }
-        .legend-item {
-            border-radius: 16px;
-            padding: 9px 10px;
-            background: #f8fbff;
-            font-size: 0.88rem;
-            font-weight: 900;
-        }
+        .mission-card { padding: 16px; margin-top: 14px; background: linear-gradient(135deg, #ffffff, #f6f9ff); }
+        .mission-word { margin: 12px 0; text-align: center; font-size: clamp(2.2rem, 12vw, 4.25rem); font-weight: 1000; letter-spacing: 0.02em; }
+        .question { font-size: 1.28rem; line-height: 1.32; font-weight: 1000; }
+        .choice-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 12px; }
+        .choice { border: 0; border-radius: 22px; padding: 14px 8px; background: #eef3ff; color: var(--primary-dark); font-weight: 1000; cursor: pointer; }
+        .choice.good { background: #bbf7d0; color: #166534; animation: pop 420ms ease both; }
+        .choice.bad { background: #fecaca; color: #991b1b; }
+        .feedback { min-height: 34px; margin-top: 12px; font-weight: 1000; }
+        .feedback.good { color: #15803d; }
+        .feedback.try { color: #dc2626; }
+        @keyframes pop { 0% { transform: scale(0.92); } 70% { transform: scale(1.08); } 100% { transform: scale(1); } }
+
+        .rule-grid { display: grid; gap: 10px; }
+        .rule-chip { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-radius: 22px; padding: 13px 14px; background: #f8fbff; color: var(--ink); text-align: left; cursor: pointer; border: 2px solid transparent; }
+        .rule-chip.active { border-color: var(--primary); background: #eef3ff; }
+        .rule-name { font-weight: 1000; }
+        .rule-help { color: var(--muted); font-size: 0.86rem; font-weight: 850; }
+        .badge { border-radius: 999px; background: var(--sun); padding: 5px 9px; font-weight: 1000; white-space: nowrap; }
+
+        .lego-build { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; margin: 14px 0; }
+        .brick { position: relative; border: 0; border-radius: 16px; padding: 16px 12px 12px; color: #1f2937; font-weight: 1000; box-shadow: inset 0 -6px rgba(0, 0, 0, 0.12); text-align: center; }
+        .brick::before { content: ""; position: absolute; width: 22px; height: 8px; border-radius: 8px 8px 0 0; background: inherit; top: -7px; left: calc(50% - 11px); filter: brightness(0.96); }
+        .prefix-brick { background: var(--lego-blue); color: white; }
+        .root-brick { background: var(--lego-yellow); }
+        .suffix-brick { background: var(--mint); }
+        .plus { font-size: 1.5rem; font-weight: 1000; color: var(--primary-dark); }
+        .build-result { border-radius: 20px; padding: 12px; background: #f3f7ff; font-weight: 1000; }
+
+        .analyzer { display: grid; gap: 10px; }
+        .analyzer-input { width: 100%; min-height: 58px; border: 2px solid var(--line); border-radius: 21px; padding: 12px 14px; color: var(--ink); font-size: 1.2rem; font-weight: 1000; }
+        .analyzer-output { min-height: 90px; border-radius: 24px; padding: 16px; background: #f8fbff; }
+        .analysis-word { font-size: 2.05rem; font-weight: 1000; word-break: break-word; }
+        .analysis-note { margin-top: 9px; color: var(--muted); font-weight: 850; }
+
+        .legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+        .legend-item { border-radius: 16px; padding: 9px 10px; background: #f8fbff; font-size: 0.88rem; font-weight: 900; }
         .dot { display: inline-block; width: 0.82rem; height: 0.82rem; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
 
         .word-list { display: grid; gap: 12px; margin-top: 14px; }
         .word-card { padding: 16px; overflow: hidden; }
         .word-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
         .word-text { font-size: 2rem; line-height: 1.05; font-weight: 1000; letter-spacing: 0.01em; }
-        .speak {
-            flex: 0 0 auto;
-            border: 0;
-            border-radius: 18px;
-            background: var(--mint);
-            color: #075836;
-            font-size: 1.25rem;
-            padding: 10px 12px;
-            cursor: pointer;
-        }
-        .meaning { margin: 8px 0 0; color: var(--muted); font-weight: 800; line-height: 1.45; }
+        .speak { flex: 0 0 auto; border: 0; border-radius: 18px; background: var(--mint); color: #075836; font-size: 1.25rem; padding: 10px 12px; cursor: pointer; }
+        .meaning { margin: 8px 0 0; color: var(--muted); font-weight: 850; line-height: 1.45; }
         .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
-        .tag { border-radius: 999px; padding: 6px 9px; background: #eef3ff; color: var(--primary-dark); font-weight: 900; font-size: 0.78rem; }
-        .lego { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .brick { border-radius: 14px; padding: 9px 10px; background: #fff6d8; border: 2px solid #ffe59a; font-weight: 950; }
-        .brick small { display: block; color: #8a6b00; font-size: 0.68rem; text-transform: uppercase; }
-        .hint { margin-top: 12px; padding: 12px; border-radius: 18px; background: #f5f8ff; color: var(--muted); line-height: 1.45; font-weight: 800; }
+        .tag { border-radius: 999px; padding: 6px 9px; background: #eef3ff; color: var(--primary-dark); font-weight: 950; font-size: 0.78rem; }
+        .word-lego { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .mini-brick { border-radius: 14px; padding: 9px 10px; background: #fff6d8; border: 2px solid #ffe59a; font-weight: 1000; }
+        .mini-brick small { display: block; color: #8a6b00; font-size: 0.68rem; text-transform: uppercase; }
+        .hint { margin-top: 12px; padding: 12px; border-radius: 18px; background: #f5f8ff; color: var(--muted); line-height: 1.45; font-weight: 850; }
 
+        .boss { background: linear-gradient(135deg, #fff1f2, #ffffff 55%, #eef2ff); }
+        .boss-face { float: right; font-size: 4rem; filter: drop-shadow(0 10px 12px rgba(127, 29, 29, 0.15)); }
+        .boss-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+        .big-btn { border: 0; border-radius: 20px; padding: 13px 12px; background: var(--primary); color: white; font-weight: 1000; cursor: pointer; }
+        .big-btn.secondary { background: #eaf0ff; color: var(--primary-dark); }
         .color-red { color: var(--red); background: rgba(239, 68, 68, 0.12); }
         .color-skyblue { color: var(--skyblue); background: rgba(14, 165, 233, 0.13); }
         .color-orange { color: var(--orange); background: rgba(249, 115, 22, 0.13); }
@@ -176,213 +138,188 @@
         .color-green { color: var(--green); background: rgba(22, 163, 74, 0.13); }
         .phonics-mark { border-radius: 0.35em; padding: 0 0.08em; }
 
-        .practice {
-            display: grid;
-            gap: 12px;
-        }
-        .question { font-size: 1.45rem; line-height: 1.3; font-weight: 950; }
-        .answer-input {
-            width: 100%;
-            min-height: 56px;
-            border: 2px solid var(--line);
-            border-radius: 20px;
-            padding: 12px 14px;
-            font: inherit;
-            font-size: 1.25rem;
-            font-weight: 900;
-            color: var(--ink);
-        }
-        .answer-input:focus { outline: 4px solid rgba(91, 124, 250, 0.18); border-color: var(--primary); }
-        .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .big-btn {
-            border: 0;
-            border-radius: 20px;
-            padding: 13px 12px;
-            background: var(--primary);
-            color: white;
-            font: inherit;
-            font-weight: 950;
-            cursor: pointer;
-        }
-        .big-btn.secondary { background: #eaf0ff; color: var(--primary-dark); }
-        .feedback { min-height: 28px; font-weight: 950; }
-        .feedback.good { color: #15803d; }
-        .feedback.try { color: #dc2626; }
-
-        .bottom-nav {
-            position: fixed;
-            left: 50%;
-            bottom: 12px;
-            transform: translateX(-50%);
-            width: min(calc(100% - 22px), 500px);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            padding: 8px;
-            border-radius: 26px;
-            background: rgba(255, 255, 255, 0.96);
-            box-shadow: 0 16px 36px rgba(38, 54, 79, 0.18);
-            border: 2px solid var(--line);
-        }
-        .nav-btn {
-            border: 0;
-            border-radius: 20px;
-            padding: 10px 6px;
-            background: transparent;
-            color: var(--muted);
-            font: inherit;
-            font-weight: 1000;
-            cursor: pointer;
-        }
+        .bottom-nav { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(calc(100% - 22px), 500px); display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; padding: 8px; border-radius: 26px; background: rgba(255, 255, 255, 0.96); box-shadow: 0 16px 36px rgba(38, 54, 79, 0.18); border: 2px solid var(--line); }
+        .nav-btn { border: 0; border-radius: 18px; padding: 9px 3px; background: transparent; color: var(--muted); font-size: 0.72rem; font-weight: 1000; cursor: pointer; }
         .nav-btn.active { background: #eef3ff; color: var(--primary-dark); }
 
         @media (min-width: 760px) {
             .app-shell { width: min(100%, 980px); }
-            .rule-grid, .word-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .quick-actions, .rule-grid, .word-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .legend { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
 <body>
     <main class="app-shell">
-        <header class="hero" id="top">
+        <header class="hero" id="home">
             <section class="hero-card">
-                <p class="eyebrow">8歲手機英文拼字 · Phonics + Morphology</p>
-                <h1>🔨 Word Forge</h1>
-                <p class="subtitle">Tap a rule, see the sound colours, then spell. 適合小朋友用手指操作、聽讀、記顏色和拆字積木。</p>
+                <p class="eyebrow">SpellBlocks（拼字積木）</p>
+                <h1>🧩 SpellBlocks</h1>
+                <p class="subtitle">Kids do not memorize random words. They crack English patterns, color sounds, and snap word parts together like LEGO.</p>
+                <span class="crack">Crack English Like LEGO.</span>
                 <div class="stats" aria-label="learning stats">
                     <div class="stat"><strong id="wordCount">0</strong><span>Words</span></div>
-                    <div class="stat"><strong id="ruleCount">31</strong><span>Rules</span></div>
-                    <div class="stat"><strong>6</strong><span>Colours</span></div>
+                    <div class="stat"><strong id="ruleCount">0</strong><span>Secret Rules</span></div>
+                    <div class="stat"><strong>6</strong><span>Sound Colors</span></div>
+                </div>
+                <div class="quick-actions" aria-label="game modes">
+                    <button class="quick-btn" data-jump="mission"><strong>🎮 Play Mission</strong><span>Find the hidden sound</span></button>
+                    <button class="quick-btn" data-jump="build"><strong>🧩 Build Words</strong><span>Prefix + base LEGO</span></button>
+                    <button class="quick-btn" data-jump="colors"><strong>🎨 Color Sounds</strong><span>See spelling patterns</span></button>
+                    <button class="quick-btn" data-jump="boss"><strong>⚡ Speed Challenge</strong><span>Beat tricky monsters</span></button>
+                    <button class="quick-btn" data-jump="collection"><strong>🏆 Trophy Room</strong><span>Collect badges</span></button>
+                    <button class="quick-btn" data-jump="boss"><strong>🧠 Tricky Boss</strong><span>enough, could, through</span></button>
                 </div>
             </section>
-            <nav class="tabs" id="ruleTabs" aria-label="phonics and morphology filters"></nav>
+            <nav class="tabs" id="ruleTabs" aria-label="kid-friendly pattern filters"></nav>
         </header>
 
+        <section class="mission-card" id="mission">
+            <h2>🕵️ Phonics Detective</h2>
+            <p class="panel-copy">One tiny question at a time. Tap the sound, then watch the pattern pop.</p>
+            <div class="question" id="detectiveQuestion">Which sound does the “o” make?</div>
+            <div class="mission-word" id="detectiveWord">MONKEY</div>
+            <div class="choice-row" id="choiceRow"></div>
+            <div class="feedback" id="detectiveFeedback"></div>
+        </section>
+
         <section class="panel" id="learn">
-            <h2>🎯 Choose a training rule</h2>
+            <h2>🗺️ Kid-Friendly Secret Rules</h2>
+            <p class="panel-copy">No school labels here: just weird vowel tricks, magic teams, silent ninjas, and word LEGO.</p>
             <div class="rule-grid" id="ruleGrid"></div>
         </section>
 
+        <section class="panel" id="build">
+            <h2>🧩 Morphology LEGO</h2>
+            <p class="panel-copy">Snap bricks together and learn what each word part means.</p>
+            <div class="lego-build">
+                <div class="brick prefix-brick" id="prefixBrick">un</div>
+                <div class="plus">+</div>
+                <div class="brick root-brick" id="rootBrick">happy</div>
+            </div>
+            <div class="build-result" id="buildResult">✨ un means NOT → unhappy</div>
+            <button class="big-btn secondary" id="nextBuildBtn">Next LEGO word</button>
+        </section>
+
+        <section class="panel" id="colors">
+            <h2>🎨 AI Word Analyzer mockup</h2>
+            <p class="panel-copy">Type any word to instantly split, color, and explain the tricky pieces.</p>
+            <div class="analyzer">
+                <input class="analyzer-input" id="analyzerInput" value="mystery" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="word analyzer input">
+                <button class="big-btn" id="analyzeBtn">Crack this word ✨</button>
+                <div class="analyzer-output" id="analyzerOutput"></div>
+            </div>
+        </section>
+
         <section class="panel" id="legend">
-            <h2>🌈 Visual Phonics colours</h2>
+            <h2>🌈 Visual Color Spelling</h2>
             <div class="legend">
                 <div class="legend-item"><span class="dot" style="background:var(--red)"></span>Red: short vowels</div>
-                <div class="legend-item"><span class="dot" style="background:var(--skyblue)"></span>Skyblue: long vowels</div>
-                <div class="legend-item"><span class="dot" style="background:var(--orange)"></span>Orange: digraphs/blends</div>
-                <div class="legend-item"><span class="dot" style="background:var(--purple)"></span>Purple: R-controlled</div>
-                <div class="legend-item"><span class="dot" style="background:var(--blue)"></span>Blue: silent letters</div>
-                <div class="legend-item"><span class="dot" style="background:var(--green)"></span>Green: variant/schwa</div>
+                <div class="legend-item"><span class="dot" style="background:var(--skyblue)"></span>Skyblue: magic vowel teams</div>
+                <div class="legend-item"><span class="dot" style="background:var(--orange)"></span>Orange: sound teams</div>
+                <div class="legend-item"><span class="dot" style="background:var(--purple)"></span>Purple: bossy-r sounds</div>
+                <div class="legend-item"><span class="dot" style="background:var(--blue)"></span>Blue: silent ninja letters</div>
+                <div class="legend-item"><span class="dot" style="background:var(--green)"></span>Green: weird vowel tricks</div>
             </div>
         </section>
 
         <section class="word-list" id="wordList" aria-live="polite"></section>
 
-        <section class="panel practice" id="practice">
-            <h2>✍️ Mini spelling trial</h2>
-            <div class="question" id="questionText">Loading...</div>
-            <input class="answer-input" id="answerInput" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the word">
-            <div class="action-row">
-                <button class="big-btn" id="checkBtn">Check</button>
-                <button class="big-btn secondary" id="nextBtn">Next</button>
+        <section class="panel boss" id="boss">
+            <div class="boss-face">👹</div>
+            <h2>Tricky Word Boss Battle</h2>
+            <p class="panel-copy">Boss word: <strong id="bossWord">enough</strong>. Find silent letters, weird vowels, and spell it to win.</p>
+            <input class="analyzer-input" id="bossInput" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the boss word">
+            <div class="boss-actions">
+                <button class="big-btn" id="bossCheckBtn">Attack!</button>
+                <button class="big-btn secondary" id="bossNextBtn">New Boss</button>
             </div>
-            <div class="feedback" id="feedback"></div>
+            <div class="feedback" id="bossFeedback"></div>
+        </section>
+
+        <section class="panel" id="collection">
+            <h2>🏆 Trophy Room</h2>
+            <p class="panel-copy">Badges keep the loop playful: Pattern Detective, Word Builder, Color Coder, Tricky Hunter.</p>
+            <div class="tags">
+                <span class="tag">🕵️ Pattern Detective</span>
+                <span class="tag">🧩 Word Builder</span>
+                <span class="tag">🎨 Color Coder</span>
+                <span class="tag">🏆 Tricky Hunter</span>
+            </div>
         </section>
     </main>
 
     <nav class="bottom-nav" aria-label="main navigation">
-        <button class="nav-btn active" data-jump="top">🏠 Home</button>
-        <button class="nav-btn" data-jump="learn">🧩 Rules</button>
-        <button class="nav-btn" data-jump="practice">✍️ Spell</button>
+        <button class="nav-btn active" data-jump="home">🏠<br>Home</button>
+        <button class="nav-btn" data-jump="learn">📚<br>Learn</button>
+        <button class="nav-btn" data-jump="mission">🎮<br>Game</button>
+        <button class="nav-btn" data-jump="collection">🏆<br>Collect</button>
+        <button class="nav-btn" data-jump="colors">👪<br>Parent</button>
     </nav>
 
     <script>
         const PHONICS_RULES = [
-            { id: 'short-u-o', name: "Short /u/ as 'o'", help: "mother, monkey: letter o can sound like /u/", examples: ['mother', 'monkey', 'brother'], colour: 'green' },
-            { id: 'short-i-y', name: "Short /i/ as 'y'", help: "gym, mystery: y can sound like short /i/", examples: ['gym', 'mystery', 'system'], colour: 'red' },
-            { id: 'long-a-ey', name: "Long /a/ as 'ey'", help: "obey, prey: ey says long a", examples: ['obey', 'prey', 'they'], colour: 'skyblue' },
-            { id: 'long-a-ai', name: "Long /a/ as 'ai'", help: "rain, plain: ai says long a", autoPattern: /ai/gi, examples: ['rain', 'plain', 'train'], colour: 'skyblue' },
-            { id: 'long-a-ei', name: "Long /a/ as 'ei'", help: "reign, weight: ei says long a", examples: ['reign', 'weight', 'eight'], colour: 'skyblue' },
-            { id: 'ur-ear', name: "Sound /ur/ as 'ear'", help: "earth, learn: ear can sound like /ur/", examples: ['earth', 'learn', 'early'], colour: 'purple' },
-            { id: 'k-ch', name: "Sound /k/ as 'ch'", help: "echo, chaos, stomach: ch can say /k/", examples: ['echo', 'chaos', 'stomach'], colour: 'orange' },
-            { id: 'gue-que', name: "Final gue / que", help: "league, antique, unique endings", autoPattern: /(gue|que)$/gi, examples: ['league', 'antique', 'unique'], colour: 'blue' },
-            { id: 'ary', name: "Suffix -ary", help: "dictionary, library: unstressed ending", autoPattern: /ary$/gi, examples: ['dictionary', 'library', 'ordinary'], colour: 'green' }
+            { id: 'short-u-o', name: '🔥 Weird Vowel Trick', help: "short /u/ can hide under letter o", examples: ['mother', 'monkey', 'brother', 'enough'], colour: 'green' },
+            { id: 'short-i-y', name: '🔥 Weird Y Trick', help: 'y can say short /i/', examples: ['gym', 'mystery', 'system'], colour: 'red' },
+            { id: 'long-a-ey', name: '🌈 Magic EY Team', help: 'ey can say long /a/', examples: ['obey', 'prey', 'they'], colour: 'skyblue' },
+            { id: 'long-a-ai', name: '🌈 Magic AI Team', help: 'ai says long /a/', autoPattern: /ai/gi, examples: ['rain', 'plain', 'train'], colour: 'skyblue' },
+            { id: 'long-a-ei', name: '🌈 Magic EI Team', help: 'ei can say long /a/', examples: ['reign', 'weight', 'eight'], colour: 'skyblue' },
+            { id: 'ur-ear', name: '🔥 Weird EAR Trick', help: 'ear can sound like /ur/', examples: ['earth', 'learn', 'early'], colour: 'purple' },
+            { id: 'k-ch', name: '⚡ Cool Secret CH', help: 'ch can say /k/', examples: ['echo', 'chaos', 'stomach'], colour: 'orange' },
+            { id: 'gue-que', name: '👻 Silent Ninja Ending', help: 'gue and que hide quiet letters at the end', autoPattern: /(gue|que)$/gi, examples: ['league', 'antique', 'unique'], colour: 'blue' },
+            { id: 'silent-ninja', name: '👻 Silent Ninja Letters', help: 'some letters are seen but not heard', autoPattern: /(kn|wr|mb$|igh)/gi, examples: ['knight', 'write', 'comb'], colour: 'blue' },
+            { id: 'ary', name: '🧠 Tricky Brain Ending', help: '-ary is an unstressed ending', autoPattern: /ary$/gi, examples: ['dictionary', 'library', 'ordinary'], colour: 'green' }
         ];
 
         const PREFIX_RULES = [
-            ['un-', 'Not / 相反'], ['re-', 'Again / 再次'], ['dis-', 'Negative / 否定'], ['mis-', 'Wrongly / 錯誤地'],
-            ['pre-', 'Before / 之前'], ['in-', 'Not / 不'], ['im-', 'Not / 不'], ['non-', 'Not / 非'], ['over-', 'Too much / 過多'], ['sub-', 'Under / 在...之下']
+            ['un-', 'NOT'], ['re-', 'AGAIN'], ['dis-', 'NOT / opposite'], ['mis-', 'WRONGLY'], ['pre-', 'BEFORE'],
+            ['in-', 'NOT'], ['im-', 'NOT'], ['non-', 'NOT'], ['over-', 'TOO MUCH'], ['sub-', 'UNDER']
         ];
         const SUFFIX_RULES = [
-            ['-ly', 'Basic adverb'], ['-ily', 'y → ily'], ['-ly-from-le', 'le → ly'], ['-ally', 'ic/al → ally'],
-            ['-ful', 'Full of'], ['-less', 'Without'], ['-ness', 'State'], ['-ment', 'Action/process'], ['-able', 'Can be']
+            ['-ly', 'in a way'], ['-ily', 'in a y-changed way'], ['-ly-from-le', 'le changes before ly'], ['-ally', 'in an al way'],
+            ['-ful', 'FULL OF'], ['-less', 'WITHOUT'], ['-ness', 'STATE'], ['-ment', 'ACTION'], ['-able', 'CAN BE']
         ];
-
         const FALLBACK_WORDS = [
             { word: 'mother', meaning: 'a female parent', categories: ['cool'], phonics: ['short-u-o'] },
-            { word: 'monkey', meaning: 'a playful animal', categories: ['cool'], phonics: ['short-u-o', 'long-a-ey'] },
-            { word: 'gym', meaning: 'a place to exercise', categories: ['cool'], phonics: ['short-i-y'] },
+            { word: 'monkey', meaning: 'a playful animal', categories: ['cool'], phonics: ['short-u-o'] },
+            { word: 'brother', meaning: 'a boy or man with the same parents', categories: ['cool'], phonics: ['short-u-o'] },
             { word: 'mystery', meaning: 'something not yet explained', categories: ['tricky'], phonics: ['short-i-y'] },
-            { word: 'obey', meaning: 'to do what is asked', phonics: ['long-a-ey'] },
-            { word: 'prey', meaning: 'an animal hunted by another animal', categories: ['homophone'], phonics: ['long-a-ey'] },
-            { word: 'rain', meaning: 'water drops from clouds', categories: ['homophone', 'cool'], phonics: ['long-a-ai'] },
-            { word: 'plain', meaning: 'simple, or a flat wide land', categories: ['homophone'], phonics: ['long-a-ai'] },
-            { word: 'reign', meaning: 'rule as a king or queen', categories: ['homophone', 'tricky'], phonics: ['long-a-ei'] },
-            { word: 'weight', meaning: 'how heavy something is', categories: ['homophone'], phonics: ['long-a-ei'] },
-            { word: 'earth', meaning: 'our planet or soil', categories: ['cool'], phonics: ['ur-ear'] },
-            { word: 'learn', meaning: 'to get knowledge or a skill', phonics: ['ur-ear'] },
-            { word: 'echo', meaning: 'a sound that bounces back', categories: ['cool'], phonics: ['k-ch'] },
-            { word: 'chaos', meaning: 'a big mess with no order', categories: ['tricky'], phonics: ['k-ch'] },
-            { word: 'stomach', meaning: 'the body part that digests food', categories: ['cool'], phonics: ['k-ch'] },
-            { word: 'league', meaning: 'a group of teams', phonics: ['gue-que'] },
-            { word: 'antique', meaning: 'very old and valuable', phonics: ['gue-que'] },
-            { word: 'unique', meaning: 'one of a kind', categories: ['cool'], phonics: ['gue-que'] },
-            { word: 'dictionary', meaning: 'a book or app that explains words', phonics: ['ary'] },
-            { word: 'library', meaning: 'a place with many books', categories: ['cool'], phonics: ['ary'] },
-            { word: 'unhappy', meaning: 'not happy', prefix: 'un-', root: 'happy', suffix: '', categories: ['morphology'] },
-            { word: 'rewrite', meaning: 'write again', prefix: 're-', root: 'write', suffix: '', categories: ['morphology'] },
-            { word: 'dislike', meaning: 'not like', prefix: 'dis-', root: 'like', suffix: '', categories: ['morphology'] },
-            { word: 'misread', meaning: 'read wrongly', prefix: 'mis-', root: 'read', suffix: '', categories: ['morphology'] },
-            { word: 'preview', meaning: 'see before', prefix: 'pre-', root: 'view', suffix: '', categories: ['morphology'] },
-            { word: 'impossible', meaning: 'not possible', prefix: 'im-', root: 'poss', suffix: '-ible', categories: ['morphology', 'tricky'] },
-            { word: 'nonstop', meaning: 'not stopping', prefix: 'non-', root: 'stop', suffix: '', categories: ['morphology'] },
-            { word: 'overcook', meaning: 'cook too much', prefix: 'over-', root: 'cook', suffix: '', categories: ['morphology'] },
-            { word: 'subway', meaning: 'a train under the city', prefix: 'sub-', root: 'way', suffix: '', categories: ['morphology', 'cool'] },
-            { word: 'quickly', meaning: 'in a quick way', root: 'quick', suffix: '-ly', categories: ['morphology'] },
-            { word: 'happily', meaning: 'in a happy way', root: 'happy', suffix: '-ily', categories: ['morphology'] },
-            { word: 'gently', meaning: 'in a gentle way', root: 'gentle', suffix: '-ly', categories: ['morphology'] },
-            { word: 'magically', meaning: 'in a magical way', root: 'magic', suffix: '-ally', categories: ['morphology', 'cool'] },
-            { word: 'hopeful', meaning: 'full of hope', root: 'hope', suffix: '-ful', categories: ['morphology'] },
-            { word: 'fearless', meaning: 'without fear', root: 'fear', suffix: '-less', categories: ['morphology'] },
-            { word: 'kindness', meaning: 'the state of being kind', root: 'kind', suffix: '-ness', categories: ['morphology'] },
-            { word: 'movement', meaning: 'the act of moving', root: 'move', suffix: '-ment', categories: ['morphology'] },
-            { word: 'readable', meaning: 'able to be read', root: 'read', suffix: '-able', categories: ['morphology'] },
-            { word: 'their', meaning: 'belonging to them', categories: ['homophone', 'tricky'] },
-            { word: 'there', meaning: 'in that place', categories: ['homophone', 'tricky'] },
-            { word: 'they\'re', meaning: 'short for they are', categories: ['homophone', 'tricky'] }
+            { word: 'knight', meaning: 'a brave armored fighter', categories: ['tricky'], phonics: ['silent-ninja'] },
+            { word: 'enough', meaning: 'as much as needed', categories: ['tricky'], phonics: ['short-u-o'] },
+            { word: 'unhappy', meaning: 'not happy', prefix: 'un-', root: 'happy', categories: ['morphology'] },
+            { word: 'helpful', meaning: 'full of help', root: 'help', suffix: '-ful', categories: ['morphology', 'cool'] }
         ];
-
         const visualPatterns = [
-            { re: /(kn|wr|mb$|gue$|que$|igh)/gi, colour: 'blue' },
-            { re: /(ear|er|ir|ur|or)/gi, colour: 'purple' },
-            { re: /(ai|ay|ee|ea|ey|ei|oa|ow|ue|ui)/gi, colour: 'skyblue' },
-            { re: /(sh|ch|th|ph|wh|ck|bl|br|cl|cr|dr|fl|fr|gl|gr|pl|pr|sl|sm|sn|sp|st|tr)/gi, colour: 'orange' },
-            { re: /([aeiou])/gi, colour: 'red' },
-            { re: /(a|e|i|o|u|y)$/gi, colour: 'green' }
+            { re: /(kn|wr|mb$|gue$|que$|igh|gh$)/gi, colour: 'blue', label: 'silent ninja letter' },
+            { re: /(ear|er|ir|ur|or|ar)/gi, colour: 'purple', label: 'bossy-r sound' },
+            { re: /(ai|ay|ee|ea|ey|ei|oa|ow|ue|ui|igh)/gi, colour: 'skyblue', label: 'magic vowel team' },
+            { re: /(sh|ch|th|ph|wh|ck|bl|br|cl|cr|dr|fl|fr|gl|gr|pl|pr|sl|sm|sn|sp|st|tr)/gi, colour: 'orange', label: 'sound team' },
+            { re: /([aeiou])/gi, colour: 'red', label: 'short vowel spot' },
+            { re: /(a|e|i|o|u|y)$/gi, colour: 'green', label: 'weird vowel ending' }
         ];
+        const detectiveMissions = [
+            { word: 'monkey', question: 'Which sound does the “o” make?', choices: ['/o/', '/u/', '/a/'], answer: '/u/', pattern: "✨ Short /u/ as 'o'", family: '🐵 monkey · 🧑 mother · 🛏️ brother' },
+            { word: 'knight', question: 'Which part is a silent ninja?', choices: ['k', 'igh', 't'], answer: 'k', pattern: '👻 k is seen, not heard', family: 'knight · knee · knock' },
+            { word: 'reign', question: 'Which team says long /a/?', choices: ['ei', 'gn', 'r'], answer: 'ei', pattern: '🌈 ei says long /a/', family: 'reign · weight · eight' }
+        ];
+        const legoBuilds = [
+            { prefix: 'un', root: 'happy', word: 'unhappy', meaning: 'un means NOT' },
+            { prefix: 're', root: 'write', word: 'rewrite', meaning: 're means AGAIN' },
+            { prefix: 'help', root: 'ful', word: 'helpful', meaning: 'ful means FULL OF' }
+        ];
+        const bossWords = ['enough', 'could', 'through', 'knight', 'write', 'comb'];
 
         let words = [];
         let activeRule = 'all';
-        let practiceIndex = 0;
+        let missionIndex = 0;
+        let buildIndex = 0;
+        let bossIndex = 0;
 
         const ruleTabs = document.getElementById('ruleTabs');
         const ruleGrid = document.getElementById('ruleGrid');
         const wordList = document.getElementById('wordList');
         const wordCount = document.getElementById('wordCount');
         const ruleCount = document.getElementById('ruleCount');
-        const questionText = document.getElementById('questionText');
-        const answerInput = document.getElementById('answerInput');
-        const feedback = document.getElementById('feedback');
 
         function escapeHtml(text) {
             return String(text ?? '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
@@ -405,6 +342,7 @@
                 item.root = lower.slice(start, Math.max(start + 1, end));
             }
             if (item.prefix || item.suffix) item.categories = Array.from(new Set([...item.categories, 'morphology']));
+            if (!item.categories.length && item.phonics.length) item.categories.push('cool');
             return item;
         }
 
@@ -431,14 +369,29 @@
             return output;
         }
 
+        function analyzeWord(word) {
+            const clean = word.trim() || 'mystery';
+            const lower = clean.toLowerCase();
+            const pieces = [];
+            const prefix = PREFIX_RULES.find(([prefix]) => lower.startsWith(prefix.replace('-', '')));
+            const suffix = SUFFIX_RULES.find(([suffix]) => lower.endsWith(suffix.replace(/^-/, '').replace('-from-le', '')));
+            if (prefix) pieces.push(`${prefix[0]} (${prefix[1]})`);
+            if (lower.includes('igh')) pieces.push('igh (long sound team)');
+            if (lower.includes('y')) pieces.push('y can be a vowel');
+            if (lower.includes('kn') || lower.includes('wr') || lower.endsWith('mb')) pieces.push('silent ninja letter');
+            if (suffix) pieces.push(`${suffix[0]} (${suffix[1]})`);
+            if (!pieces.length) pieces.push('look for color chunks, then say it slowly');
+            return { clean, note: pieces.join(' · ') };
+        }
+
         function allRules() {
             return [
-                { id: 'all', name: 'All Words', help: '全部詞彙', count: words.length },
+                { id: 'all', name: 'All Blocks', help: '全部詞彙', count: words.length },
                 ...PHONICS_RULES.map(rule => ({ ...rule, count: words.filter(word => word.phonics.includes(rule.id)).length })),
-                { id: 'morphology', name: 'Morphology Lego', help: 'Prefix + root + suffix', count: words.filter(word => word.categories.includes('morphology')).length },
-                { id: 'homophone', name: 'Homophones', help: 'Same sound, different spelling', count: words.filter(word => word.categories.includes('homophone')).length },
-                { id: 'tricky', name: 'Tricky Words', help: 'Need memory power', count: words.filter(word => word.categories.includes('tricky')).length },
-                { id: 'cool', name: 'Cool Words', help: 'Fun everyday words', count: words.filter(word => word.categories.includes('cool')).length }
+                { id: 'morphology', name: '🧩 Word LEGO', help: 'prefix + base + suffix', count: words.filter(word => word.categories.includes('morphology')).length },
+                { id: 'homophone', name: '🧠 Tricky Brain Words', help: 'same sound, different spelling', count: words.filter(word => word.categories.includes('homophone')).length },
+                { id: 'tricky', name: '👹 Boss Words', help: 'memory power words', count: words.filter(word => word.categories.includes('tricky')).length },
+                { id: 'cool', name: '⚡ Cool Secret Words', help: 'fun words that look smart', count: words.filter(word => word.categories.includes('cool')).length }
             ];
         }
 
@@ -460,6 +413,14 @@
             document.querySelectorAll('[data-rule]').forEach(button => button.addEventListener('click', () => setRule(button.dataset.rule)));
         }
 
+        function makeHint(word) {
+            const rule = PHONICS_RULES.find(item => word.phonics.includes(item.id));
+            if (rule) return rule.help;
+            if (word.prefix) return `${word.prefix} means ${PREFIX_RULES.find(([prefix]) => prefix === word.prefix)?.[1] || 'a word part'}.`;
+            if (word.suffix) return `${word.suffix} means ${SUFFIX_RULES.find(([suffix]) => suffix === word.suffix)?.[1] || 'a word ending'}.`;
+            return 'Look, say, cover, write, check.';
+        }
+
         function renderWords() {
             const visible = filterWords();
             wordList.innerHTML = visible.map(word => `
@@ -475,29 +436,19 @@
                         ${word.phonics.map(id => `<span class="tag">${escapeHtml(PHONICS_RULES.find(rule => rule.id === id)?.name || id)}</span>`).join('')}
                         ${word.categories.map(cat => `<span class="tag">${escapeHtml(cat)}</span>`).join('')}
                     </div>
-                    <div class="lego">
-                        ${word.prefix ? `<span class="brick"><small>Prefix</small>${escapeHtml(word.prefix)}</span>` : ''}
-                        <span class="brick"><small>Root/Base</small>${escapeHtml(word.root)}</span>
-                        ${word.suffix ? `<span class="brick"><small>Suffix</small>${escapeHtml(word.suffix)}</span>` : ''}
+                    <div class="word-lego">
+                        ${word.prefix ? `<span class="mini-brick"><small>Prefix</small>${escapeHtml(word.prefix)}</span>` : ''}
+                        <span class="mini-brick"><small>Root/Base</small>${escapeHtml(word.root)}</span>
+                        ${word.suffix ? `<span class="mini-brick"><small>Suffix</small>${escapeHtml(word.suffix)}</span>` : ''}
                     </div>
                     <div class="hint">Kid hint: ${escapeHtml(makeHint(word))}</div>
                 </article>
             `).join('');
             document.querySelectorAll('[data-say]').forEach(button => button.addEventListener('click', () => speak(button.dataset.say)));
-            setupPractice();
-        }
-
-        function makeHint(word) {
-            const rule = PHONICS_RULES.find(item => word.phonics.includes(item.id));
-            if (rule) return rule.help;
-            if (word.prefix) return `${word.prefix} means ${PREFIX_RULES.find(([prefix]) => prefix === word.prefix)?.[1] || 'a word part'}.`;
-            if (word.suffix) return `${word.suffix} means ${SUFFIX_RULES.find(([suffix]) => suffix === word.suffix)?.[1] || 'a word ending'}.`;
-            return 'Look, say, cover, write, check.';
         }
 
         function setRule(ruleId) {
             activeRule = ruleId;
-            practiceIndex = 0;
             renderRules();
             renderWords();
             document.getElementById('wordList').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -512,33 +463,57 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        function setupPractice() {
-            const pool = filterWords();
-            if (!pool.length) return;
-            const word = pool[practiceIndex % pool.length];
-            questionText.innerHTML = `Spell this word: <strong>${escapeHtml(word.meaning)}</strong><br><span class="rule-help">${escapeHtml(makeHint(word))}</span>`;
-            answerInput.value = '';
+        function renderMission() {
+            const mission = detectiveMissions[missionIndex % detectiveMissions.length];
+            document.getElementById('detectiveQuestion').textContent = mission.question;
+            document.getElementById('detectiveWord').innerHTML = markVisualPhonics(mission.word.toUpperCase());
+            document.getElementById('choiceRow').innerHTML = mission.choices.map(choice => `<button class="choice" data-choice="${escapeHtml(choice)}">${escapeHtml(choice)}</button>`).join('');
+            const feedback = document.getElementById('detectiveFeedback');
             feedback.textContent = '';
             feedback.className = 'feedback';
-            questionText.dataset.answer = word.word.toLowerCase();
-            speak(word.word);
+            document.querySelectorAll('[data-choice]').forEach(button => button.addEventListener('click', () => {
+                const isGood = button.dataset.choice === mission.answer;
+                button.classList.add(isGood ? 'good' : 'bad');
+                feedback.className = `feedback ${isGood ? 'good' : 'try'}`;
+                feedback.textContent = isGood ? `${mission.pattern} · ${mission.family} · POP! CONFETTI!` : 'Almost! Try the hidden sound again.';
+                if (isGood) setTimeout(() => { missionIndex += 1; renderMission(); }, 1400);
+            }));
         }
 
-        document.getElementById('checkBtn').addEventListener('click', () => {
-            const answer = questionText.dataset.answer;
-            const guess = answerInput.value.trim().toLowerCase();
-            if (guess === answer) {
-                feedback.textContent = 'Great forging! ✅';
-                feedback.className = 'feedback good';
-            } else {
-                feedback.textContent = `Try again. Hint: ${answer[0]} _ _ _`;
-                feedback.className = 'feedback try';
-            }
+        function renderBuild() {
+            const build = legoBuilds[buildIndex % legoBuilds.length];
+            document.getElementById('prefixBrick').textContent = build.prefix;
+            document.getElementById('rootBrick').textContent = build.root;
+            document.getElementById('buildResult').textContent = `✨ ${build.meaning} → ${build.word}`;
+        }
+
+        function renderAnalyzer() {
+            const { clean, note } = analyzeWord(document.getElementById('analyzerInput').value);
+            document.getElementById('analyzerOutput').innerHTML = `<div class="analysis-word">${markVisualPhonics(clean)}</div><div class="analysis-note">✨ ${escapeHtml(note)}</div>`;
+        }
+
+        function renderBoss() {
+            document.getElementById('bossWord').innerHTML = markVisualPhonics(bossWords[bossIndex % bossWords.length]);
+            document.getElementById('bossInput').value = '';
+            document.getElementById('bossFeedback').textContent = '';
+            document.getElementById('bossFeedback').className = 'feedback';
+        }
+
+        document.getElementById('nextBuildBtn').addEventListener('click', () => { buildIndex += 1; renderBuild(); });
+        document.getElementById('analyzeBtn').addEventListener('click', renderAnalyzer);
+        document.getElementById('analyzerInput').addEventListener('input', renderAnalyzer);
+        document.getElementById('bossCheckBtn').addEventListener('click', () => {
+            const answer = bossWords[bossIndex % bossWords.length];
+            const guess = document.getElementById('bossInput').value.trim().toLowerCase();
+            const feedback = document.getElementById('bossFeedback');
+            const good = guess === answer;
+            feedback.className = `feedback ${good ? 'good' : 'try'}`;
+            feedback.textContent = good ? '🏆 Tricky Hunter Badge unlocked! ✨ POP ✨' : `Boss blocked it! Hint: ${answer[0]} _ _ _`;
         });
-        document.getElementById('nextBtn').addEventListener('click', () => { practiceIndex += 1; setupPractice(); });
+        document.getElementById('bossNextBtn').addEventListener('click', () => { bossIndex += 1; renderBoss(); });
         document.querySelectorAll('[data-jump]').forEach(button => button.addEventListener('click', () => {
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+            if (button.classList.contains('nav-btn')) button.classList.add('active');
             document.getElementById(button.dataset.jump).scrollIntoView({ behavior: 'smooth', block: 'start' });
         }));
 
@@ -550,10 +525,16 @@
             } catch (error) {
                 words = FALLBACK_WORDS.map(inferWord);
             }
+            const bonusWords = FALLBACK_WORDS.filter(item => !words.some(word => word.word.toLowerCase() === item.word));
+            words = [...words, ...bonusWords.map(inferWord)];
             wordCount.textContent = words.length;
-            ruleCount.textContent = PHONICS_RULES.length + PREFIX_RULES.length + SUFFIX_RULES.length + 3;
+            ruleCount.textContent = PHONICS_RULES.length + PREFIX_RULES.length + SUFFIX_RULES.length + 4;
             renderRules();
             renderWords();
+            renderMission();
+            renderBuild();
+            renderAnalyzer();
+            renderBoss();
         }
 
         loadWords();
